@@ -39,7 +39,7 @@ export function ChannelRequirementsSection({ requirements }: ChannelRequirements
   ];
 
   return (
-    <section id="standards" className="py-14 sm:py-20 lg:py-24 bg-[var(--bg-primary)] border-b border-[var(--border-subtle)]">
+    <section id="standards" className="py-14 sm:py-20 lg:py-24 bg-[var(--bg-primary)] border-b border-[var(--border-subtle)] scroll-mt-20 sm:scroll-mt-24">
       <div className="site-container">
         {/* Section Header */}
         <div className="max-w-3xl mb-10 sm:mb-14">

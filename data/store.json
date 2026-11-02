@@ -247,8 +247,8 @@
   "settings": {
     "heroHeading": "YOUR TRADING COMMUNITY.\nYOUR NEXT GROWTH OPPORTUNITY.",
     "heroSubheading": "Connect your trading community with promotional opportunities designed to help quality trading channels reach a wider audience.",
-    "announcementText": "🔥 Q4 Promotion Slots Now Open – Manual channel quality reviews underway.",
-    "announcementActive": true,
+    "announcementText": "",
+    "announcementActive": false,
     "officialTelegramUsername": "TradingLegend_Official",
     "officialTelegramUrl": "https://t.me/TradingLegend_Official",
     "communityTelegramUrl": "https://t.me/TradingLegend_Community",

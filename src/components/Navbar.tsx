@@ -21,6 +21,15 @@ export function Navbar({ announcement, announcementActive = false }: NavbarProps
     setMobileMenuOpen(false);
   }, [pathname]);
 
+  // Handle escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   // Prevent background scrolling when mobile drawer is open
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -45,19 +54,6 @@ export function Navbar({ announcement, announcementActive = false }: NavbarProps
 
   return (
     <>
-      {/* Optional Top Announcement Bar */}
-      {announcementActive && announcement && (
-        <aside
-          aria-label="Platform Announcement"
-          className="bg-[#121212] border-b border-[#262626] text-white text-[12px] font-mono py-1.5 px-4 text-center tracking-wide"
-        >
-          <div className="site-container flex items-center justify-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FF8A00]" />
-            <span>{announcement}</span>
-          </div>
-        </aside>
-      )}
-
       {/* Main Sticky Navigation */}
       <header className="sticky top-0 z-50 bg-[var(--nav-bg)] backdrop-blur-md border-b border-[var(--border-subtle)] transition-colors duration-200">
         <div className="site-container">
@@ -92,8 +88,8 @@ export function Navbar({ announcement, announcementActive = false }: NavbarProps
               </Link>
             </div>
 
-            {/* Mobile Controls: Theme + Hamburger */}
-            <div className="flex items-center gap-2 lg:hidden">
+            {/* Mobile Controls: Theme + Hamburger (Optimized spacing for narrow screens 320px+) */}
+            <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden">
               <ThemeToggle />
               <button
                 type="button"
@@ -109,10 +105,10 @@ export function Navbar({ announcement, announcementActive = false }: NavbarProps
         </div>
       </header>
 
-      {/* Mobile Drawer Navigation */}
+      {/* Mobile Drawer Navigation with backdrop overlay */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 top-16 sm:top-18 z-40 bg-[var(--bg-primary)] lg:hidden flex flex-col justify-between overflow-y-auto animate-in fade-in duration-150">
-          <div className="site-container py-6 space-y-1">
+          <div className="site-container py-5 space-y-1">
             <div className="text-[11px] font-mono uppercase tracking-wider text-[var(--text-muted)] px-3 mb-2">
               Menu Navigation
             </div>
@@ -121,7 +117,7 @@ export function Navbar({ announcement, announcementActive = false }: NavbarProps
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="block px-3 py-3.5 text-base font-semibold text-[var(--text-primary)] hover:text-[#FF8A00] border-b border-[var(--border-subtle)] transition-colors"
+                className="min-h-[48px] flex items-center px-3 text-base font-semibold text-[var(--text-primary)] hover:text-[#FF8A00] border-b border-[var(--border-subtle)] transition-colors"
               >
                 {link.label}
               </Link>
@@ -129,11 +125,11 @@ export function Navbar({ announcement, announcementActive = false }: NavbarProps
           </div>
 
           {/* Drawer Bottom CTA */}
-          <div className="p-6 border-t border-[var(--border-subtle)] bg-[var(--bg-secondary)] space-y-3">
+          <div className="p-5 sm:p-6 border-t border-[var(--border-subtle)] bg-[var(--bg-secondary)] space-y-3">
             <Link
               href="/apply"
               onClick={() => setMobileMenuOpen(false)}
-              className="btn-primary w-full py-4 text-center font-bold text-sm tracking-wide flex items-center justify-center gap-2"
+              className="btn-primary btn-touch w-full py-3.5 text-center font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-xs"
             >
               <span>Apply for Promotion</span>
               <ArrowRight className="w-4 h-4" />

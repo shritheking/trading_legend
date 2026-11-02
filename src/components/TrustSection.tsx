@@ -49,7 +49,7 @@ export function TrustSection({ pillars }: TrustSectionProps) {
     : defaultPillars;
 
   return (
-    <section id="approach" className="py-14 sm:py-20 lg:py-24 bg-[var(--bg-primary)] border-b border-[var(--border-subtle)]">
+    <section id="approach" className="py-14 sm:py-20 lg:py-24 bg-[var(--bg-primary)] border-b border-[var(--border-subtle)] scroll-mt-20 sm:scroll-mt-24">
       <div className="site-container">
         {/* Section Header */}
         <div className="max-w-2xl mb-10 sm:mb-14">

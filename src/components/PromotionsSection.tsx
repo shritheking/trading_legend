@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Check, ArrowRight, Clock, MapPin, Sparkles } from 'lucide-react';
+import { Check, ArrowRight, Clock, MapPin, Sparkles, Crown, Zap, Shield } from 'lucide-react';
 import { PromotionPackage } from '@/lib/types';
 
 interface PromotionsSectionProps {
@@ -35,7 +35,7 @@ export function PromotionsSection({ packages = [] }: PromotionsSectionProps) {
     {
       id: 'pkg-featured',
       name: 'Featured Promotion',
-      badge: 'Flagship Placement',
+      badge: 'Recommended • Flagship Placement',
       shortDescription: 'High-visibility placement across our primary network channels with prioritized scheduling.',
       placement: 'Main Broadcast Channel + Community Spotlight',
       duration: '48-Hour Pinned + 2x Highlights',
@@ -57,7 +57,7 @@ export function PromotionsSection({ packages = [] }: PromotionsSectionProps) {
     {
       id: 'pkg-premium',
       name: 'Premium Promotion',
-      badge: 'Multi-Day Campaign',
+      badge: 'Elite Partner Tier',
       shortDescription: 'Comprehensive multi-day campaign with prominent cross-channel exposure for leading communities.',
       placement: 'Full Network Broadcast, Discord & Telegram Network',
       duration: '7-Day Strategic Campaign',
@@ -79,12 +79,12 @@ export function PromotionsSection({ packages = [] }: PromotionsSectionProps) {
   ];
 
   return (
-    <section id="promotions" className="py-14 sm:py-20 lg:py-24 bg-[var(--bg-primary)] border-b border-[var(--border-subtle)]">
+    <section id="promotions" className="py-14 sm:py-20 lg:py-24 bg-[var(--bg-primary)] border-b border-[var(--border-subtle)] scroll-mt-20 sm:scroll-mt-24">
       <div className="site-container">
         {/* Section Header */}
         <div className="max-w-3xl mb-10 sm:mb-14">
           <div className="text-xs font-mono uppercase text-[#FF8A00] tracking-wider mb-2 font-semibold">
-            PROMOTION PACKAGES
+            CAMPAIGN PACKAGES
           </div>
           <h2 className="section-headline text-[var(--text-primary)] uppercase">
             Curated Promotional Tiers
@@ -94,46 +94,66 @@ export function PromotionsSection({ packages = [] }: PromotionsSectionProps) {
           </p>
         </div>
 
-        {/* Clear Vertically Stacked Plans on Mobile, Balanced 3-Columns on Desktop */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
+        {/* 3 Configurable Cards with Distinct Visual Personalities */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
           {displayPackages.map((pkg, idx) => {
             const isFeatured = pkg.highlighted || idx === 1;
+            const isPremium = idx === 2 || pkg.name.toLowerCase().includes('premium');
             const priceLabel = pkg.price ? `$${pkg.price}` : 'Contact for Pricing';
+
+            const tierAccent = isFeatured ? '#FF8A00' : isPremium ? '#8757FF' : '#E7B84B';
+            const tierBadgeBg = isFeatured
+              ? 'bg-[#FF8A00] text-white shadow-xs'
+              : isPremium
+              ? 'bg-[#8757FF]/15 text-[#8757FF] border border-[#8757FF]/30'
+              : 'bg-[#E7B84B]/15 text-[#E7B84B] border border-[#E7B84B]/30';
+
+            const slotPercent = Math.min(100, Math.round((pkg.availableSlots / (pkg.totalSlots || 1)) * 100));
 
             return (
               <div
                 key={pkg.id}
-                className={`rounded-xl p-6 sm:p-7 flex flex-col justify-between transition-all bg-[var(--bg-surface)] ${
+                className={`rounded-2xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-200 relative bg-[var(--bg-surface)] ${
                   isFeatured
-                    ? 'border-2 border-[#FF8A00] shadow-sm relative'
-                    : 'border border-[var(--border-subtle)] hover:border-[var(--border-strong)]'
+                    ? 'border-2 border-[#FF8A00] shadow-md lg:-translate-y-2'
+                    : isPremium
+                    ? 'border border-[var(--border-subtle)] hover:border-[#8757FF]/60 shadow-xs'
+                    : 'border border-[var(--border-subtle)] hover:border-[#E7B84B]/60 shadow-xs'
                 }`}
               >
-                <div>
-                  {/* Top Tier Identity */}
-                  <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="font-heading font-bold text-lg sm:text-xl text-[var(--text-primary)]">
-                      {pkg.name}
+                {/* Top Badge for Featured */}
+                {isFeatured && (
+                  <div className="absolute -top-3.5 left-6 sm:left-7">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-[#FF8A00] text-white shadow-xs">
+                      <Sparkles className="w-3 h-3" />
+                      <span>{pkg.badge || 'Most Popular'}</span>
                     </span>
-                    {pkg.badge && (
-                      <span
-                        className={`text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded font-semibold ${
-                          isFeatured
-                            ? 'bg-[#FF8A00] text-white'
-                            : 'bg-[var(--bg-secondary)] text-[var(--text-secondary)] border border-[var(--border-subtle)]'
-                        }`}
-                      >
-                        {pkg.badge}
+                  </div>
+                )}
+
+                <div>
+                  {/* Top Bar for non-featured */}
+                  {!isFeatured && pkg.badge && (
+                    <div className="mb-3">
+                      <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-[10px] font-mono font-semibold uppercase tracking-wider ${tierBadgeBg}`}>
+                        {isPremium ? <Crown className="w-3 h-3" /> : <Shield className="w-3 h-3" />}
+                        <span>{pkg.badge}</span>
                       </span>
-                    )}
+                    </div>
+                  )}
+
+                  {/* Title & Short Description */}
+                  <div className={isFeatured ? 'pt-2 mb-4' : 'mb-4'}>
+                    <h3 className="text-xl sm:text-2xl font-heading font-bold text-[var(--text-primary)] mb-1.5">
+                      {pkg.name}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed min-h-[38px]">
+                      {pkg.shortDescription}
+                    </p>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed mb-6 min-h-[38px]">
-                    {pkg.shortDescription}
-                  </p>
-
-                  {/* Price Box */}
-                  <div className="p-4 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-subtle)] mb-5">
+                  {/* Pricing Panel with subtle gradient & slot indicator */}
+                  <div className="p-4 sm:p-5 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-subtle)] mb-5">
                     <div className="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)] mb-1">
                       Placement Pricing
                     </div>
@@ -145,26 +165,39 @@ export function PromotionsSection({ packages = [] }: PromotionsSectionProps) {
                         <span className="text-xs font-mono text-[var(--text-muted)]">/ campaign</span>
                       )}
                     </div>
-                    <div className="mt-2.5 pt-2.5 border-t border-[var(--border-subtle)] flex items-center justify-between text-xs font-mono">
-                      <span className="text-[var(--text-muted)]">Available Slots</span>
-                      <span className="text-[#FF8A00] font-semibold">
-                        {pkg.availableSlots} of {pkg.totalSlots} Open
-                      </span>
+
+                    {/* Available Slot Meter */}
+                    <div className="mt-3 pt-3 border-t border-[var(--border-subtle)] space-y-1.5">
+                      <div className="flex items-center justify-between text-xs font-mono">
+                        <span className="text-[var(--text-muted)]">Calendar Allocation</span>
+                        <span className="font-semibold" style={{ color: tierAccent }}>
+                          {pkg.availableSlots} of {pkg.totalSlots} Slots Open
+                        </span>
+                      </div>
+                      <div className="w-full h-1.5 rounded-full bg-[var(--border-subtle)] overflow-hidden">
+                        <div
+                          className="h-full rounded-full transition-all duration-300"
+                          style={{
+                            width: `${slotPercent}%`,
+                            backgroundColor: tierAccent,
+                          }}
+                        />
+                      </div>
                     </div>
                   </div>
 
-                  {/* Metadata Specs */}
+                  {/* Placement & Duration Specs */}
                   <div className="space-y-2 mb-5 text-xs text-[var(--text-secondary)]">
                     <div className="flex items-start gap-2">
-                      <MapPin className="w-3.5 h-3.5 text-[#FF8A00] shrink-0 mt-0.5" />
-                      <div>
+                      <MapPin className="w-4 h-4 shrink-0 mt-0.5" style={{ color: tierAccent }} />
+                      <div className="leading-snug">
                         <span className="font-semibold text-[var(--text-primary)]">Placement: </span>
                         <span>{pkg.placement}</span>
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
-                      <Clock className="w-3.5 h-3.5 text-[#FF8A00] shrink-0 mt-0.5" />
-                      <div>
+                      <Clock className="w-4 h-4 shrink-0 mt-0.5" style={{ color: tierAccent }} />
+                      <div className="leading-snug">
                         <span className="font-semibold text-[var(--text-primary)]">Duration: </span>
                         <span>{pkg.duration}</span>
                       </div>
@@ -172,28 +205,38 @@ export function PromotionsSection({ packages = [] }: PromotionsSectionProps) {
                   </div>
 
                   {/* Deliverables Checklist */}
-                  <div className="mb-6 pt-4 border-t border-[var(--border-subtle)]">
+                  <div className="pt-4 border-t border-[var(--border-subtle)] mb-6">
                     <div className="text-xs font-mono uppercase tracking-wider font-bold text-[var(--text-primary)] mb-3">
-                      Included Deliverables
+                      Included Deliverables:
                     </div>
                     <ul className="space-y-2 text-xs sm:text-sm text-[var(--text-secondary)]">
                       {pkg.deliverables.map((item, dIdx) => (
-                        <li key={dIdx} className="flex items-start gap-2">
-                          <Check className="w-3.5 h-3.5 text-[#16A34A] shrink-0 mt-0.5" />
-                          <span>{item}</span>
+                        <li key={dIdx} className="flex items-start gap-2.5">
+                          <div
+                            className="w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold"
+                            style={{
+                              backgroundColor: `${tierAccent}20`,
+                              color: tierAccent,
+                            }}
+                          >
+                            <Check className="w-3 h-3 stroke-[2.5]" />
+                          </div>
+                          <span className="leading-snug">{item}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
                 </div>
 
-                {/* Full-width Apply Button on Mobile & Desktop */}
+                {/* Apply CTA Button (Full-width on mobile & desktop) */}
                 <div className="pt-4 border-t border-[var(--border-subtle)]">
                   <Link
                     href={`/apply?package=${encodeURIComponent(pkg.name)}`}
-                    className={`btn-touch w-full py-3.5 px-4 text-center text-sm font-bold flex items-center justify-center gap-2 rounded-lg transition-all ${
+                    className={`btn-touch w-full py-3.5 px-4 text-center text-sm font-bold flex items-center justify-center gap-2 rounded-xl transition-all ${
                       isFeatured
-                        ? 'btn-primary'
+                        ? 'btn-primary shadow-xs'
+                        : isPremium
+                        ? 'bg-[#8757FF] hover:bg-[#7847EE] text-white shadow-xs'
                         : 'btn-secondary'
                     }`}
                   >
@@ -208,7 +251,7 @@ export function PromotionsSection({ packages = [] }: PromotionsSectionProps) {
 
         {/* Pricing disclosure note */}
         <div className="mt-8 text-xs font-mono text-[var(--text-muted)] text-center max-w-xl mx-auto">
-          * Package slots are strictly capped per calendar period to prevent channel saturation. Bespoke multi-channel campaigns are evaluated upon submission.
+          * Package slots are strictly capped per calendar period to maintain community trust and high engagement.
         </div>
       </div>
     </section>

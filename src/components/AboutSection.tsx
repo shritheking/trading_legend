@@ -7,7 +7,7 @@ import { ArrowRight, Target, ShieldCheck, Calendar } from 'lucide-react';
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-14 sm:py-20 lg:py-24 bg-[var(--bg-secondary)] border-b border-[var(--border-subtle)]">
+    <section id="about" className="py-14 sm:py-20 lg:py-24 bg-[var(--bg-secondary)] border-b border-[var(--border-subtle)] scroll-mt-20 sm:scroll-mt-24">
       <div className="site-container">
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Header */}

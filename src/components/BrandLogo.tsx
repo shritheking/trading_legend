@@ -55,7 +55,7 @@ export function BrandLogo({ variant = 'navbar', className = '', href = '/' }: Br
               />
             </div>
             <div className="flex items-center gap-1.5 font-heading font-extrabold tracking-wider text-xl text-[var(--text-primary)]">
-              TRADING <span className="text-[#F07800]">LEGEND</span>
+              TRADING <span className="text-[#FF8A00]">LEGEND</span>
             </div>
           </div>
         );
@@ -74,7 +74,7 @@ export function BrandLogo({ variant = 'navbar', className = '', href = '/' }: Br
             </div>
             <div className="flex flex-col">
               <span className="font-heading font-bold text-lg text-[var(--text-primary)] tracking-tight leading-none">
-                TRADING <span className="text-[#F07800]">LEGEND</span>
+                TRADING <span className="text-[#FF8A00]">LEGEND</span>
               </span>
               <span className="text-[10px] font-mono font-medium text-[var(--text-muted)] tracking-widest uppercase mt-1">
                 Promotion Platform
@@ -100,10 +100,10 @@ export function BrandLogo({ variant = 'navbar', className = '', href = '/' }: Br
             </div>
             {/* Typography adhering strictly to Sora + Inter */}
             <div className="flex flex-col">
-              <div className="font-heading font-extrabold text-base sm:text-lg text-[var(--text-primary)] tracking-wide uppercase leading-tight">
-                TRADING <span className="text-[#F07800]">LEGEND</span>
+              <div className="font-heading font-extrabold text-sm sm:text-base md:text-lg text-[var(--text-primary)] tracking-wide uppercase leading-tight">
+                TRADING <span className="text-[#FF8A00]">LEGEND</span>
               </div>
-              <div className="text-[10px] text-[var(--text-muted)] font-mono uppercase tracking-widest leading-none mt-0.5">
+              <div className="text-[9px] sm:text-[10px] text-[var(--text-muted)] font-mono uppercase tracking-widest leading-none mt-0.5">
                 Vetted Network
               </div>
             </div>
