@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Send, Mail, MessageSquare, Check, Sparkles, ArrowRight } from 'lucide-react';
+import { Send, Mail, MessageSquare, Check, ArrowRight, ShieldCheck } from 'lucide-react';
 
 interface ContactSectionProps {
   officialTelegram?: string;
@@ -29,7 +29,6 @@ export function ContactSection({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Simulate inquiry submission
     setTimeout(() => {
       setLoading(false);
       setSubmitted(true);
@@ -37,20 +36,20 @@ export function ContactSection({
   };
 
   return (
-    <section id="contact" className="py-20 lg:py-28 bg-[#111111] relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Left Column: Direct Official Channels */}
+    <section id="contact" className="py-20 sm:py-28 lg:py-32 bg-[var(--bg-primary)]">
+      <div className="site-container">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 xl:gap-20 items-start">
+          {/* Left Column: Direct Communication Channels (5 cols on lg) */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1c1c1c] border border-[#303030] text-xs font-mono text-[#F07800]">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--badge-bg)] border border-[var(--border-subtle)] text-xs font-mono font-medium text-[#F07800]">
               COMMUNICATION DESK
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-white tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-[var(--text-primary)] tracking-tight uppercase">
               CONNECT WITH TRADING LEGEND
             </h2>
 
-            <p className="text-sm sm:text-base text-[#A3A3A3] leading-relaxed">
+            <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed">
               Have specific questions regarding campaign eligibility, bespoke multi-channel sponsorships, or our compliance process? Reach out through our direct verified endpoints.
             </p>
 
@@ -61,15 +60,15 @@ export function ContactSection({
                 href={officialTelegram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-4 rounded-2xl bg-[#191919] border border-[#303030] hover:border-[#F07800]/50 transition-all flex items-center justify-between group shadow-lg"
+                className="p-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-subtle)] hover:border-[#F07800]/50 transition-all flex items-center justify-between group shadow-xs"
               >
-                <div className="flex items-center gap-3.5">
-                  <div className="w-11 h-11 rounded-xl bg-[#202020] border border-[#383838] flex items-center justify-center text-[#F07800] group-hover:bg-[#F07800]/10 transition-colors">
+                <div className="flex items-center gap-4">
+                  <div className="w-11 h-11 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-subtle)] flex items-center justify-center text-[#F07800]">
                     <Send className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-xs font-mono uppercase text-[#A3A3A3]">Official Telegram Review Desk</div>
-                    <div className="text-sm sm:text-base font-bold text-white group-hover:text-[#F07800] transition-colors">
+                    <div className="text-[10px] font-mono uppercase text-[var(--text-muted)]">Official Telegram Review Desk</div>
+                    <div className="text-sm sm:text-base font-bold text-[var(--text-primary)] group-hover:text-[#F07800] transition-colors">
                       @TradingLegend_Official
                     </div>
                   </div>
@@ -84,41 +83,41 @@ export function ContactSection({
                 href={communityTelegram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-4 rounded-2xl bg-[#191919] border border-[#303030] hover:border-[#FFB000]/50 transition-all flex items-center justify-between group shadow-lg"
+                className="p-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-subtle)] hover:border-[#F07800]/50 transition-all flex items-center justify-between group shadow-xs"
               >
-                <div className="flex items-center gap-3.5">
-                  <div className="w-11 h-11 rounded-xl bg-[#202020] border border-[#383838] flex items-center justify-center text-[#FFB000] group-hover:bg-[#FFB000]/10 transition-colors">
+                <div className="flex items-center gap-4">
+                  <div className="w-11 h-11 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-subtle)] flex items-center justify-center text-[#F07800]">
                     <MessageSquare className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-xs font-mono uppercase text-[#A3A3A3]">Telegram Community Channel</div>
-                    <div className="text-sm sm:text-base font-bold text-white group-hover:text-[#FFB000] transition-colors">
+                    <div className="text-[10px] font-mono uppercase text-[var(--text-muted)]">Telegram Community Channel</div>
+                    <div className="text-sm sm:text-base font-bold text-[var(--text-primary)] group-hover:text-[#F07800] transition-colors">
                       @TradingLegend_Community
                     </div>
                   </div>
                 </div>
-                <span className="text-xs font-mono text-[#FFB000] group-hover:translate-x-1 transition-transform">
+                <span className="text-xs font-mono text-[#F07800] group-hover:translate-x-1 transition-transform">
                   &rarr;
                 </span>
               </a>
 
-              {/* Email Points */}
-              <div className="p-4 rounded-2xl bg-[#191919] border border-[#303030] space-y-3">
-                <div className="flex items-center gap-3">
-                  <Mail className="w-4 h-4 text-[#A3A3A3]" />
+              {/* Contact Email Points */}
+              <div className="p-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-subtle)] space-y-3.5 shadow-xs">
+                <div className="flex items-center gap-3.5">
+                  <Mail className="w-4 h-4 text-[#F07800] flex-shrink-0" />
                   <div className="text-xs">
-                    <span className="text-[#777777] block font-mono">Operations & Reviews:</span>
-                    <a href={`mailto:${supportEmail}`} className="text-white hover:text-[#F07800] font-medium font-mono">
+                    <span className="text-[var(--text-muted)] block font-mono">Operations & Editorial Desk:</span>
+                    <a href={`mailto:${supportEmail}`} className="text-[var(--text-primary)] hover:text-[#F07800] font-medium font-mono">
                       {supportEmail}
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 pt-2 border-t border-[#262626]">
-                  <Sparkles className="w-4 h-4 text-[#FFB000]" />
+                <div className="flex items-center gap-3.5 pt-3 border-t border-[var(--border-subtle)]">
+                  <ShieldCheck className="w-4 h-4 text-[#F07800] flex-shrink-0" />
                   <div className="text-xs">
-                    <span className="text-[#777777] block font-mono">Strategic Partnerships:</span>
-                    <a href={`mailto:${businessInquiryEmail}`} className="text-white hover:text-[#FFB000] font-medium font-mono">
+                    <span className="text-[var(--text-muted)] block font-mono">Corporate Partnerships:</span>
+                    <a href={`mailto:${businessInquiryEmail}`} className="text-[var(--text-primary)] hover:text-[#F07800] font-medium font-mono">
                       {businessInquiryEmail}
                     </a>
                   </div>
@@ -127,40 +126,40 @@ export function ContactSection({
             </div>
           </div>
 
-          {/* Right Column: Business Enquiry Form */}
+          {/* Right Column: Business Inquiry Form (7 cols on lg) */}
           <div className="lg:col-span-7">
-            <div className="rounded-3xl bg-[#191919] border border-[#303030] p-6 sm:p-8 shadow-2xl">
-              <h3 className="text-xl sm:text-2xl font-heading font-bold text-white mb-1">
-                Business & Partnership Enquiry
+            <div className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] p-8 sm:p-10 shadow-lg">
+              <h3 className="text-2xl font-heading font-bold text-[var(--text-primary)] mb-1">
+                Business & Placement Inquiry
               </h3>
-              <p className="text-xs sm:text-sm text-[#A3A3A3] mb-6">
-                Send a formal inquiry to our promotional campaign team. Response timeframe: within 24 business hours.
+              <p className="text-xs sm:text-sm text-[var(--text-secondary)] mb-8">
+                Send a message directly to our campaign coordinators. Response timeframe: within 24 business hours.
               </p>
 
               {submitted ? (
-                <div className="p-6 rounded-2xl bg-[#202020] border border-[#22C55E]/40 text-center space-y-3 animate-in fade-in">
-                  <div className="w-12 h-12 rounded-full bg-[#22C55E]/15 border border-[#22C55E]/40 text-[#22C55E] flex items-center justify-center mx-auto">
+                <div className="p-8 rounded-2xl bg-[var(--bg-secondary)] border border-[#22C55E]/40 text-center space-y-4 animate-in fade-in">
+                  <div className="w-12 h-12 rounded-2xl bg-[#22C55E]/15 text-[#22C55E] flex items-center justify-center mx-auto">
                     <Check className="w-6 h-6" />
                   </div>
-                  <h4 className="text-lg font-heading font-bold text-white">Inquiry Received</h4>
-                  <p className="text-xs sm:text-sm text-[#A3A3A3] max-w-md mx-auto">
-                    Thank you. Your message has been routed to our corporate relations desk. A representative will contact you via Telegram or Email shortly.
+                  <h4 className="text-xl font-heading font-bold text-[var(--text-primary)]">Inquiry Received</h4>
+                  <p className="text-xs sm:text-sm text-[var(--text-secondary)] max-w-md mx-auto">
+                    Thank you. Your message has been routed to our corporate relations desk. A team member will follow up via your stated contact details.
                   </p>
                   <button
                     onClick={() => {
                       setSubmitted(false);
                       setFormData({ name: '', email: '', telegram: '', inquiryType: 'Promotion Inquiry', message: '' });
                     }}
-                    className="mt-3 text-xs font-mono text-[#F07800] hover:underline"
+                    className="mt-2 text-xs font-mono text-[#F07800] hover:underline"
                   >
-                    Submit another inquiry
+                    Send another inquiry
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-xs font-mono text-[#A3A3A3] mb-1.5 uppercase">
+                      <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-2">
                         Your Full Name <span className="text-[#F07800]">*</span>
                       </label>
                       <input
@@ -174,7 +173,7 @@ export function ContactSection({
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono text-[#A3A3A3] mb-1.5 uppercase">
+                      <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-2">
                         Telegram Username <span className="text-[#F07800]">*</span>
                       </label>
                       <input
@@ -188,9 +187,9 @@ export function ContactSection({
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-xs font-mono text-[#A3A3A3] mb-1.5 uppercase">
+                      <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-2">
                         Email Address <span className="text-[#F07800]">*</span>
                       </label>
                       <input
@@ -204,13 +203,13 @@ export function ContactSection({
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono text-[#A3A3A3] mb-1.5 uppercase">
-                        Inquiry Category
+                      <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-2">
+                        Inquiry Topic
                       </label>
                       <select
                         value={formData.inquiryType}
                         onChange={(e) => setFormData({ ...formData, inquiryType: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl fintech-input text-sm bg-[#191919]"
+                        className="w-full px-4 py-3 rounded-xl fintech-input text-sm"
                       >
                         <option>Promotion Inquiry</option>
                         <option>Bespoke Multi-Week Campaign</option>
@@ -222,7 +221,7 @@ export function ContactSection({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono text-[#A3A3A3] mb-1.5 uppercase">
+                    <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-2">
                       Message / Channel Details <span className="text-[#F07800]">*</span>
                     </label>
                     <textarea
@@ -238,13 +237,13 @@ export function ContactSection({
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full gradient-btn-primary py-3.5 rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-lg disabled:opacity-50"
+                    className="w-full gradient-btn-primary py-4 rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-xs disabled:opacity-50"
                   >
                     {loading ? (
-                      <span className="font-mono text-xs">Dispatching message...</span>
+                      <span className="font-mono text-xs">Sending message...</span>
                     ) : (
                       <>
-                        <span>Submit Business Enquiry</span>
+                        <span>Submit Business Inquiry</span>
                         <ArrowRight className="w-4 h-4" />
                       </>
                     )}

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, Suspense } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
@@ -11,8 +11,6 @@ import {
   AlertCircle,
   Copy,
   ArrowRight,
-  ShieldAlert,
-  HelpCircle,
   Sparkles,
   BarChart2,
   Lock,
@@ -37,7 +35,6 @@ const PACKAGES = [
 
 function ApplicationForm() {
   const searchParams = useSearchParams();
-  const router = useRouter();
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -148,43 +145,43 @@ function ApplicationForm() {
 
   if (successData) {
     return (
-      <div className="max-w-2xl mx-auto my-12 p-8 sm:p-12 rounded-3xl bg-[#191919] border border-[#303030] shadow-2xl text-center animate-in zoom-in-95 duration-300">
-        <div className="w-16 h-16 rounded-2xl bg-[#22C55E]/15 border border-[#22C55E]/40 text-[#22C55E] flex items-center justify-center mx-auto mb-6">
+      <div className="max-w-2xl mx-auto my-12 p-8 sm:p-12 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] shadow-xl text-center animate-in zoom-in-95 duration-200">
+        <div className="w-16 h-16 rounded-2xl bg-[#22C55E]/15 text-[#22C55E] flex items-center justify-center mx-auto mb-6">
           <CheckCircle className="w-8 h-8" />
         </div>
 
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#202020] border border-[#303030] text-xs font-mono text-[#22C55E] mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-secondary)] border border-[var(--border-subtle)] text-xs font-mono text-[#22C55E] mb-4">
           APPLICATION REGISTERED
         </div>
 
-        <h2 className="text-2xl sm:text-3xl font-heading font-extrabold text-white mb-3">
+        <h2 className="text-2xl sm:text-3xl font-heading font-extrabold text-[var(--text-primary)] mb-3">
           Submission Successful
         </h2>
 
-        {/* Required wording */}
-        <p className="text-base text-[#CCCCCC] leading-relaxed max-w-lg mx-auto mb-8">
+        {/* Required Notification Text */}
+        <p className="text-base text-[var(--text-secondary)] leading-relaxed max-w-lg mx-auto mb-8">
           &ldquo;Your application has been submitted successfully. Our team will review your channel and notify you about the decision.&rdquo;
         </p>
 
         {/* Reference ID Card */}
-        <div className="p-6 rounded-2xl bg-[#141414] border border-[#303030] max-w-md mx-auto mb-8 text-left">
-          <div className="text-[11px] font-mono uppercase tracking-wider text-[#777777] mb-1">
+        <div className="p-6 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-subtle)] max-w-md mx-auto mb-8 text-left">
+          <div className="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)] mb-1">
             Unique Application Reference ID
           </div>
           <div className="flex items-center justify-between gap-3">
-            <span className="font-mono text-2xl font-bold text-[#FFB000] tracking-wider">
+            <span className="font-mono text-2xl font-bold text-[#F07800] tracking-wider">
               {successData.referenceId}
             </span>
             <button
               onClick={copyRefId}
               type="button"
-              className="px-3 py-1.5 rounded-lg bg-[#202020] hover:bg-[#282828] border border-[#383838] text-xs font-medium text-white flex items-center gap-1.5 transition-colors"
+              className="px-3.5 py-1.5 rounded-xl bg-[var(--bg-card)] hover:bg-[var(--bg-card-hover)] border border-[var(--border-subtle)] text-xs font-medium text-[var(--text-primary)] flex items-center gap-1.5 transition-colors shadow-xs"
             >
               <Copy className="w-3.5 h-3.5 text-[#F07800]" />
               <span>{copied ? 'Copied!' : 'Copy'}</span>
             </button>
           </div>
-          <div className="mt-3 text-[11px] text-[#A3A3A3] pt-2 border-t border-[#262626]">
+          <div className="mt-3 text-[11px] text-[var(--text-muted)] pt-3 border-t border-[var(--border-subtle)]">
             Save this Reference ID. You will need it alongside your Telegram username to track review status.
           </div>
         </div>
@@ -192,7 +189,7 @@ function ApplicationForm() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             href={`/track?ref=${encodeURIComponent(successData.referenceId)}`}
-            className="w-full sm:w-auto gradient-btn-primary px-7 py-3.5 rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-lg"
+            className="w-full sm:w-auto gradient-btn-primary px-7 py-3.5 rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-xs"
           >
             <span>Track Application Status</span>
             <ArrowRight className="w-4 h-4" />
@@ -200,7 +197,7 @@ function ApplicationForm() {
 
           <Link
             href="/"
-            className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#202020] hover:bg-[#282828] text-white font-medium text-sm border border-[#383838] transition-colors"
+            className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[var(--bg-secondary)] hover:bg-[var(--bg-card-hover)] text-[var(--text-primary)] font-medium text-sm border border-[var(--border-subtle)] transition-colors"
           >
             Return to Homepage
           </Link>
@@ -213,21 +210,21 @@ function ApplicationForm() {
     <div className="max-w-4xl mx-auto">
       {/* Header */}
       <div className="text-center mb-12">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1c1c1c] border border-[#303030] text-xs font-mono text-[#F07800] mb-3">
-          <Sparkles className="w-3.5 h-3.5 text-[#FFB000]" />
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[var(--badge-bg)] border border-[var(--border-subtle)] text-xs font-mono font-medium text-[#F07800] mb-3">
+          <Sparkles className="w-3.5 h-3.5 text-[#F07800]" />
           TRADING COMMUNITY PROMOTION PORTAL
         </div>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white tracking-tight">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-[var(--text-primary)] tracking-tight uppercase">
           Apply for Promotional Placement
         </h1>
-        <p className="mt-3 text-sm sm:text-base text-[#A3A3A3] max-w-2xl mx-auto">
-          Submit your trading channel for our editorial compliance review. Applications are reviewed manually within 24 to 48 business hours.
+        <p className="mt-3 text-sm sm:text-base text-[var(--text-secondary)] max-w-2xl mx-auto">
+          Submit your trading channel for our editorial compliance review. Applications are audited manually within 24 to 48 business hours.
         </p>
       </div>
 
-      {/* Error alert if any */}
+      {/* Error alert */}
       {errorMessage && (
-        <div className="mb-8 p-4 rounded-2xl bg-[#EF4444]/10 border border-[#EF4444]/40 text-[#EF4444] text-sm flex items-start gap-3 animate-in shake">
+        <div className="mb-8 p-4 rounded-2xl bg-[#EF4444]/10 border border-[#EF4444]/40 text-[#DC2626] dark:text-[#EF4444] text-sm flex items-start gap-3">
           <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
           <div className="flex-1">
             <span className="font-semibold">Submission Incomplete: </span>
@@ -237,17 +234,17 @@ function ApplicationForm() {
       )}
 
       {/* Main Form */}
-      <form onSubmit={handleSubmit} className="rounded-3xl bg-[#191919] border border-[#303030] p-6 sm:p-10 shadow-2xl space-y-8">
+      <form onSubmit={handleSubmit} className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] p-6 sm:p-10 shadow-lg space-y-8">
         {/* Section 1: Contact Identity */}
         <div>
-          <h2 className="text-lg font-heading font-bold text-white flex items-center gap-2 mb-4 pb-2 border-b border-[#2b2b2b]">
+          <h2 className="text-lg font-heading font-bold text-[var(--text-primary)] flex items-center gap-2 mb-4 pb-2 border-b border-[var(--border-subtle)]">
             <Lock className="w-4 h-4 text-[#F07800]" />
             1. Channel Owner Contact
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div>
-              <label className="block text-xs font-mono text-[#A3A3A3] mb-1.5 uppercase">
+              <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-2">
                 Full Name <span className="text-[#F07800]">*</span>
               </label>
               <input
@@ -261,7 +258,7 @@ function ApplicationForm() {
             </div>
 
             <div>
-              <label className="block text-xs font-mono text-[#A3A3A3] mb-1.5 uppercase">
+              <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-2">
                 Telegram Username <span className="text-[#F07800]">*</span>
               </label>
               <input
@@ -272,21 +269,21 @@ function ApplicationForm() {
                 placeholder="@vance_trading"
                 className="w-full px-4 py-3 rounded-xl fintech-input text-sm"
               />
-              <span className="text-[11px] text-[#777777] mt-1 block">Used for review status communications.</span>
+              <span className="text-[11px] text-[var(--text-muted)] mt-1.5 block">Used for review status communications.</span>
             </div>
           </div>
         </div>
 
         {/* Section 2: Channel Identification & Metrics */}
         <div>
-          <h2 className="text-lg font-heading font-bold text-white flex items-center gap-2 mb-4 pb-2 border-b border-[#2b2b2b]">
-            <BarChart2 className="w-4 h-4 text-[#FFB000]" />
+          <h2 className="text-lg font-heading font-bold text-[var(--text-primary)] flex items-center gap-2 mb-4 pb-2 border-b border-[var(--border-subtle)]">
+            <BarChart2 className="w-4 h-4 text-[#F07800]" />
             2. Channel Metrics & Classification
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
             <div>
-              <label className="block text-xs font-mono text-[#A3A3A3] mb-1.5 uppercase">
+              <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-2">
                 Telegram Channel Name <span className="text-[#F07800]">*</span>
               </label>
               <input
@@ -300,7 +297,7 @@ function ApplicationForm() {
             </div>
 
             <div>
-              <label className="block text-xs font-mono text-[#A3A3A3] mb-1.5 uppercase">
+              <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-2">
                 Telegram Channel Link <span className="text-[#F07800]">*</span>
               </label>
               <input
@@ -316,13 +313,13 @@ function ApplicationForm() {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             <div>
-              <label className="block text-xs font-mono text-[#A3A3A3] mb-1.5 uppercase">
+              <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-2">
                 Channel Category <span className="text-[#F07800]">*</span>
               </label>
               <select
                 value={formData.channelCategory}
                 onChange={(e) => setFormData({ ...formData, channelCategory: e.target.value as ChannelCategory })}
-                className="w-full px-4 py-3 rounded-xl fintech-input text-sm bg-[#191919]"
+                className="w-full px-4 py-3 rounded-xl fintech-input text-sm"
               >
                 {CATEGORIES.map((c) => (
                   <option key={c} value={c}>
@@ -333,7 +330,7 @@ function ApplicationForm() {
             </div>
 
             <div>
-              <label className="block text-xs font-mono text-[#A3A3A3] mb-1.5 uppercase">
+              <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-2">
                 Total Subscribers <span className="text-[#F07800]">*</span>
               </label>
               <input
@@ -345,11 +342,11 @@ function ApplicationForm() {
                 placeholder="e.g. 24000"
                 className="w-full px-4 py-3 rounded-xl fintech-input text-sm font-mono"
               />
-              <span className="text-[11px] text-[#777777] mt-1 block">Min. 100 subscribers</span>
+              <span className="text-[11px] text-[var(--text-muted)] mt-1.5 block">Min. 100 subscribers</span>
             </div>
 
             <div>
-              <label className="block text-xs font-mono text-[#A3A3A3] mb-1.5 uppercase">
+              <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-2">
                 Average Post Views <span className="text-[#F07800]">*</span>
               </label>
               <input
@@ -361,14 +358,14 @@ function ApplicationForm() {
                 placeholder="e.g. 8500"
                 className="w-full px-4 py-3 rounded-xl fintech-input text-sm font-mono"
               />
-              <span className="text-[11px] text-[#777777] mt-1 block">Past 30-day average</span>
+              <span className="text-[11px] text-[var(--text-muted)] mt-1.5 block">Past 30-day average</span>
             </div>
           </div>
         </div>
 
         {/* Section 3: Engagement Information */}
         <div>
-          <label className="block text-xs font-mono text-[#A3A3A3] mb-1.5 uppercase">
+          <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-2">
             Engagement Information & Discussion Group Activity <span className="text-[#F07800]">*</span>
           </label>
           <textarea
@@ -376,14 +373,14 @@ function ApplicationForm() {
             rows={3}
             value={formData.engagementInfo}
             onChange={(e) => setFormData({ ...formData, engagementInfo: e.target.value })}
-            placeholder="Describe your typical engagement: view-rate percentage, active discussion group activity, reactions, comments, etc..."
+            placeholder="Describe your typical engagement: view-rate percentage, active discussion group activity, reactions, comments..."
             className="w-full px-4 py-3 rounded-xl fintech-input text-sm resize-none"
           />
         </div>
 
         {/* Section 4: Preferred Package */}
         <div>
-          <label className="block text-xs font-mono text-[#A3A3A3] mb-2 uppercase">
+          <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-2.5">
             Preferred Promotion Package <span className="text-[#F07800]">*</span>
           </label>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -395,21 +392,21 @@ function ApplicationForm() {
                   onClick={() => setFormData({ ...formData, preferredPackage: pkg })}
                   className={`p-4 rounded-2xl cursor-pointer border transition-all text-left ${
                     selected
-                      ? 'bg-[#222222] border-[#F07800] shadow-md shadow-[#F07800]/10'
-                      : 'bg-[#161616] border-[#303030] hover:border-[#404040]'
+                      ? 'bg-[var(--bg-secondary)] border-[#F07800] shadow-xs'
+                      : 'bg-[var(--bg-card)] border-[var(--border-subtle)] hover:border-[var(--border-strong)]'
                   }`}
                 >
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="font-heading font-bold text-white text-sm">{pkg}</span>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="font-heading font-bold text-[var(--text-primary)] text-sm">{pkg}</span>
                     <div
                       className={`w-4 h-4 rounded-full border flex items-center justify-center ${
-                        selected ? 'border-[#F07800] bg-[#F07800]' : 'border-[#444444]'
+                        selected ? 'border-[#F07800] bg-[#F07800]' : 'border-[var(--border-strong)]'
                       }`}
                     >
-                      {selected && <div className="w-1.5 h-1.5 rounded-full bg-black" />}
+                      {selected && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
                     </div>
                   </div>
-                  <span className="text-[11px] font-mono text-[#A3A3A3]">
+                  <span className="text-[11px] font-mono text-[var(--text-muted)]">
                     {pkg === 'Basic Promotion' ? '24h Spotlight' : pkg === 'Featured Promotion' ? '48h Pinned' : '7-Day Campaign'}
                   </span>
                 </div>
@@ -421,7 +418,7 @@ function ApplicationForm() {
         {/* Section 5: Supporting Screenshots / Links & Additional Info */}
         <div className="space-y-4">
           <div>
-            <label className="block text-xs font-mono text-[#A3A3A3] mb-1.5 uppercase">
+            <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-2">
               Supporting Statistics Link or Screenshot URL (Optional)
             </label>
             <input
@@ -431,11 +428,11 @@ function ApplicationForm() {
               placeholder="https://t.me/tgstat_or_analytics_screenshot_url"
               className="w-full px-4 py-3 rounded-xl fintech-input text-sm"
             />
-            <span className="text-[11px] text-[#777777] mt-1 block">TGStat link, Telemetr report, or image link showing analytics.</span>
+            <span className="text-[11px] text-[var(--text-muted)] mt-1.5 block">TGStat link, Telemetr report, or image link showing analytics.</span>
           </div>
 
           <div>
-            <label className="block text-xs font-mono text-[#A3A3A3] mb-1.5 uppercase">
+            <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-2">
               Additional Information (Optional)
             </label>
             <textarea
@@ -449,16 +446,16 @@ function ApplicationForm() {
         </div>
 
         {/* Section 6: Compliance Acknowledgement */}
-        <div className="p-4 rounded-2xl bg-[#141414] border border-[#2e2e2e]">
-          <label className="flex items-start gap-3 cursor-pointer">
+        <div className="p-5 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-subtle)]">
+          <label className="flex items-start gap-3.5 cursor-pointer">
             <input
               type="checkbox"
               required
               checked={formData.acceptedTerms}
               onChange={(e) => setFormData({ ...formData, acceptedTerms: e.target.checked })}
-              className="mt-1 h-4 w-4 rounded border-[#404040] bg-[#202020] text-[#F07800] focus:ring-[#F07800]"
+              className="mt-1 h-4 w-4 rounded border-[var(--border-strong)] text-[#F07800] focus:ring-[#F07800]"
             />
-            <span className="text-xs text-[#A3A3A3] leading-relaxed">
+            <span className="text-xs text-[var(--text-secondary)] leading-relaxed">
               I certify that this channel does not publish deceptive profit claims or fraudulent content. I acknowledge that application submission does not guarantee promotion approval and that all campaigns are manually reviewed and scheduled per slot availability.
             </span>
           </label>
@@ -469,7 +466,7 @@ function ApplicationForm() {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full gradient-btn-primary py-4 rounded-xl font-bold text-base tracking-wide flex items-center justify-center gap-2 shadow-xl hover:shadow-[#F07800]/30 transition-all disabled:opacity-50"
+            className="w-full gradient-btn-primary py-4 rounded-xl font-bold text-base tracking-wide flex items-center justify-center gap-2 shadow-xs disabled:opacity-50"
           >
             {submitting ? (
               <span className="flex items-center gap-2">
@@ -491,18 +488,20 @@ function ApplicationForm() {
 
 export default function ApplyPage() {
   return (
-    <div className="min-h-screen bg-[#111111] text-white flex flex-col">
+    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] flex flex-col transition-colors duration-200">
       <Navbar />
       <main className="flex-grow py-16 px-4 sm:px-6 lg:px-8">
-        <Suspense
-          fallback={
-            <div className="text-center py-24 text-sm text-[#A3A3A3] font-mono">
-              Loading application portal...
-            </div>
-          }
-        >
-          <ApplicationForm />
-        </Suspense>
+        <div className="site-container">
+          <Suspense
+            fallback={
+              <div className="text-center py-24 text-sm text-[var(--text-muted)] font-mono">
+                Loading application portal...
+              </div>
+            }
+          >
+            <ApplicationForm />
+          </Suspense>
+        </div>
       </main>
       <Footer />
     </div>

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Sora, Inter } from "next/font/google";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
 
 const sora = Sora({
@@ -17,7 +18,10 @@ const inter = Inter({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#111111",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FFFFFF" },
+    { media: "(prefers-color-scheme: dark)", color: "#111111" },
+  ],
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -45,7 +49,7 @@ export const metadata: Metadata = {
     title: "Trading Legend – Premium Trading Promotion Platform",
     description:
       "Exclusive, vetted promotional opportunities for high-caliber trading communities and creators.",
-    url: "https://tradinglegend.com",
+    url: "https://tradinglegend.io",
     siteName: "Trading Legend",
     images: [
       {
@@ -68,11 +72,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${sora.variable} ${inter.variable} dark`}
+      className={`${sora.variable} ${inter.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen bg-[#111111] text-[#FFFFFF] font-sans antialiased selection:bg-[#F07800]/30 selection:text-white">
-        {children}
+      <head>
+        {/* Anti-flash script to guarantee instant theme application prior to render */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('tl-theme')||'system';var d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(t==='dark'||(t==='system'&&d)){document.documentElement.classList.add('dark');document.documentElement.classList.remove('light');document.documentElement.style.colorScheme='dark';}else{document.documentElement.classList.add('light');document.documentElement.classList.remove('dark');document.documentElement.style.colorScheme='light';}}catch(e){}})();`,
+          }}
+        />
+      </head>
+      <body className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] font-sans antialiased selection:bg-[#F07800]/25 selection:text-[#F07800]">
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

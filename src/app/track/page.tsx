@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import Link from 'next/link';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import {
@@ -12,11 +11,7 @@ import {
   AlertCircle,
   XCircle,
   Calendar,
-  Layers,
-  ArrowRight,
-  ShieldAlert,
   Send,
-  Sparkles,
 } from 'lucide-react';
 import { ApplicationStatus } from '@/lib/types';
 
@@ -96,22 +91,22 @@ function TrackingContent() {
   const getStatusBadge = (status: ApplicationStatus) => {
     switch (status) {
       case 'Submitted':
-        return 'bg-blue-500/10 text-blue-400 border-blue-500/30';
+        return 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/30';
       case 'Under Review':
-        return 'bg-amber-500/10 text-amber-400 border-amber-500/30';
+        return 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/30';
       case 'Approved':
       case 'Confirmed':
-        return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30';
+        return 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/30';
       case 'Payment Pending':
-        return 'bg-orange-500/10 text-orange-400 border-orange-500/30';
+        return 'bg-orange-500/10 text-[#F07800] border-orange-500/30';
       case 'Scheduled':
-        return 'bg-purple-500/10 text-purple-400 border-purple-500/30';
+        return 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/30';
       case 'Completed':
-        return 'bg-zinc-500/10 text-zinc-300 border-zinc-500/30';
+        return 'bg-zinc-500/10 text-zinc-700 dark:text-zinc-300 border-zinc-500/30';
       case 'Rejected':
-        return 'bg-red-500/10 text-red-400 border-red-500/30';
+        return 'bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/30';
       default:
-        return 'bg-zinc-500/10 text-zinc-400 border-zinc-500/30';
+        return 'bg-zinc-500/10 text-zinc-600 dark:text-zinc-400 border-zinc-500/30';
     }
   };
 
@@ -119,23 +114,23 @@ function TrackingContent() {
     <div className="max-w-3xl mx-auto">
       {/* Page Header */}
       <div className="text-center mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1c1c1c] border border-[#303030] text-xs font-mono text-[#F07800] mb-3">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[var(--badge-bg)] border border-[var(--border-subtle)] text-xs font-mono font-medium text-[#F07800] mb-3">
           VERIFIED APPLICATION LOOKUP
         </div>
-        <h1 className="text-3xl sm:text-4xl font-heading font-extrabold text-white tracking-tight">
+        <h1 className="text-3xl sm:text-4xl font-heading font-extrabold text-[var(--text-primary)] tracking-tight uppercase">
           Track Your Application Status
         </h1>
-        <p className="mt-2.5 text-sm sm:text-base text-[#A3A3A3]">
+        <p className="mt-2.5 text-sm sm:text-base text-[var(--text-secondary)]">
           Enter your unique Application Reference ID and registered Telegram username to check real-time review progress.
         </p>
       </div>
 
       {/* Lookup Card */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-[#191919] border border-[#303030] shadow-2xl mb-8">
+      <div className="p-6 sm:p-8 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] shadow-lg mb-8">
         <form onSubmit={handleLookup} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-mono uppercase text-[#A3A3A3] mb-1.5">
+              <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-2">
                 Reference ID <span className="text-[#F07800]">*</span>
               </label>
               <input
@@ -149,7 +144,7 @@ function TrackingContent() {
             </div>
 
             <div>
-              <label className="block text-xs font-mono uppercase text-[#A3A3A3] mb-1.5">
+              <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-2">
                 Telegram Username (Optional Verification)
               </label>
               <input
@@ -165,7 +160,7 @@ function TrackingContent() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full gradient-btn-primary py-3.5 rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-lg disabled:opacity-50"
+            className="w-full gradient-btn-primary py-3.5 rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-xs disabled:opacity-50"
           >
             {loading ? (
               <span className="font-mono text-xs">Querying platform status...</span>
@@ -179,7 +174,7 @@ function TrackingContent() {
         </form>
 
         {/* Demo Fast Fill helpers */}
-        <div className="mt-5 pt-4 border-t border-[#262626] flex flex-wrap items-center justify-between text-xs text-[#777777] font-mono">
+        <div className="mt-5 pt-4 border-t border-[var(--border-subtle)] flex flex-wrap items-center justify-between text-xs text-[var(--text-muted)] font-mono">
           <span>Sample demo references:</span>
           <div className="flex flex-wrap gap-2 mt-1 sm:mt-0">
             {['TL-2026-4812', 'TL-2026-7209', 'TL-2026-9051', 'TL-2026-3184'].map((ref) => (
@@ -190,7 +185,7 @@ function TrackingContent() {
                   setReferenceId(ref);
                   setTelegramUsername('');
                 }}
-                className="hover:text-[#FFB000] underline"
+                className="text-[#F07800] hover:underline"
               >
                 {ref}
               </button>
@@ -201,7 +196,7 @@ function TrackingContent() {
 
       {/* Error state */}
       {error && (
-        <div className="p-4 rounded-2xl bg-[#EF4444]/10 border border-[#EF4444]/40 text-[#EF4444] text-sm flex items-start gap-3 mb-8">
+        <div className="p-4 rounded-2xl bg-[#EF4444]/10 border border-[#EF4444]/40 text-[#DC2626] dark:text-[#EF4444] text-sm flex items-start gap-3 mb-8">
           <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
           <div>{error}</div>
         </div>
@@ -209,16 +204,16 @@ function TrackingContent() {
 
       {/* Result Card */}
       {application && (
-        <div className="rounded-3xl bg-[#191919] border border-[#303030] p-6 sm:p-8 shadow-2xl space-y-6 animate-in fade-in duration-300">
+        <div className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] p-6 sm:p-8 shadow-xl space-y-6 animate-in fade-in duration-200">
           {/* Header of Application */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#2b2b2b]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[var(--border-subtle)]">
             <div>
-              <div className="text-xs font-mono uppercase text-[#777777]">Application Reference</div>
-              <div className="text-2xl font-heading font-extrabold text-white mt-0.5">
+              <div className="text-xs font-mono uppercase text-[var(--text-muted)]">Application Reference</div>
+              <div className="text-2xl font-heading font-extrabold text-[var(--text-primary)] mt-0.5">
                 {application.referenceId}
               </div>
-              <div className="text-sm text-[#A3A3A3] mt-1">
-                Channel: <span className="text-white font-medium">{application.channelName}</span>
+              <div className="text-sm text-[var(--text-secondary)] mt-1">
+                Channel: <span className="text-[var(--text-primary)] font-semibold">{application.channelName}</span>
               </div>
             </div>
 
@@ -233,10 +228,10 @@ function TrackingContent() {
             </div>
           </div>
 
-          {/* Status Progression Bar (if not rejected) */}
+          {/* Status Progression Bar */}
           {application.status !== 'Rejected' ? (
             <div>
-              <div className="text-xs font-mono uppercase text-[#777777] mb-3">Review Lifecycle</div>
+              <div className="text-xs font-mono uppercase text-[var(--text-muted)] mb-3">Review Lifecycle</div>
               <div className="grid grid-cols-2 sm:grid-cols-6 gap-2">
                 {STATUS_PROGRESSION.map((step, idx) => {
                   const currentIdx = STATUS_PROGRESSION.indexOf(application.status as any);
@@ -248,10 +243,10 @@ function TrackingContent() {
                       key={step}
                       className={`p-2.5 rounded-xl border text-center transition-colors ${
                         isCurrent
-                          ? 'bg-[#F07800]/15 border-[#F07800] text-[#FFB000] font-bold'
+                          ? 'bg-[#F07800]/10 border-[#F07800] text-[#F07800] font-bold'
                           : isPassed
-                          ? 'bg-[#202020] border-[#22C55E]/40 text-[#22C55E]'
-                          : 'bg-[#141414] border-[#262626] text-[#555555]'
+                          ? 'bg-[var(--bg-secondary)] border-[#22C55E]/40 text-[#22C55E]'
+                          : 'bg-[var(--bg-secondary)] border-[var(--border-subtle)] text-[var(--text-muted)]'
                       }`}
                     >
                       <div className="text-[10px] font-mono leading-none mb-1">0{idx + 1}</div>
@@ -268,30 +263,30 @@ function TrackingContent() {
                 <span>Application Declined by Compliance Committee</span>
               </div>
               {application.rejectionReason && (
-                <p className="text-xs text-[#E5E5E5] leading-relaxed">
-                  <span className="font-semibold text-white">Specific Auditor Finding: </span>
+                <p className="text-xs text-[var(--text-primary)] leading-relaxed">
+                  <span className="font-semibold">Auditor Finding: </span>
                   {application.rejectionReason}
                 </p>
               )}
             </div>
           )}
 
-          {/* Public Status Note / Next Steps */}
+          {/* Public Status Note */}
           {application.publicStatusNote && (
-            <div className="p-4 rounded-2xl bg-[#141414] border border-[#2b2b2b]">
-              <div className="text-[11px] font-mono uppercase text-[#777777] mb-1">Auditor Status Note</div>
-              <p className="text-sm text-white font-medium">{application.publicStatusNote}</p>
+            <div className="p-4 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-subtle)]">
+              <div className="text-[10px] font-mono uppercase text-[var(--text-muted)] mb-1">Auditor Status Note</div>
+              <p className="text-sm text-[var(--text-primary)] font-medium">{application.publicStatusNote}</p>
             </div>
           )}
 
-          {/* Scheduled Date if available */}
+          {/* Scheduled Date */}
           {application.scheduledDate && (
-            <div className="p-4 rounded-2xl bg-[#202020] border border-[#F07800]/40 flex items-center justify-between">
+            <div className="p-4 rounded-2xl bg-[var(--bg-secondary)] border border-[#F07800]/40 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <Calendar className="w-5 h-5 text-[#FFB000]" />
+                <Calendar className="w-5 h-5 text-[#F07800]" />
                 <div>
-                  <div className="text-xs font-mono uppercase text-[#A3A3A3]">Confirmed Broadcast Schedule</div>
-                  <div className="text-sm font-bold text-white">
+                  <div className="text-xs font-mono uppercase text-[var(--text-secondary)]">Confirmed Broadcast Schedule</div>
+                  <div className="text-sm font-bold text-[var(--text-primary)]">
                     {new Date(application.scheduledDate).toLocaleDateString('en-US', {
                       weekday: 'long',
                       year: 'numeric',
@@ -308,33 +303,33 @@ function TrackingContent() {
           )}
 
           {/* Details Table */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-mono pt-4 border-t border-[#262626]">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-mono pt-4 border-t border-[var(--border-subtle)]">
             <div>
-              <div className="text-[#666666]">CATEGORY</div>
-              <div className="text-white font-sans font-semibold mt-0.5">{application.channelCategory}</div>
+              <div className="text-[var(--text-muted)]">CATEGORY</div>
+              <div className="text-[var(--text-primary)] font-sans font-semibold mt-0.5">{application.channelCategory}</div>
             </div>
             <div>
-              <div className="text-[#666666]">TIER APPLIED</div>
-              <div className="text-white font-sans font-semibold mt-0.5">{application.preferredPackage}</div>
+              <div className="text-[var(--text-muted)]">TIER APPLIED</div>
+              <div className="text-[var(--text-primary)] font-sans font-semibold mt-0.5">{application.preferredPackage}</div>
             </div>
             <div>
-              <div className="text-[#666666]">SUBMITTED AT</div>
-              <div className="text-[#A3A3A3] mt-0.5">{new Date(application.submittedAt).toLocaleDateString()}</div>
+              <div className="text-[var(--text-muted)]">SUBMITTED AT</div>
+              <div className="text-[var(--text-secondary)] mt-0.5">{new Date(application.submittedAt).toLocaleDateString()}</div>
             </div>
             <div>
-              <div className="text-[#666666]">LAST UPDATE</div>
-              <div className="text-[#A3A3A3] mt-0.5">{new Date(application.updatedAt).toLocaleDateString()}</div>
+              <div className="text-[var(--text-muted)]">LAST UPDATE</div>
+              <div className="text-[var(--text-secondary)] mt-0.5">{new Date(application.updatedAt).toLocaleDateString()}</div>
             </div>
           </div>
 
           {/* Direct Support Footer */}
-          <div className="p-4 rounded-xl bg-[#141414] border border-[#262626] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-            <span className="text-[#888888]">Need to update your details or schedule?</span>
+          <div className="p-4 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-subtle)] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+            <span className="text-[var(--text-secondary)]">Need to update your details or schedule?</span>
             <a
               href="https://t.me/TradingLegend_Official"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#F07800] hover:underline flex items-center gap-1 font-mono"
+              className="text-[#F07800] hover:underline flex items-center gap-1 font-mono font-medium"
             >
               <Send className="w-3.5 h-3.5" />
               <span>Contact Review Desk via Telegram</span>
@@ -348,18 +343,20 @@ function TrackingContent() {
 
 export default function TrackPage() {
   return (
-    <div className="min-h-screen bg-[#111111] text-white flex flex-col">
+    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] flex flex-col transition-colors duration-200">
       <Navbar />
       <main className="flex-grow py-16 px-4 sm:px-6 lg:px-8">
-        <Suspense
-          fallback={
-            <div className="text-center py-24 text-sm text-[#A3A3A3] font-mono">
-              Loading tracking engine...
-            </div>
-          }
-        >
-          <TrackingContent />
-        </Suspense>
+        <div className="site-container">
+          <Suspense
+            fallback={
+              <div className="text-center py-24 text-sm text-[var(--text-muted)] font-mono">
+                Loading tracking engine...
+              </div>
+            }
+          >
+            <TrackingContent />
+          </Suspense>
+        </div>
       </main>
       <Footer />
     </div>

@@ -3,109 +3,41 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Target, Users, Shield, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, CheckCircle2, Shield, Target, Users } from 'lucide-react';
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-20 lg:py-28 relative overflow-hidden">
-      {/* Decorative background grid line */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Left Column: Visual Card */}
-          <div className="lg:col-span-5 order-2 lg:order-1">
-            <div className="relative rounded-2xl bg-[#191919] border border-[#303030] p-6 lg:p-8 shadow-2xl overflow-hidden">
-              {/* Background gradient badge */}
-              <div className="absolute top-0 right-0 w-48 h-48 bg-[#F07800]/10 rounded-full blur-3xl" />
-
-              {/* Official Brand Logo Mark Showcase */}
-              <div className="mb-6 p-4 rounded-xl bg-[#141414] border border-[#2b2b2b] flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-lg bg-[#202020] border border-[#383838] p-1.5 flex items-center justify-center">
-                    <Image
-                      src="/logo-icon.png"
-                      alt="Trading Legend Logo Mark"
-                      width={40}
-                      height={40}
-                      className="object-contain"
-                    />
-                  </div>
-                  <div>
-                    <div className="text-white font-heading font-bold text-sm tracking-wide">TRADING LEGEND</div>
-                    <div className="text-[11px] font-mono text-[#F07800]">VERIFIED PLATFORM</div>
-                  </div>
-                </div>
-                <span className="px-2.5 py-1 rounded-full bg-[#22C55E]/10 border border-[#22C55E]/30 text-[#22C55E] text-[10px] font-mono font-semibold">
-                  AUDITED
-                </span>
-              </div>
-
-              {/* Pillar Items */}
-              <div className="space-y-4">
-                <div className="p-4 rounded-xl bg-[#202020] border border-[#303030]/80">
-                  <div className="flex items-center gap-3 mb-1">
-                    <Target className="w-4 h-4 text-[#F07800]" />
-                    <span className="text-sm font-semibold text-white">Targeted Exposure</span>
-                  </div>
-                  <p className="text-xs text-[#A3A3A3] leading-relaxed">
-                    Connecting disciplined market educators with relevant traders actively seeking structured market analysis.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-xl bg-[#202020] border border-[#303030]/80">
-                  <div className="flex items-center gap-3 mb-1">
-                    <Shield className="w-4 h-4 text-[#FFB000]" />
-                    <span className="text-sm font-semibold text-white">Ethical Standards</span>
-                  </div>
-                  <p className="text-xs text-[#A3A3A3] leading-relaxed">
-                    Rigid review filter eliminating sensationalized promises and protecting traders from predatory schemes.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-xl bg-[#202020] border border-[#303030]/80">
-                  <div className="flex items-center gap-3 mb-1">
-                    <Users className="w-4 h-4 text-[#22C55E]" />
-                    <span className="text-sm font-semibold text-white">Network Governance</span>
-                  </div>
-                  <p className="text-xs text-[#A3A3A3] leading-relaxed">
-                    Controlled promotional calendar preventing member saturation and maintaining high post engagement.
-                  </p>
-                </div>
-              </div>
-
-              {/* Bot Architecture Preview */}
-              <div className="mt-5 pt-4 border-t border-[#303030] flex items-center justify-between text-xs text-[#777777] font-mono">
-                <span>TELEGRAM BOT API READY</span>
-                <span className="text-[#FFB000]">v1.0.0</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column: Mission and Content */}
-          <div className="lg:col-span-7 space-y-6 order-1 lg:order-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1c1c1c] border border-[#303030] text-xs font-mono text-[#F07800]">
+    <section id="about" className="py-20 sm:py-28 lg:py-32 relative overflow-hidden bg-[var(--bg-secondary)] border-y border-[var(--border-subtle)]">
+      <div className="site-container">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 xl:gap-24 items-center">
+          {/* Left Column: Editorial Content (7 cols on lg) */}
+          <div className="lg:col-span-7 space-y-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-card)] border border-[var(--border-subtle)] text-xs font-mono font-medium text-[#F07800]">
               ABOUT THE PLATFORM
             </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-[var(--text-primary)] tracking-tight leading-tight uppercase">
               ABOUT TRADING LEGEND
             </h2>
 
-            <div className="space-y-4 text-base sm:text-lg text-[#A3A3A3] leading-relaxed">
-              <p className="text-white font-medium text-lg sm:text-xl leading-relaxed border-l-2 border-[#F07800] pl-4">
+            <div className="space-y-5 text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed">
+              <p className="text-[var(--text-primary)] font-medium text-lg sm:text-xl leading-relaxed border-l-2 border-[#F07800] pl-5 py-1">
                 &ldquo;Trading Legend is a trading community-focused platform designed to connect trading-related content creators and Telegram channel owners with promotional opportunities. Our focus is on quality, transparency and meaningful community growth.&rdquo;
               </p>
+
               <p>
-                In an industry frequently clouded by excessive noise and unsubstantiated claims, Trading Legend stands for rigorous curation. We act as a professional bridge between serious trading community owners and targeted promotional distribution across vetted financial channels.
+                In a media ecosystem frequently crowded by unsubstantiated hype, Trading Legend provides a structured, high-integrity distribution bridge. We manually audit every applying channel to verify genuine educational substance, analytical methodology, and authentic member engagement.
               </p>
+
               <p>
-                Whether you manage an established multi-asset community, a specialized technical analysis channel, or a macro-economic research desk, our promotion workflows are structured to highlight your genuine expertise without compromising on integrity.
+                Whether you operate an established macro-economic commentary channel, an order flow technical desk, or a specialized multi-asset community, our platform delivers targeted exposure while safeguarding the integrity of your brand.
               </p>
             </div>
 
             <div className="pt-4 flex flex-wrap items-center gap-4">
               <Link
                 href="/apply"
-                className="gradient-btn-primary px-6 py-3 rounded-xl text-sm font-bold flex items-center gap-2 shadow-lg"
+                className="gradient-btn-primary px-7 py-3.5 rounded-xl text-sm font-bold flex items-center gap-2 shadow-xs"
               >
                 <span>Submit Your Channel</span>
                 <ArrowUpRight className="w-4 h-4" />
@@ -113,10 +45,81 @@ export function AboutSection() {
 
               <Link
                 href="/#channel-requirements"
-                className="px-5 py-3 rounded-xl bg-[#191919] hover:bg-[#202020] border border-[#303030] text-sm font-medium text-white transition-colors"
+                className="px-6 py-3.5 rounded-xl bg-[var(--bg-card)] hover:bg-[var(--bg-card-hover)] border border-[var(--border-subtle)] text-sm font-semibold text-[var(--text-primary)] transition-colors"
               >
-                Review Requirements
+                Review Channel Standards
               </Link>
+            </div>
+          </div>
+
+          {/* Right Column: Editorial Visual (5 cols on lg) */}
+          <div className="lg:col-span-5">
+            <div className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] p-8 sm:p-10 shadow-lg relative overflow-hidden">
+              {/* Subtle brand mark header */}
+              <div className="flex items-center gap-4 pb-6 border-b border-[var(--border-subtle)]">
+                <div className="w-12 h-12 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-subtle)] p-2 flex items-center justify-center flex-shrink-0">
+                  <Image
+                    src="/logo-icon.png"
+                    alt="Trading Legend Emblem"
+                    width={36}
+                    height={36}
+                    className="object-contain"
+                  />
+                </div>
+                <div>
+                  <div className="font-heading font-extrabold text-sm sm:text-base text-[var(--text-primary)] uppercase tracking-wide">
+                    TRADING LEGEND
+                  </div>
+                  <div className="text-[11px] font-mono text-[var(--text-muted)]">
+                    Quality-First Financial Media
+                  </div>
+                </div>
+              </div>
+
+              {/* Three Editorial Tenets */}
+              <div className="space-y-6 pt-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-9 h-9 rounded-xl bg-[#F07800]/10 flex items-center justify-center flex-shrink-0 text-[#F07800]">
+                    <Target className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-heading font-bold text-[var(--text-primary)] mb-1">
+                      Curated Audience Alignment
+                    </h3>
+                    <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                      Promotional broadcasts reach dedicated market participants actively seeking rigorous technical analysis and educational content.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-9 h-9 rounded-xl bg-[#F07800]/10 flex items-center justify-center flex-shrink-0 text-[#F07800]">
+                    <Shield className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-heading font-bold text-[var(--text-primary)] mb-1">
+                      Zero Deceptive Marketing
+                    </h3>
+                    <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                      Strict exclusion of unrealistic return claims and fraudulent schemes to protect community members and publisher reputation.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-9 h-9 rounded-xl bg-[#F07800]/10 flex items-center justify-center flex-shrink-0 text-[#F07800]">
+                    <Users className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-heading font-bold text-[var(--text-primary)] mb-1">
+                      Controlled Broadcast Calendars
+                    </h3>
+                    <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                      Strict weekly caps on sponsored placements prevent message saturation and preserve peak reader retention.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

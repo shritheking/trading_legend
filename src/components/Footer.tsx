@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { BrandLogo } from './BrandLogo';
 import { LegalModal } from './LegalModals';
-import { Send, Shield, ExternalLink, ArrowUpRight } from 'lucide-react';
+import { Send, Shield, ArrowUpRight } from 'lucide-react';
 
 interface FooterProps {
   officialTelegram?: string;
@@ -19,103 +19,103 @@ export function Footer({
 
   return (
     <>
-      <footer className="bg-[#0e0e0e] border-t border-[#262626] text-[#A3A3A3] pt-16 pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <footer className="bg-[var(--bg-card)] border-t border-[var(--border-subtle)] text-[var(--text-secondary)] pt-16 pb-12">
+        <div className="site-container">
           {/* Main Footer Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-12 border-b border-[#262626]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-12 border-b border-[var(--border-subtle)]">
             {/* Column 1: Brand & Bio (Spans 2 on lg) */}
             <div className="lg:col-span-2 space-y-4">
               <BrandLogo variant="footer" href="/" />
-              <p className="text-sm text-[#A3A3A3] leading-relaxed max-w-sm mt-3">
+              <p className="text-sm text-[var(--text-secondary)] leading-relaxed max-w-sm mt-3">
                 Trading community-focused platform designed to connect trading-related content creators and Telegram channel owners with promotional opportunities. Quality, transparency and meaningful community growth.
               </p>
-              <div className="flex items-center gap-3 pt-2">
+              <div className="flex flex-wrap items-center gap-3 pt-2">
                 <a
                   href={officialTelegram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#191919] hover:bg-[#202020] border border-[#303030] hover:border-[#F07800]/50 text-white text-xs font-medium transition-all"
+                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[var(--bg-secondary)] hover:bg-[var(--bg-card-hover)] border border-[var(--border-subtle)] hover:border-[#F07800]/50 text-[var(--text-primary)] text-xs font-medium transition-all"
                 >
                   <Send className="w-3.5 h-3.5 text-[#F07800]" />
                   <span>Official Desk</span>
-                  <ArrowUpRight className="w-3 h-3 text-[#A3A3A3]" />
+                  <ArrowUpRight className="w-3 h-3 text-[var(--text-muted)]" />
                 </a>
 
                 <a
                   href={communityTelegram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#191919] hover:bg-[#202020] border border-[#303030] hover:border-[#FFB000]/50 text-white text-xs font-medium transition-all"
+                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[var(--bg-secondary)] hover:bg-[var(--bg-card-hover)] border border-[var(--border-subtle)] hover:border-[#F07800]/50 text-[var(--text-primary)] text-xs font-medium transition-all"
                 >
-                  <Send className="w-3.5 h-3.5 text-[#FFB000]" />
+                  <Send className="w-3.5 h-3.5 text-[#F07800]" />
                   <span>Community Channel</span>
-                  <ArrowUpRight className="w-3 h-3 text-[#A3A3A3]" />
+                  <ArrowUpRight className="w-3 h-3 text-[var(--text-muted)]" />
                 </a>
               </div>
             </div>
 
             {/* Column 2: Navigation */}
             <div className="space-y-3">
-              <h3 className="text-xs font-mono font-bold tracking-wider text-white uppercase">
+              <h3 className="text-xs font-mono font-bold tracking-wider text-[var(--text-primary)] uppercase">
                 Platform Navigation
               </h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link href="/" className="hover:text-white transition-colors">
+                  <Link href="/" className="hover:text-[var(--text-primary)] transition-colors">
                     Home
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#about" className="hover:text-white transition-colors">
+                  <Link href="/#about" className="hover:text-[var(--text-primary)] transition-colors">
                     About Trading Legend
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#how-it-works" className="hover:text-white transition-colors">
+                  <Link href="/#how-it-works" className="hover:text-[var(--text-primary)] transition-colors">
                     How It Works
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#channel-requirements" className="hover:text-white transition-colors">
+                  <Link href="/#channel-requirements" className="hover:text-[var(--text-primary)] transition-colors">
                     Channel Standards
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#contact" className="hover:text-white transition-colors">
+                  <Link href="/#contact" className="hover:text-[var(--text-primary)] transition-colors">
                     Contact & Inquiry
                   </Link>
                 </li>
               </ul>
             </div>
 
-            {/* Column 3: Promotions & Application */}
+            {/* Column 3: Promotions & Tracking */}
             <div className="space-y-3">
-              <h3 className="text-xs font-mono font-bold tracking-wider text-white uppercase">
+              <h3 className="text-xs font-mono font-bold tracking-wider text-[var(--text-primary)] uppercase">
                 Campaigns & Tracking
               </h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link href="/apply" className="hover:text-white transition-colors font-medium text-[#F07800]">
+                  <Link href="/apply" className="hover:text-[var(--text-primary)] transition-colors font-medium text-[#F07800]">
                     Apply for Promotion
                   </Link>
                 </li>
                 <li>
-                  <Link href="/track" className="hover:text-white transition-colors">
+                  <Link href="/track" className="hover:text-[var(--text-primary)] transition-colors">
                     Track Application Status
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#promotions" className="hover:text-white transition-colors">
+                  <Link href="/#promotions" className="hover:text-[var(--text-primary)] transition-colors">
                     Basic Promotion Tier
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#promotions" className="hover:text-white transition-colors">
+                  <Link href="/#promotions" className="hover:text-[var(--text-primary)] transition-colors">
                     Featured Promotion Tier
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#promotions" className="hover:text-white transition-colors">
+                  <Link href="/#promotions" className="hover:text-[var(--text-primary)] transition-colors">
                     Premium Promotion Tier
                   </Link>
                 </li>
@@ -124,14 +124,14 @@ export function Footer({
 
             {/* Column 4: Compliance & Legal */}
             <div className="space-y-3">
-              <h3 className="text-xs font-mono font-bold tracking-wider text-white uppercase">
+              <h3 className="text-xs font-mono font-bold tracking-wider text-[var(--text-primary)] uppercase">
                 Compliance & Legal
               </h3>
               <ul className="space-y-2 text-sm">
                 <li>
                   <button
                     onClick={() => setModalType('disclaimer')}
-                    className="hover:text-white transition-colors text-left text-amber-500/90"
+                    className="hover:text-[var(--text-primary)] transition-colors text-left text-amber-600 dark:text-amber-500 font-medium"
                   >
                     Risk Disclaimer
                   </button>
@@ -139,7 +139,7 @@ export function Footer({
                 <li>
                   <button
                     onClick={() => setModalType('terms')}
-                    className="hover:text-white transition-colors text-left"
+                    className="hover:text-[var(--text-primary)] transition-colors text-left"
                   >
                     Terms & Conditions
                   </button>
@@ -147,13 +147,13 @@ export function Footer({
                 <li>
                   <button
                     onClick={() => setModalType('privacy')}
-                    className="hover:text-white transition-colors text-left"
+                    className="hover:text-[var(--text-primary)] transition-colors text-left"
                   >
                     Privacy Policy
                   </button>
                 </li>
                 <li>
-                  <Link href="/admin" className="hover:text-white transition-colors font-mono text-xs text-[#666666]">
+                  <Link href="/admin" className="hover:text-[var(--text-primary)] transition-colors font-mono text-xs text-[var(--text-muted)]">
                     Admin Terminal
                   </Link>
                 </li>
@@ -162,8 +162,8 @@ export function Footer({
           </div>
 
           {/* Mandatory Risk Disclaimer Box */}
-          <div className="my-8 p-5 rounded-2xl bg-[#141414] border border-[#2b2b2b] text-xs leading-relaxed text-[#8a8a8a]">
-            <div className="flex items-center gap-2 text-white font-mono font-semibold uppercase tracking-wider mb-1.5">
+          <div className="my-8 p-5 sm:p-6 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-subtle)] text-xs leading-relaxed text-[var(--text-secondary)]">
+            <div className="flex items-center gap-2 text-[var(--text-primary)] font-mono font-semibold uppercase tracking-wider mb-2">
               <Shield className="w-4 h-4 text-[#F07800]" />
               Official Regulatory & Risk Notice
             </div>
@@ -173,26 +173,26 @@ export function Footer({
           </div>
 
           {/* Bottom Bar */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#666666]">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--text-muted)]">
             <div>
               &copy; 2026 TRADING LEGEND. All rights reserved.
             </div>
             <div className="flex items-center gap-6">
               <button
                 onClick={() => setModalType('disclaimer')}
-                className="hover:text-[#A3A3A3] transition-colors"
+                className="hover:text-[var(--text-primary)] transition-colors"
               >
                 Risk Notice
               </button>
               <button
                 onClick={() => setModalType('privacy')}
-                className="hover:text-[#A3A3A3] transition-colors"
+                className="hover:text-[var(--text-primary)] transition-colors"
               >
                 Privacy
               </button>
               <button
                 onClick={() => setModalType('terms')}
-                className="hover:text-[#A3A3A3] transition-colors"
+                className="hover:text-[var(--text-primary)] transition-colors"
               >
                 Terms
               </button>

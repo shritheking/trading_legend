@@ -1,165 +1,116 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { TrendingUp, ShieldCheck, Activity, Layers, Radio, Sparkles } from 'lucide-react';
+import React from 'react';
+import Image from 'next/image';
+import { ArrowUpRight, Compass, Network, ShieldCheck } from 'lucide-react';
 
 export function HeroVisual() {
-  const [pulse, setPulse] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setPulse((p) => (p + 1) % 100);
-    }, 2500);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <div className="relative w-full max-w-lg lg:max-w-xl mx-auto select-none">
-      {/* Background ambient glow */}
-      <div className="absolute -inset-4 bg-gradient-to-tr from-[#F07800]/15 via-[#FFB000]/10 to-transparent rounded-3xl blur-2xl pointer-events-none" />
+    <div className="relative w-full max-w-xl lg:max-w-2xl mx-auto select-none">
+      {/* Subtle warm accent ambient glow */}
+      <div className="absolute -inset-6 bg-gradient-to-tr from-[#F07800]/10 via-[#FFB000]/5 to-transparent rounded-full blur-3xl pointer-events-none" />
 
-      {/* Main Container */}
-      <div className="relative rounded-2xl bg-[#191919] border border-[#303030] shadow-2xl overflow-hidden backdrop-blur-xl">
-        {/* Terminal Header */}
-        <div className="flex items-center justify-between px-5 py-3.5 border-b border-[#303030] bg-[#141414]">
-          <div className="flex items-center gap-2">
-            <div className="h-3 w-3 rounded-full bg-[#EF4444]/80" />
-            <div className="h-3 w-3 rounded-full bg-[#FFB000]/80" />
-            <div className="h-3 w-3 rounded-full bg-[#22C55E]/80" />
-            <span className="ml-2 text-xs font-mono text-[#A3A3A3] tracking-wide">
-              TL-PROMOTION-ENGINE // V3.2
+      {/* Main Structural Frame */}
+      <div className="relative rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] p-6 sm:p-8 shadow-xl overflow-hidden transition-all duration-300">
+        {/* Subtle Background Structural Geometry */}
+        <div className="absolute inset-0 opacity-[0.035] dark:opacity-[0.06] pointer-events-none">
+          <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="hero-fine-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="1" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#hero-fine-grid)" />
+          </svg>
+        </div>
+
+        {/* Top Header Label */}
+        <div className="flex items-center justify-between pb-6 border-b border-[var(--border-subtle)]">
+          <div className="flex items-center gap-3">
+            <div className="w-2.5 h-2.5 rounded-full bg-[#F07800]" />
+            <span className="text-xs font-mono font-medium tracking-wider uppercase text-[var(--text-secondary)]">
+              Curated Community Distribution Network
             </span>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="flex h-2 w-2 rounded-full bg-[#22C55E] animate-ping" />
-            <span className="text-[11px] font-mono font-medium text-[#22C55E]">NETWORK LIVE</span>
+          <span className="text-[11px] font-mono text-[var(--text-muted)]">
+            Est. Review Standards
+          </span>
+        </div>
+
+        {/* Central Abstract Network Artwork */}
+        <div className="my-6 relative h-64 sm:h-72 w-full rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-subtle)] flex items-center justify-center overflow-hidden">
+          {/* Subtle concentric rings representing community network distribution */}
+          <div className="absolute w-52 h-52 rounded-full border border-[#F07800]/15 dark:border-[#F07800]/25 animate-pulse" />
+          <div className="absolute w-72 h-72 rounded-full border border-[var(--border-subtle)]" />
+          <div className="absolute w-96 h-96 rounded-full border border-[var(--border-subtle)] opacity-40" />
+
+          {/* SVG Vector Topology - Editorial & Mathematical Network Intersections */}
+          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 500 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+            {/* Structural Axis Lines */}
+            <line x1="50" y1="140" x2="450" y2="140" stroke="var(--border-subtle)" strokeWidth="1" strokeDasharray="4 4" />
+            <line x1="250" y1="30" x2="250" y2="250" stroke="var(--border-subtle)" strokeWidth="1" strokeDasharray="4 4" />
+
+            {/* Network Vector Connections */}
+            <path
+              d="M 90 200 C 160 180, 180 100, 250 80 C 320 60, 360 160, 420 120"
+              stroke="#F07800"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              className="drop-shadow-[0_2px_8px_rgba(240,120,0,0.3)]"
+            />
+            <path
+              d="M 110 90 C 180 130, 210 200, 290 190 C 370 180, 390 90, 430 70"
+              stroke="var(--border-strong)"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeDasharray="6 6"
+            />
+
+            {/* Node Points */}
+            <circle cx="90" cy="200" r="4.5" fill="var(--bg-card)" stroke="#F07800" strokeWidth="2.5" />
+            <circle cx="250" cy="80" r="5" fill="var(--bg-card)" stroke="#F07800" strokeWidth="2.5" />
+            <circle cx="420" cy="120" r="4.5" fill="var(--bg-card)" stroke="#FFB000" strokeWidth="2.5" />
+            <circle cx="290" cy="190" r="4" fill="var(--bg-card)" stroke="var(--text-secondary)" strokeWidth="2" />
+          </svg>
+
+          {/* Center Brand Anchor Badge */}
+          <div className="relative z-10 flex flex-col items-center justify-center p-4 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-subtle)] shadow-lg">
+            <Image
+              src="/logo-icon.png"
+              alt="Trading Legend Emblem"
+              width={44}
+              height={44}
+              className="object-contain"
+            />
+            <div className="mt-2 text-[11px] font-heading font-bold text-[var(--text-primary)] uppercase tracking-wider">
+              TRADING LEGEND
+            </div>
+            <div className="text-[9px] font-mono text-[var(--text-muted)] tracking-widest uppercase">
+              Vetted Hub
+            </div>
+          </div>
+
+          {/* Floating Subtle Annotation Tags */}
+          <div className="absolute top-4 left-4 px-3 py-1.5 rounded-xl bg-[var(--bg-card)]/90 backdrop-blur-md border border-[var(--border-subtle)] text-[11px] font-mono text-[var(--text-secondary)] shadow-xs flex items-center gap-1.5">
+            <Network className="w-3.5 h-3.5 text-[#F07800]" />
+            <span>Targeted Reach</span>
+          </div>
+
+          <div className="absolute bottom-4 right-4 px-3 py-1.5 rounded-xl bg-[var(--bg-card)]/90 backdrop-blur-md border border-[var(--border-subtle)] text-[11px] font-mono text-[var(--text-secondary)] shadow-xs flex items-center gap-1.5">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#22C55E]" />
+            <span>Quality Standard</span>
           </div>
         </div>
 
-        {/* Chart Window */}
-        <div className="p-6">
-          {/* Top Metric Bar */}
-          <div className="grid grid-cols-3 gap-3 mb-6">
-            <div className="rounded-xl bg-[#202020] p-3 border border-[#303030]/80">
-              <div className="text-[11px] text-[#A3A3A3] uppercase font-mono tracking-wider">Review Rate</div>
-              <div className="text-base font-heading font-bold text-white mt-0.5 flex items-center gap-1.5">
-                100% Manual
-                <ShieldCheck className="w-4 h-4 text-[#22C55E]" />
-              </div>
-            </div>
-
-            <div className="rounded-xl bg-[#202020] p-3 border border-[#303030]/80">
-              <div className="text-[11px] text-[#A3A3A3] uppercase font-mono tracking-wider">Weekly Slots</div>
-              <div className="text-base font-heading font-bold text-[#FFB000] mt-0.5 flex items-center gap-1.5">
-                Capped
-                <Radio className="w-4 h-4 text-[#F07800]" />
-              </div>
-            </div>
-
-            <div className="rounded-xl bg-[#202020] p-3 border border-[#303030]/80">
-              <div className="text-[11px] text-[#A3A3A3] uppercase font-mono tracking-wider">Integrity Filter</div>
-              <div className="text-base font-heading font-bold text-[#22C55E] mt-0.5 flex items-center gap-1.5">
-                Active
-                <Sparkles className="w-4 h-4 text-[#22C55E]" />
-              </div>
-            </div>
+        {/* Bottom Context Footnote */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-2 text-xs text-[var(--text-secondary)]">
+          <div className="flex items-center gap-2">
+            <Compass className="w-3.5 h-3.5 text-[#F07800]" />
+            <span>Structured exposure across vetted financial communities</span>
           </div>
-
-          {/* Abstract SVG Graphic: Financial Matrix & Geometric Trajectory */}
-          <div className="relative h-56 w-full rounded-xl bg-[#111111] border border-[#2b2b2b] p-3 overflow-hidden">
-            {/* Grid background */}
-            <svg className="absolute inset-0 h-full w-full stroke-white/[0.04]" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <pattern id="grid-pattern" width="32" height="32" patternUnits="userSpaceOnUse">
-                  <path d="M 32 0 L 0 0 0 32" fill="none" strokeWidth="1" />
-                </pattern>
-                <linearGradient id="gradient-area" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#F07800" stopOpacity="0.35" />
-                  <stop offset="60%" stopColor="#FFB000" stopOpacity="0.08" />
-                  <stop offset="100%" stopColor="#111111" stopOpacity="0" />
-                </linearGradient>
-                <linearGradient id="stroke-grad" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stopColor="#F07800" />
-                  <stop offset="50%" stopColor="#FFB000" />
-                  <stop offset="100%" stopColor="#FFFFFF" />
-                </linearGradient>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#grid-pattern)" />
-            </svg>
-
-            {/* Geometric Chart Lines */}
-            <svg className="absolute inset-0 h-full w-full" preserveAspectRatio="none" viewBox="0 0 500 200">
-              {/* Shaded Area */}
-              <path
-                d="M 0 160 Q 75 140, 140 130 T 260 100 T 380 65 T 500 40 L 500 200 L 0 200 Z"
-                fill="url(#gradient-area)"
-              />
-
-              {/* Lower baseline reference */}
-              <path
-                d="M 0 180 Q 90 170, 180 160 T 340 140 T 500 120"
-                fill="none"
-                stroke="#303030"
-                strokeWidth="1.5"
-                strokeDasharray="4 4"
-              />
-
-              {/* Upper trajectory curve */}
-              <path
-                d="M 0 160 Q 75 140, 140 130 T 260 100 T 380 65 T 500 40"
-                fill="none"
-                stroke="url(#stroke-grad)"
-                strokeWidth="3.5"
-                strokeLinecap="round"
-              />
-
-              {/* Milestone Dots */}
-              <circle cx="140" cy="130" r="5" fill="#191919" stroke="#F07800" strokeWidth="2.5" />
-              <circle cx="260" cy="100" r="5" fill="#191919" stroke="#FFB000" strokeWidth="2.5" />
-              <circle cx="380" cy="65" r="5" fill="#191919" stroke="#F07800" strokeWidth="2.5" />
-              <circle cx="500" cy="40" r="6" fill="#FFB000" stroke="#FFFFFF" strokeWidth="3" />
-            </svg>
-
-            {/* Abstract Candlesticks array */}
-            <div className="absolute bottom-4 left-6 right-6 flex justify-between items-end pointer-events-none opacity-40">
-              {[
-                { h: 36, c: '#F07800' },
-                { h: 54, c: '#FFB000' },
-                { h: 42, c: '#22C55E' },
-                { h: 68, c: '#22C55E' },
-                { h: 48, c: '#F07800' },
-                { h: 84, c: '#22C55E' },
-                { h: 72, c: '#FFB000' },
-                { h: 104, c: '#22C55E' },
-                { h: 96, c: '#22C55E' },
-                { h: 128, c: '#F07800' },
-                { h: 140, c: '#22C55E' },
-              ].map((bar, i) => (
-                <div key={i} className="flex flex-col items-center">
-                  <div className="w-[1.5px] bg-[#666666] mb-[-2px]" style={{ height: `${bar.h + 16}px` }} />
-                  <div
-                    className="w-3 rounded-xs shadow-sm"
-                    style={{ height: `${bar.h}px`, backgroundColor: bar.c }}
-                  />
-                </div>
-              ))}
-            </div>
-
-            {/* Float Highlight Badge */}
-            <div className="absolute top-4 right-4 rounded-lg bg-[#191919]/90 border border-[#303030] px-3 py-1.5 backdrop-blur-md flex items-center gap-2 shadow-lg">
-              <Activity className="w-3.5 h-3.5 text-[#22C55E]" />
-              <span className="text-xs font-mono font-medium text-white">Targeted Organic Exposure</span>
-            </div>
-          </div>
-
-          {/* Bottom Execution Status */}
-          <div className="mt-4 flex items-center justify-between text-xs text-[#A3A3A3] pt-3 border-t border-[#303030]/60">
-            <div className="flex items-center gap-2">
-              <Layers className="w-3.5 h-3.5 text-[#F07800]" />
-              <span>Multi-tier Telegram & Community Distribution</span>
-            </div>
-            <div className="font-mono text-[#FFB000] text-[11px]">Strict Compliance</div>
-          </div>
+          <span className="font-mono text-[11px] text-[var(--text-muted)]">
+            Manual Editorial Audit
+          </span>
         </div>
       </div>
     </div>

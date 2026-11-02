@@ -3,38 +3,31 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { BrandLogo } from '@/components/BrandLogo';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import {
-  Shield,
-  Layers,
   FileText,
   DollarSign,
   Settings,
   BarChart3,
   Bot,
   Search,
-  Filter,
   CheckCircle2,
   XCircle,
   Clock,
-  Eye,
   Calendar,
-  AlertTriangle,
-  ArrowRight,
   RefreshCw,
   Plus,
   ExternalLink,
   Lock,
   LogOut,
-  Send,
   Edit,
-  Trash2,
+  Layers,
 } from 'lucide-react';
 import {
   Application,
   PromotionPackage,
   PaymentRecord,
   WebsiteSettings,
-  ApplicationStatus,
 } from '@/lib/types';
 
 export default function AdminPage() {
@@ -83,9 +76,7 @@ export default function AdminPage() {
   const [botTestResult, setBotTestResult] = useState<any>(null);
   const [botTesting, setBotTesting] = useState(false);
 
-  // Auto-authenticate on demo mount for convenience or let user enter password
   useEffect(() => {
-    // Check local session
     const saved = sessionStorage.getItem('tl_admin_auth');
     if (saved === 'true') {
       setIsAuthenticated(true);
@@ -140,7 +131,6 @@ export default function AdminPage() {
     }
   };
 
-  // Application Actions
   const updateAppStatus = async (
     id: string,
     updates: Partial<Application>
@@ -209,7 +199,6 @@ export default function AdminPage() {
     alert('Internal reviewer note saved.');
   };
 
-  // Package Save
   const handleSavePackage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingPkg) return;
@@ -233,7 +222,6 @@ export default function AdminPage() {
     }
   };
 
-  // Verify Payment
   const handleVerifyPayment = async (payId: string) => {
     try {
       const res = await fetch(`/api/payments/${payId}`, {
@@ -246,14 +234,13 @@ export default function AdminPage() {
         setPayments((prev) =>
           prev.map((p) => (p.id === payId ? data.payment : p))
         );
-        fetchAllData(); // reload apps & revenue
+        fetchAllData();
       }
     } catch (err) {
       console.error('Error verifying payment:', err);
     }
   };
 
-  // Create Payment
   const handleCreatePayment = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -280,7 +267,6 @@ export default function AdminPage() {
     }
   };
 
-  // Save Website Settings
   const handleSaveSettings = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!settings) return;
@@ -301,7 +287,6 @@ export default function AdminPage() {
     }
   };
 
-  // Test Bot Webhook
   const handleRunBotTest = async () => {
     setBotTesting(true);
     setBotTestResult(null);
@@ -323,7 +308,6 @@ export default function AdminPage() {
     }
   };
 
-  // Filtered applications
   const filteredApps = applications.filter((app) => {
     const matchesSearch =
       !appSearch ||
@@ -343,21 +327,21 @@ export default function AdminPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-[#111111] flex items-center justify-center p-4">
-        <div className="w-full max-w-md p-8 rounded-3xl bg-[#191919] border border-[#303030] shadow-2xl text-center">
+      <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center p-4 transition-colors duration-200">
+        <div className="w-full max-w-md p-8 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] shadow-xl text-center">
           <div className="mb-6 flex justify-center">
             <BrandLogo variant="navbar" />
           </div>
 
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#202020] border border-[#303030] text-xs font-mono text-[#F07800] mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--badge-bg)] border border-[var(--border-subtle)] text-xs font-mono text-[#F07800] mb-4">
             <Lock className="w-3.5 h-3.5 text-[#F07800]" />
             RESTRICTED ADMIN ACCESS
           </div>
 
-          <h1 className="text-xl font-heading font-bold text-white mb-2">
+          <h1 className="text-xl font-heading font-bold text-[var(--text-primary)] mb-2">
             Trading Legend Operations Desk
           </h1>
-          <p className="text-xs text-[#A3A3A3] mb-6">
+          <p className="text-xs text-[var(--text-secondary)] mb-6">
             Enter authorized management passcode to access application review, promotion schedules, and payment verification.
           </p>
 
@@ -372,13 +356,13 @@ export default function AdminPage() {
 
             <button
               type="submit"
-              className="w-full gradient-btn-primary py-3 rounded-xl font-bold text-sm tracking-wide shadow-lg"
+              className="w-full gradient-btn-primary py-3 rounded-xl font-bold text-sm tracking-wide shadow-xs"
             >
               Sign In to Admin Portal
             </button>
           </form>
 
-          <div className="mt-6 pt-4 border-t border-[#262626]">
+          <div className="mt-6 pt-4 border-t border-[var(--border-subtle)]">
             <button
               onClick={() => {
                 setAdminPass('legend2026');
@@ -386,7 +370,7 @@ export default function AdminPage() {
                 sessionStorage.setItem('tl_admin_auth', 'true');
                 fetchAllData();
               }}
-              className="text-xs text-[#FFB000] hover:underline font-mono"
+              className="text-xs text-[#F07800] hover:underline font-mono"
             >
               Quick Demo Access &rarr;
             </button>
@@ -397,20 +381,22 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#111111] text-white flex flex-col">
+    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] flex flex-col transition-colors duration-200">
       {/* Top Admin Bar */}
-      <header className="sticky top-0 z-40 bg-[#161616] border-b border-[#2b2b2b] px-4 sm:px-8 py-3.5 flex items-center justify-between">
+      <header className="sticky top-0 z-40 bg-[var(--bg-card)] border-b border-[var(--border-subtle)] px-6 sm:px-10 py-3.5 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <BrandLogo variant="navbar" href="/" />
-          <span className="hidden sm:inline-block px-2.5 py-0.5 rounded-full bg-[#F07800]/15 text-[#FFB000] text-[11px] font-mono border border-[#F07800]/30 font-semibold">
+          <span className="hidden sm:inline-block px-2.5 py-0.5 rounded-full bg-[var(--badge-bg)] text-[#F07800] text-[11px] font-mono border border-[var(--border-subtle)] font-semibold">
             MANAGEMENT CONTROL
           </span>
         </div>
 
         <div className="flex items-center gap-3">
+          <ThemeToggle />
+
           <button
             onClick={fetchAllData}
-            className="p-2 rounded-xl bg-[#202020] hover:bg-[#282828] border border-[#303030] text-[#A3A3A3] hover:text-white transition-colors"
+            className="p-2 rounded-xl bg-[var(--bg-secondary)] hover:bg-[var(--bg-card-hover)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
             title="Refresh Data"
           >
             <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
@@ -419,7 +405,7 @@ export default function AdminPage() {
           <Link
             href="/"
             target="_blank"
-            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#202020] hover:bg-[#282828] border border-[#303030] text-xs text-[#A3A3A3] hover:text-white transition-colors"
+            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[var(--bg-secondary)] hover:bg-[var(--bg-card-hover)] border border-[var(--border-subtle)] text-xs text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
           >
             <span>View Live Site</span>
             <ExternalLink className="w-3.5 h-3.5" />
@@ -427,7 +413,7 @@ export default function AdminPage() {
 
           <button
             onClick={handleLogout}
-            className="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-[#202020] hover:bg-[#282828] border border-[#303030] text-xs text-[#EF4444] hover:bg-[#EF4444]/10 transition-colors flex items-center gap-1.5"
+            className="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-[var(--bg-secondary)] hover:bg-[var(--bg-card-hover)] border border-[var(--border-subtle)] text-xs text-[#EF4444] hover:bg-[#EF4444]/10 transition-colors flex items-center gap-1.5"
           >
             <LogOut className="w-4 h-4" />
             <span className="hidden sm:inline">Logout</span>
@@ -436,7 +422,7 @@ export default function AdminPage() {
       </header>
 
       {/* Admin Navigation Tabs */}
-      <div className="bg-[#141414] border-b border-[#262626] px-4 sm:px-8 overflow-x-auto">
+      <div className="bg-[var(--bg-secondary)] border-b border-[var(--border-subtle)] px-6 sm:px-10 overflow-x-auto">
         <div className="flex items-center gap-1 sm:gap-2 py-2 min-w-max">
           {[
             { id: 'overview', label: 'Overview', icon: BarChart3 },
@@ -455,8 +441,8 @@ export default function AdminPage() {
                 onClick={() => setActiveTab(tab.id as any)}
                 className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition-colors ${
                   active
-                    ? 'bg-[#222222] text-[#FFB000] border border-[#F07800]/40'
-                    : 'text-[#A3A3A3] hover:text-white hover:bg-[#1a1a1a]'
+                    ? 'bg-[var(--bg-card)] text-[#F07800] border border-[var(--border-subtle)] font-semibold shadow-xs'
+                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]'
                 }`}
               >
                 <Icon className="w-4 h-4" />
@@ -468,45 +454,45 @@ export default function AdminPage() {
       </div>
 
       {/* Main Admin Tab Content */}
-      <main className="flex-grow p-4 sm:p-8 max-w-7xl mx-auto w-full">
+      <main className="flex-grow p-6 sm:p-10 site-container w-full">
         {/* ================= TAB 1: OVERVIEW ================= */}
         {activeTab === 'overview' && (
-          <div className="space-y-8 animate-in fade-in">
+          <div className="space-y-8 animate-in fade-in duration-200">
             {/* KPI Cards */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-              <div className="rounded-2xl bg-[#191919] border border-[#303030] p-5 shadow-lg">
-                <div className="text-xs font-mono uppercase text-[#A3A3A3] mb-1">Total Applications</div>
-                <div className="text-2xl sm:text-3xl font-heading font-extrabold text-white">
+              <div className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] p-6 shadow-xs">
+                <div className="text-xs font-mono uppercase text-[var(--text-secondary)] mb-1">Total Applications</div>
+                <div className="text-3xl font-heading font-extrabold text-[var(--text-primary)]">
                   {analytics?.totalApplications ?? applications.length}
                 </div>
-                <div className="text-[11px] font-mono text-[#777777] mt-1.5">
+                <div className="text-[11px] font-mono text-[var(--text-muted)] mt-1.5">
                   All recorded submissions
                 </div>
               </div>
 
-              <div className="rounded-2xl bg-[#191919] border border-[#303030] p-5 shadow-lg">
-                <div className="text-xs font-mono uppercase text-[#FFB000] mb-1">Pending Review</div>
-                <div className="text-2xl sm:text-3xl font-heading font-extrabold text-[#FFB000]">
+              <div className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] p-6 shadow-xs">
+                <div className="text-xs font-mono uppercase text-[#F07800] mb-1">Pending Review</div>
+                <div className="text-3xl font-heading font-extrabold text-[#F07800]">
                   {analytics?.pendingApplications ?? 0}
                 </div>
-                <div className="text-[11px] font-mono text-[#A3A3A3] mt-1.5">
+                <div className="text-[11px] font-mono text-[var(--text-muted)] mt-1.5">
                   Awaiting manual audit
                 </div>
               </div>
 
-              <div className="rounded-2xl bg-[#191919] border border-[#303030] p-5 shadow-lg">
+              <div className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] p-6 shadow-xs">
                 <div className="text-xs font-mono uppercase text-[#22C55E] mb-1">Approved & Active</div>
-                <div className="text-2xl sm:text-3xl font-heading font-extrabold text-[#22C55E]">
+                <div className="text-3xl font-heading font-extrabold text-[#22C55E]">
                   {(analytics?.approvedApplications ?? 0) + (analytics?.activePromotions ?? 0)}
                 </div>
-                <div className="text-[11px] font-mono text-[#A3A3A3] mt-1.5">
+                <div className="text-[11px] font-mono text-[var(--text-muted)] mt-1.5">
                   Qualified network channels
                 </div>
               </div>
 
-              <div className="rounded-2xl bg-[#191919] border border-[#303030] p-5 shadow-lg">
-                <div className="text-xs font-mono uppercase text-[#F07800] mb-1">Verified Revenue</div>
-                <div className="text-2xl sm:text-3xl font-heading font-extrabold text-white">
+              <div className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] p-6 shadow-xs">
+                <div className="text-xs font-mono uppercase text-[var(--text-secondary)] mb-1">Verified Revenue</div>
+                <div className="text-3xl font-heading font-extrabold text-[var(--text-primary)]">
                   ${(analytics?.totalRevenue ?? 0).toLocaleString()}
                 </div>
                 <div className="text-[11px] font-mono text-[#22C55E] mt-1.5">
@@ -516,10 +502,10 @@ export default function AdminPage() {
             </div>
 
             {/* Quick Action Queue */}
-            <div className="rounded-3xl bg-[#191919] border border-[#303030] p-6 shadow-xl">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-heading font-bold text-white flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-[#FFB000]" />
+            <div className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] p-6 sm:p-8 shadow-xs">
+              <div className="flex items-center justify-between mb-5">
+                <h2 className="text-lg font-heading font-bold text-[var(--text-primary)] flex items-center gap-2">
+                  <Clock className="w-5 h-5 text-[#F07800]" />
                   Priority Application Queue (Pending Review)
                 </h2>
                 <button
@@ -536,7 +522,7 @@ export default function AdminPage() {
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs font-mono">
                   <thead>
-                    <tr className="border-b border-[#2b2b2b] text-[#777777]">
+                    <tr className="border-b border-[var(--border-subtle)] text-[var(--text-muted)]">
                       <th className="py-3 px-3">REF ID</th>
                       <th className="py-3 px-3">CHANNEL NAME</th>
                       <th className="py-3 px-3">CATEGORY</th>
@@ -546,31 +532,31 @@ export default function AdminPage() {
                       <th className="py-3 px-3 text-right">ACTION</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#242424]">
+                  <tbody className="divide-y divide-[var(--border-subtle)]">
                     {applications.slice(0, 5).map((app) => (
-                      <tr key={app.id} className="hover:bg-[#202020] transition-colors">
-                        <td className="py-3 px-3 font-bold text-white">{app.referenceId}</td>
-                        <td className="py-3 px-3 font-sans text-sm text-white">
-                          <div>{app.channelName}</div>
-                          <span className="text-xs text-[#777777]">@{app.telegramUsername}</span>
+                      <tr key={app.id} className="hover:bg-[var(--bg-secondary)] transition-colors">
+                        <td className="py-3.5 px-3 font-bold text-[var(--text-primary)]">{app.referenceId}</td>
+                        <td className="py-3.5 px-3 font-sans text-sm text-[var(--text-primary)]">
+                          <div className="font-semibold">{app.channelName}</div>
+                          <span className="text-xs text-[var(--text-muted)]">@{app.telegramUsername}</span>
                         </td>
-                        <td className="py-3 px-3 text-[#A3A3A3]">{app.channelCategory}</td>
-                        <td className="py-3 px-3 text-white">
+                        <td className="py-3.5 px-3 text-[var(--text-secondary)]">{app.channelCategory}</td>
+                        <td className="py-3.5 px-3 text-[var(--text-primary)]">
                           {app.subscriberCount.toLocaleString()} / {app.avgPostViews.toLocaleString()}
                         </td>
-                        <td className="py-3 px-3 text-[#FFB000]">{app.preferredPackage}</td>
-                        <td className="py-3 px-3">
-                          <span className="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase bg-[#202020] border border-[#333333]">
+                        <td className="py-3.5 px-3 text-[#F07800]">{app.preferredPackage}</td>
+                        <td className="py-3.5 px-3">
+                          <span className="px-2.5 py-0.5 rounded-md text-[10px] font-bold uppercase bg-[var(--bg-secondary)] border border-[var(--border-subtle)]">
                             {app.status}
                           </span>
                         </td>
-                        <td className="py-3 px-3 text-right">
+                        <td className="py-3.5 px-3 text-right">
                           <button
                             onClick={() => {
                               setSelectedApp(app);
                               setInternalNoteDraft(app.internalNotes || '');
                             }}
-                            className="px-2.5 py-1 rounded-lg bg-[#252525] hover:bg-[#303030] text-white border border-[#383838]"
+                            className="px-3 py-1.5 rounded-xl bg-[var(--bg-secondary)] hover:bg-[var(--bg-card-hover)] text-[var(--text-primary)] border border-[var(--border-subtle)] font-medium"
                           >
                             Review
                           </button>
@@ -586,11 +572,11 @@ export default function AdminPage() {
 
         {/* ================= TAB 2: APPLICATION MANAGEMENT ================= */}
         {activeTab === 'applications' && (
-          <div className="space-y-6 animate-in fade-in">
+          <div className="space-y-6 animate-in fade-in duration-200">
             {/* Search and Filters Bar */}
-            <div className="p-4 rounded-2xl bg-[#191919] border border-[#303030] flex flex-col md:flex-row gap-4 items-center justify-between">
+            <div className="p-4 sm:p-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-subtle)] flex flex-col md:flex-row gap-4 items-center justify-between shadow-xs">
               <div className="relative w-full md:w-80">
-                <Search className="w-4 h-4 text-[#777777] absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Search className="w-4 h-4 text-[var(--text-muted)] absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
                   value={appSearch}
@@ -602,11 +588,11 @@ export default function AdminPage() {
 
               <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono text-[#777777]">Status:</span>
+                  <span className="text-xs font-mono text-[var(--text-muted)]">Status:</span>
                   <select
                     value={appStatusFilter}
                     onChange={(e) => setAppStatusFilter(e.target.value)}
-                    className="px-3 py-2 rounded-xl fintech-input text-xs bg-[#191919]"
+                    className="px-3 py-2 rounded-xl fintech-input text-xs"
                   >
                     <option value="All">All Statuses</option>
                     <option value="Submitted">Submitted</option>
@@ -621,11 +607,11 @@ export default function AdminPage() {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono text-[#777777]">Category:</span>
+                  <span className="text-xs font-mono text-[var(--text-muted)]">Category:</span>
                   <select
                     value={appCategoryFilter}
                     onChange={(e) => setAppCategoryFilter(e.target.value)}
-                    className="px-3 py-2 rounded-xl fintech-input text-xs bg-[#191919]"
+                    className="px-3 py-2 rounded-xl fintech-input text-xs"
                   >
                     <option value="All">All Categories</option>
                     <option value="Crypto & Web3">Crypto & Web3</option>
@@ -639,11 +625,11 @@ export default function AdminPage() {
             </div>
 
             {/* Applications Table */}
-            <div className="rounded-3xl bg-[#191919] border border-[#303030] overflow-hidden shadow-xl">
+            <div className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] overflow-hidden shadow-xs">
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs font-mono">
                   <thead>
-                    <tr className="border-b border-[#2b2b2b] bg-[#141414] text-[#777777]">
+                    <tr className="border-b border-[var(--border-subtle)] bg-[var(--bg-secondary)] text-[var(--text-muted)]">
                       <th className="py-3.5 px-4">REF ID</th>
                       <th className="py-3.5 px-4">CHANNEL DETAILS</th>
                       <th className="py-3.5 px-4">CATEGORY</th>
@@ -654,27 +640,27 @@ export default function AdminPage() {
                       <th className="py-3.5 px-4 text-right">ACTION</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#242424]">
+                  <tbody className="divide-y divide-[var(--border-subtle)]">
                     {filteredApps.length === 0 ? (
                       <tr>
-                        <td colSpan={8} className="py-12 text-center text-[#777777]">
+                        <td colSpan={8} className="py-12 text-center text-[var(--text-muted)]">
                           No applications found matching query.
                         </td>
                       </tr>
                     ) : (
                       filteredApps.map((app) => (
-                        <tr key={app.id} className="hover:bg-[#202020] transition-colors">
-                          <td className="py-3.5 px-4 font-bold text-white">
+                        <tr key={app.id} className="hover:bg-[var(--bg-secondary)] transition-colors">
+                          <td className="py-3.5 px-4 font-bold text-[var(--text-primary)]">
                             {app.referenceId}
                             {app.isDemo && (
-                              <span className="ml-1.5 px-1.5 py-0.5 rounded text-[9px] bg-[#333333] text-[#A3A3A3]">
+                              <span className="ml-1.5 px-1.5 py-0.5 rounded text-[9px] bg-[var(--badge-bg)] text-[var(--badge-text)]">
                                 DEMO
                               </span>
                             )}
                           </td>
-                          <td className="py-3.5 px-4 font-sans text-sm text-white">
+                          <td className="py-3.5 px-4 font-sans text-sm text-[var(--text-primary)]">
                             <div className="font-semibold">{app.channelName}</div>
-                            <div className="text-xs text-[#777777] flex items-center gap-2">
+                            <div className="text-xs text-[var(--text-muted)] flex items-center gap-2">
                               <span>@{app.telegramUsername}</span>
                               <a
                                 href={app.channelLink}
@@ -686,14 +672,14 @@ export default function AdminPage() {
                               </a>
                             </div>
                           </td>
-                          <td className="py-3.5 px-4 text-[#A3A3A3]">{app.channelCategory}</td>
-                          <td className="py-3.5 px-4 text-white font-semibold">
+                          <td className="py-3.5 px-4 text-[var(--text-secondary)]">{app.channelCategory}</td>
+                          <td className="py-3.5 px-4 text-[var(--text-primary)] font-semibold">
                             {app.subscriberCount.toLocaleString()}
                           </td>
-                          <td className="py-3.5 px-4 text-white">
+                          <td className="py-3.5 px-4 text-[var(--text-primary)]">
                             {app.avgPostViews.toLocaleString()}
                           </td>
-                          <td className="py-3.5 px-4 text-[#FFB000]">{app.preferredPackage}</td>
+                          <td className="py-3.5 px-4 text-[#F07800]">{app.preferredPackage}</td>
                           <td className="py-3.5 px-4">
                             <span
                               className={`px-2.5 py-1 rounded-md text-[10px] font-bold uppercase border ${
@@ -702,8 +688,8 @@ export default function AdminPage() {
                                   : app.status === 'Rejected'
                                   ? 'bg-[#EF4444]/10 border-[#EF4444]/30 text-[#EF4444]'
                                   : app.status === 'Scheduled'
-                                  ? 'bg-purple-500/10 border-purple-500/30 text-purple-400'
-                                  : 'bg-[#252525] border-[#383838] text-white'
+                                  ? 'bg-purple-500/10 border-purple-500/30 text-purple-600 dark:text-purple-400'
+                                  : 'bg-[var(--bg-secondary)] border-[var(--border-subtle)] text-[var(--text-primary)]'
                               }`}
                             >
                               {app.status}
@@ -715,7 +701,7 @@ export default function AdminPage() {
                                 setSelectedApp(app);
                                 setInternalNoteDraft(app.internalNotes || '');
                               }}
-                              className="px-3 py-1.5 rounded-xl bg-[#222222] hover:bg-[#2c2c2c] text-white border border-[#383838] font-medium"
+                              className="px-3 py-1.5 rounded-xl bg-[var(--bg-secondary)] hover:bg-[var(--bg-card-hover)] text-[var(--text-primary)] border border-[var(--border-subtle)] font-medium"
                             >
                               Inspect & Audit
                             </button>
@@ -732,54 +718,54 @@ export default function AdminPage() {
 
         {/* ================= TAB 3: PROMOTION MANAGEMENT ================= */}
         {activeTab === 'packages' && (
-          <div className="space-y-6 animate-in fade-in">
-            <div className="flex items-center justify-between">
-              <div>
-                <h2 className="text-xl font-heading font-bold text-white">Promotion Package Tiers</h2>
-                <p className="text-xs text-[#A3A3A3]">Manage prices, duration, and weekly slot caps.</p>
-              </div>
+          <div className="space-y-6 animate-in fade-in duration-200">
+            <div>
+              <h2 className="text-xl font-heading font-bold text-[var(--text-primary)] uppercase">
+                Promotion Package Tiers
+              </h2>
+              <p className="text-xs text-[var(--text-secondary)]">Manage pricing, durations, and weekly slot caps.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {packages.map((pkg) => (
                 <div
                   key={pkg.id}
-                  className="rounded-3xl bg-[#191919] border border-[#303030] p-6 flex flex-col justify-between shadow-xl"
+                  className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] p-6 sm:p-7 flex flex-col justify-between shadow-xs"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-xs font-mono uppercase text-[#777777]">{pkg.badge}</span>
+                      <span className="text-xs font-mono uppercase text-[var(--text-muted)]">{pkg.badge}</span>
                       <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-[#22C55E]/10 text-[#22C55E] border border-[#22C55E]/30">
                         {pkg.isActive ? 'ACTIVE' : 'INACTIVE'}
                       </span>
                     </div>
 
-                    <h3 className="text-xl font-heading font-bold text-white mb-1">{pkg.name}</h3>
-                    <p className="text-xs text-[#A3A3A3] mb-4">{pkg.shortDescription}</p>
+                    <h3 className="text-xl font-heading font-bold text-[var(--text-primary)] mb-1">{pkg.name}</h3>
+                    <p className="text-xs text-[var(--text-secondary)] mb-4">{pkg.shortDescription}</p>
 
-                    <div className="p-4 rounded-xl bg-[#141414] border border-[#2b2b2b] mb-4">
-                      <div className="text-[11px] font-mono text-[#777777]">Price</div>
-                      <div className="text-2xl font-heading font-extrabold text-white">
+                    <div className="p-4 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-subtle)] mb-4">
+                      <div className="text-[10px] font-mono text-[var(--text-muted)]">Price</div>
+                      <div className="text-2xl font-heading font-extrabold text-[var(--text-primary)]">
                         {pkg.price ? `$${pkg.price}` : 'Contact for Pricing'}
                       </div>
-                      <div className="mt-2 text-xs font-mono text-[#FFB000]">
+                      <div className="mt-2 text-xs font-mono text-[#F07800]">
                         Available Slots: {pkg.availableSlots} / {pkg.totalSlots}
                       </div>
                     </div>
 
-                    <div className="text-xs text-[#A3A3A3] space-y-1 mb-4">
+                    <div className="text-xs text-[var(--text-secondary)] space-y-1.5 mb-4">
                       <div>
-                        <span className="text-white font-medium">Duration:</span> {pkg.duration}
+                        <span className="text-[var(--text-primary)] font-medium">Duration:</span> {pkg.duration}
                       </div>
                       <div>
-                        <span className="text-white font-medium">Placement:</span> {pkg.placement}
+                        <span className="text-[var(--text-primary)] font-medium">Placement:</span> {pkg.placement}
                       </div>
                     </div>
                   </div>
 
                   <button
                     onClick={() => setEditingPkg({ ...pkg })}
-                    className="w-full py-2.5 rounded-xl bg-[#222222] hover:bg-[#2c2c2c] text-white border border-[#383838] text-xs font-semibold flex items-center justify-center gap-2 transition-colors"
+                    className="w-full py-2.5 rounded-xl bg-[var(--bg-secondary)] hover:bg-[var(--bg-card-hover)] text-[var(--text-primary)] border border-[var(--border-subtle)] text-xs font-semibold flex items-center justify-center gap-2 transition-colors"
                   >
                     <Edit className="w-3.5 h-3.5 text-[#F07800]" />
                     <span>Edit Package Details</span>
@@ -792,18 +778,20 @@ export default function AdminPage() {
 
         {/* ================= TAB 4: PAYMENT MANAGEMENT ================= */}
         {activeTab === 'payments' && (
-          <div className="space-y-6 animate-in fade-in">
+          <div className="space-y-6 animate-in fade-in duration-200">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <h2 className="text-xl font-heading font-bold text-white">Recorded Payments & Verification</h2>
-                <p className="text-xs text-[#A3A3A3]">
+                <h2 className="text-xl font-heading font-bold text-[var(--text-primary)] uppercase">
+                  Recorded Payments & Verification
+                </h2>
+                <p className="text-xs text-[var(--text-secondary)]">
                   Verify on-chain hashes, bank wire confirmations, or manage Razorpay gateway settings.
                 </p>
               </div>
 
               <button
                 onClick={() => setPaymentModalOpen(true)}
-                className="gradient-btn-primary px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 shadow-lg"
+                className="gradient-btn-primary px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 shadow-xs"
               >
                 <Plus className="w-4 h-4" />
                 <span>Record New Payment</span>
@@ -811,11 +799,11 @@ export default function AdminPage() {
             </div>
 
             {/* Payments Table */}
-            <div className="rounded-3xl bg-[#191919] border border-[#303030] overflow-hidden shadow-xl">
+            <div className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] overflow-hidden shadow-xs">
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs font-mono">
                   <thead>
-                    <tr className="border-b border-[#2b2b2b] bg-[#141414] text-[#777777]">
+                    <tr className="border-b border-[var(--border-subtle)] bg-[var(--bg-secondary)] text-[var(--text-muted)]">
                       <th className="py-3.5 px-4">REF ID</th>
                       <th className="py-3.5 px-4">CHANNEL</th>
                       <th className="py-3.5 px-4">AMOUNT</th>
@@ -825,16 +813,16 @@ export default function AdminPage() {
                       <th className="py-3.5 px-4 text-right">ACTION</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#242424]">
+                  <tbody className="divide-y divide-[var(--border-subtle)]">
                     {payments.map((p) => (
-                      <tr key={p.id} className="hover:bg-[#202020] transition-colors">
-                        <td className="py-3.5 px-4 font-bold text-white">{p.referenceId}</td>
-                        <td className="py-3.5 px-4 font-sans text-sm text-white">{p.channelName}</td>
-                        <td className="py-3.5 px-4 font-heading font-bold text-base text-white">
+                      <tr key={p.id} className="hover:bg-[var(--bg-secondary)] transition-colors">
+                        <td className="py-3.5 px-4 font-bold text-[var(--text-primary)]">{p.referenceId}</td>
+                        <td className="py-3.5 px-4 font-sans text-sm text-[var(--text-primary)]">{p.channelName}</td>
+                        <td className="py-3.5 px-4 font-heading font-bold text-base text-[var(--text-primary)]">
                           ${p.amount} {p.currency}
                         </td>
-                        <td className="py-3.5 px-4 text-[#A3A3A3]">{p.paymentMethod}</td>
-                        <td className="py-3.5 px-4 text-[#FFB000] max-w-xs truncate">
+                        <td className="py-3.5 px-4 text-[var(--text-secondary)]">{p.paymentMethod}</td>
+                        <td className="py-3.5 px-4 text-[#F07800] max-w-xs truncate">
                           {p.paymentReference}
                         </td>
                         <td className="py-3.5 px-4">
@@ -842,7 +830,7 @@ export default function AdminPage() {
                             className={`px-2.5 py-1 rounded-md text-[10px] font-bold uppercase border ${
                               p.status === 'Verified'
                                 ? 'bg-[#22C55E]/10 border-[#22C55E]/30 text-[#22C55E]'
-                                : 'bg-amber-500/10 border-amber-500/30 text-amber-400'
+                                : 'bg-amber-500/10 border-amber-500/30 text-amber-600 dark:text-amber-400'
                             }`}
                           >
                             {p.status}
@@ -852,7 +840,7 @@ export default function AdminPage() {
                           {p.status !== 'Verified' ? (
                             <button
                               onClick={() => handleVerifyPayment(p.id)}
-                              className="px-3 py-1 rounded-lg bg-[#22C55E]/20 hover:bg-[#22C55E]/30 text-[#22C55E] border border-[#22C55E]/40 font-semibold"
+                              className="px-3 py-1 rounded-xl bg-[#22C55E]/20 hover:bg-[#22C55E]/30 text-[#16A34A] dark:text-[#22C55E] border border-[#22C55E]/40 font-semibold"
                             >
                               Verify Receipt
                             </button>
@@ -874,83 +862,85 @@ export default function AdminPage() {
 
         {/* ================= TAB 5: WEBSITE MANAGEMENT ================= */}
         {activeTab === 'website' && settings && (
-          <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in">
+          <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-200">
             <div>
-              <h2 className="text-xl font-heading font-bold text-white">Website & Contact Management</h2>
-              <p className="text-xs text-[#A3A3A3]">
-                Edit live announcement bar, official Telegram endpoints, and channel requirements.
+              <h2 className="text-xl font-heading font-bold text-[var(--text-primary)] uppercase">
+                Website & Contact Management
+              </h2>
+              <p className="text-xs text-[var(--text-secondary)]">
+                Edit top announcement banner, official Telegram endpoints, and channel requirements live.
               </p>
             </div>
 
-            <form onSubmit={handleSaveSettings} className="rounded-3xl bg-[#191919] border border-[#303030] p-6 sm:p-8 space-y-6 shadow-xl">
+            <form onSubmit={handleSaveSettings} className="rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] p-6 sm:p-8 space-y-6 shadow-xs">
               <div>
-                <label className="block text-xs font-mono uppercase text-[#A3A3A3] mb-1.5">
+                <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-2">
                   Top Announcement Ticker Banner
                 </label>
                 <input
                   type="text"
                   value={settings.announcementText}
                   onChange={(e) => setSettings({ ...settings, announcementText: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl fintech-input text-sm"
+                  className="w-full px-4 py-3 rounded-xl fintech-input text-sm"
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-xs font-mono uppercase text-[#A3A3A3] mb-1.5">
+                  <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-2">
                     Official Telegram Review Desk
                   </label>
                   <input
                     type="text"
                     value={settings.officialTelegramUrl}
                     onChange={(e) => setSettings({ ...settings, officialTelegramUrl: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl fintech-input text-sm"
+                    className="w-full px-4 py-3 rounded-xl fintech-input text-sm"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono uppercase text-[#A3A3A3] mb-1.5">
+                  <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-2">
                     Community Telegram Channel
                   </label>
                   <input
                     type="text"
                     value={settings.communityTelegramUrl}
                     onChange={(e) => setSettings({ ...settings, communityTelegramUrl: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl fintech-input text-sm"
+                    className="w-full px-4 py-3 rounded-xl fintech-input text-sm"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-xs font-mono uppercase text-[#A3A3A3] mb-1.5">
+                  <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-2">
                     Operations Support Email
                   </label>
                   <input
                     type="email"
                     value={settings.supportEmail}
                     onChange={(e) => setSettings({ ...settings, supportEmail: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl fintech-input text-sm"
+                    className="w-full px-4 py-3 rounded-xl fintech-input text-sm"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono uppercase text-[#A3A3A3] mb-1.5">
+                  <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-2">
                     Partnership Inquiries Email
                   </label>
                   <input
                     type="email"
                     value={settings.businessInquiryEmail}
                     onChange={(e) => setSettings({ ...settings, businessInquiryEmail: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl fintech-input text-sm"
+                    className="w-full px-4 py-3 rounded-xl fintech-input text-sm"
                   />
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-[#262626]">
+              <div className="pt-4 border-t border-[var(--border-subtle)]">
                 <button
                   type="submit"
-                  className="gradient-btn-primary px-6 py-3 rounded-xl font-bold text-sm tracking-wide shadow-lg"
+                  className="gradient-btn-primary px-6 py-3.5 rounded-xl font-bold text-sm tracking-wide shadow-xs"
                 >
                   Save Settings & Update Live Platform
                 </button>
@@ -961,22 +951,24 @@ export default function AdminPage() {
 
         {/* ================= TAB 6: ANALYTICS ================= */}
         {activeTab === 'analytics' && (
-          <div className="space-y-6 animate-in fade-in">
-            <h2 className="text-xl font-heading font-bold text-white">Performance Analytics & Auditing</h2>
+          <div className="space-y-6 animate-in fade-in duration-200">
+            <h2 className="text-xl font-heading font-bold text-[var(--text-primary)] uppercase">
+              Performance Analytics & Reports
+            </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
               {/* Approval Rate Card */}
-              <div className="p-6 rounded-3xl bg-[#191919] border border-[#303030] shadow-xl">
-                <h3 className="text-sm font-heading font-bold text-white mb-4">
+              <div className="p-7 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] shadow-xs">
+                <h3 className="text-sm font-heading font-bold text-[var(--text-primary)] mb-5">
                   Application Review Disposition
                 </h3>
-                <div className="space-y-3">
+                <div className="space-y-4">
                   <div>
-                    <div className="flex justify-between text-xs font-mono mb-1">
+                    <div className="flex justify-between text-xs font-mono mb-1.5">
                       <span className="text-[#22C55E]">Approved</span>
-                      <span>{analytics?.approvedApplications ?? 0}</span>
+                      <span className="font-bold">{analytics?.approvedApplications ?? 0}</span>
                     </div>
-                    <div className="h-2 rounded-full bg-[#202020] overflow-hidden">
+                    <div className="h-2 rounded-full bg-[var(--bg-secondary)] overflow-hidden">
                       <div
                         className="h-full bg-[#22C55E]"
                         style={{
@@ -990,13 +982,13 @@ export default function AdminPage() {
                   </div>
 
                   <div>
-                    <div className="flex justify-between text-xs font-mono mb-1">
-                      <span className="text-[#FFB000]">Under Review</span>
-                      <span>{analytics?.pendingApplications ?? 0}</span>
+                    <div className="flex justify-between text-xs font-mono mb-1.5">
+                      <span className="text-[#F07800]">Under Review</span>
+                      <span className="font-bold">{analytics?.pendingApplications ?? 0}</span>
                     </div>
-                    <div className="h-2 rounded-full bg-[#202020] overflow-hidden">
+                    <div className="h-2 rounded-full bg-[var(--bg-secondary)] overflow-hidden">
                       <div
-                        className="h-full bg-[#FFB000]"
+                        className="h-full bg-[#F07800]"
                         style={{
                           width: `${Math.min(
                             100,
@@ -1008,11 +1000,11 @@ export default function AdminPage() {
                   </div>
 
                   <div>
-                    <div className="flex justify-between text-xs font-mono mb-1">
+                    <div className="flex justify-between text-xs font-mono mb-1.5">
                       <span className="text-[#EF4444]">Rejected</span>
-                      <span>{analytics?.rejectedApplications ?? 0}</span>
+                      <span className="font-bold">{analytics?.rejectedApplications ?? 0}</span>
                     </div>
-                    <div className="h-2 rounded-full bg-[#202020] overflow-hidden">
+                    <div className="h-2 rounded-full bg-[var(--bg-secondary)] overflow-hidden">
                       <div
                         className="h-full bg-[#EF4444]"
                         style={{
@@ -1028,19 +1020,19 @@ export default function AdminPage() {
               </div>
 
               {/* Category Breakdown */}
-              <div className="p-6 rounded-3xl bg-[#191919] border border-[#303030] shadow-xl">
-                <h3 className="text-sm font-heading font-bold text-white mb-4">
+              <div className="p-7 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] shadow-xs">
+                <h3 className="text-sm font-heading font-bold text-[var(--text-primary)] mb-5">
                   Submissions by Financial Sector
                 </h3>
-                <div className="space-y-2 text-xs font-mono">
+                <div className="space-y-2.5 text-xs font-mono">
                   {analytics?.categoryCounts &&
                     Object.entries(analytics.categoryCounts).map(([cat, count]: any) => (
                       <div
                         key={cat}
-                        className="flex items-center justify-between p-2 rounded-xl bg-[#202020] border border-[#2b2b2b]"
+                        className="flex items-center justify-between p-3 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-subtle)]"
                       >
-                        <span className="text-[#A3A3A3]">{cat}</span>
-                        <span className="text-white font-bold">{count} channels</span>
+                        <span className="text-[var(--text-secondary)]">{cat}</span>
+                        <span className="text-[var(--text-primary)] font-bold">{count} channels</span>
                       </div>
                     ))}
                 </div>
@@ -1051,14 +1043,14 @@ export default function AdminPage() {
 
         {/* ================= TAB 7: BOT HUB ================= */}
         {activeTab === 'bot' && (
-          <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in">
+          <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-200">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-xl font-heading font-bold text-white flex items-center gap-2">
-                  <Bot className="w-5 h-5 text-[#FFB000]" />
+                <h2 className="text-xl font-heading font-bold text-[var(--text-primary)] uppercase flex items-center gap-2">
+                  <Bot className="w-5 h-5 text-[#F07800]" />
                   Telegram Bot Integration Engine
                 </h2>
-                <p className="text-xs text-[#A3A3A3]">
+                <p className="text-xs text-[var(--text-secondary)]">
                   REST webhook ready for Python Telegram bot daemon. Test queries in real-time.
                 </p>
               </div>
@@ -1069,13 +1061,13 @@ export default function AdminPage() {
             </div>
 
             {/* Test Console */}
-            <div className="p-6 rounded-3xl bg-[#191919] border border-[#303030] space-y-4 shadow-xl">
-              <h3 className="text-sm font-heading font-bold text-white">Simulate External Bot Query</h3>
-              <p className="text-xs text-[#A3A3A3]">
+            <div className="p-7 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] space-y-4 shadow-xs">
+              <h3 className="text-sm font-heading font-bold text-[var(--text-primary)]">Simulate External Bot Query</h3>
+              <p className="text-xs text-[var(--text-secondary)]">
                 Emulates what the external Python Telegram bot receives when a user runs <code>/status &lt;REF_ID&gt;</code>.
               </p>
 
-              <div className="flex gap-2">
+              <div className="flex gap-2.5">
                 <input
                   type="text"
                   value={botTestRef}
@@ -1086,24 +1078,24 @@ export default function AdminPage() {
                 <button
                   onClick={handleRunBotTest}
                   disabled={botTesting}
-                  className="gradient-btn-primary px-5 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap"
+                  className="gradient-btn-primary px-5 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap shadow-xs"
                 >
                   {botTesting ? 'Querying...' : 'Dispatch Test'}
                 </button>
               </div>
 
               {botTestResult && (
-                <div className="p-4 rounded-2xl bg-[#141414] border border-[#2b2b2b]">
-                  <div className="text-[10px] font-mono text-[#777777] mb-1">REST Response:</div>
-                  <pre className="text-xs font-mono text-[#22C55E] overflow-x-auto whitespace-pre-wrap">
+                <div className="p-4 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-subtle)]">
+                  <div className="text-[10px] font-mono text-[var(--text-muted)] mb-1">REST Response:</div>
+                  <pre className="text-xs font-mono text-[#16A34A] dark:text-[#22C55E] overflow-x-auto whitespace-pre-wrap">
                     {JSON.stringify(botTestResult, null, 2)}
                   </pre>
                 </div>
               )}
             </div>
 
-            <div className="p-5 rounded-2xl bg-[#141414] border border-[#2b2b2b] text-xs font-mono text-[#A3A3A3] space-y-2">
-              <div className="text-white font-bold">Bot Integration Endpoints:</div>
+            <div className="p-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--text-secondary)] space-y-2">
+              <div className="text-[var(--text-primary)] font-bold">Bot Integration Endpoints:</div>
               <div>• Webhook Inbound: <code>POST /api/telegram/webhook</code></div>
               <div>• Event Polling: <code>GET /api/telegram/webhook?poll=true</code></div>
               <div>• Python Script: <code>python telegram_bot/bot.py</code></div>
@@ -1114,16 +1106,16 @@ export default function AdminPage() {
 
       {/* ================= INSPECT APPLICATION MODAL ================= */}
       {selectedApp && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm">
-          <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl bg-[#191919] border border-[#303030] p-6 sm:p-8 shadow-2xl text-left">
-            <div className="flex items-center justify-between pb-4 border-b border-[#2b2b2b] mb-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 dark:bg-black/85 backdrop-blur-sm">
+          <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] p-6 sm:p-8 shadow-2xl text-left">
+            <div className="flex items-center justify-between pb-4 border-b border-[var(--border-subtle)] mb-4">
               <div>
                 <div className="text-xs font-mono text-[#F07800]">{selectedApp.referenceId}</div>
-                <h3 className="text-xl font-heading font-bold text-white">{selectedApp.channelName}</h3>
+                <h3 className="text-xl font-heading font-bold text-[var(--text-primary)]">{selectedApp.channelName}</h3>
               </div>
               <button
                 onClick={() => setSelectedApp(null)}
-                className="p-2 rounded-xl bg-[#222222] text-[#A3A3A3] hover:text-white"
+                className="p-2 rounded-xl bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
               >
                 &times;
               </button>
@@ -1132,22 +1124,22 @@ export default function AdminPage() {
             <div className="space-y-4 text-xs font-mono">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <span className="text-[#777777] block">OWNER NAME</span>
-                  <span className="text-white text-sm font-sans font-medium">{selectedApp.fullName}</span>
+                  <span className="text-[var(--text-muted)] block">OWNER NAME</span>
+                  <span className="text-[var(--text-primary)] text-sm font-sans font-medium">{selectedApp.fullName}</span>
                 </div>
                 <div>
-                  <span className="text-[#777777] block">TELEGRAM USERNAME</span>
+                  <span className="text-[var(--text-muted)] block">TELEGRAM USERNAME</span>
                   <a
                     href={`https://t.me/${selectedApp.telegramUsername}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-[#FFB000] text-sm hover:underline"
+                    className="text-[#F07800] text-sm hover:underline"
                   >
                     @{selectedApp.telegramUsername} &rarr;
                   </a>
                 </div>
                 <div>
-                  <span className="text-[#777777] block">CHANNEL URL</span>
+                  <span className="text-[var(--text-muted)] block">CHANNEL URL</span>
                   <a
                     href={selectedApp.channelLink}
                     target="_blank"
@@ -1158,39 +1150,39 @@ export default function AdminPage() {
                   </a>
                 </div>
                 <div>
-                  <span className="text-[#777777] block">CATEGORY & TIER</span>
-                  <span className="text-white text-sm font-sans font-medium">
+                  <span className="text-[var(--text-muted)] block">CATEGORY & TIER</span>
+                  <span className="text-[var(--text-primary)] text-sm font-sans font-medium">
                     {selectedApp.channelCategory} ({selectedApp.preferredPackage})
                   </span>
                 </div>
                 <div>
-                  <span className="text-[#777777] block">AUDITED METRICS</span>
-                  <span className="text-white font-bold text-sm">
+                  <span className="text-[var(--text-muted)] block">AUDITED METRICS</span>
+                  <span className="text-[var(--text-primary)] font-bold text-sm">
                     {selectedApp.subscriberCount.toLocaleString()} subs • {selectedApp.avgPostViews.toLocaleString()} avg views
                   </span>
                 </div>
                 <div>
-                  <span className="text-[#777777] block">CURRENT STATUS</span>
+                  <span className="text-[var(--text-muted)] block">CURRENT STATUS</span>
                   <span className="text-[#22C55E] font-bold text-sm">{selectedApp.status}</span>
                 </div>
               </div>
 
               {/* Engagement Info */}
-              <div className="p-3.5 rounded-xl bg-[#141414] border border-[#2b2b2b]">
-                <div className="text-[#777777] mb-1 font-bold">APPLICANT ENGAGEMENT SUMMARY:</div>
-                <p className="text-white font-sans text-xs leading-relaxed">{selectedApp.engagementInfo}</p>
+              <div className="p-4 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-subtle)]">
+                <div className="text-[var(--text-muted)] mb-1 font-bold">APPLICANT ENGAGEMENT SUMMARY:</div>
+                <p className="text-[var(--text-primary)] font-sans text-xs leading-relaxed">{selectedApp.engagementInfo}</p>
               </div>
 
               {selectedApp.additionalInfo && (
-                <div className="p-3.5 rounded-xl bg-[#141414] border border-[#2b2b2b]">
-                  <div className="text-[#777777] mb-1 font-bold">ADDITIONAL NOTES:</div>
-                  <p className="text-white font-sans text-xs leading-relaxed">{selectedApp.additionalInfo}</p>
+                <div className="p-4 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-subtle)]">
+                  <div className="text-[var(--text-muted)] mb-1 font-bold">ADDITIONAL NOTES:</div>
+                  <p className="text-[var(--text-primary)] font-sans text-xs leading-relaxed">{selectedApp.additionalInfo}</p>
                 </div>
               )}
 
               {/* Internal Reviewer Notes */}
               <div>
-                <label className="text-[#777777] block mb-1 font-bold">INTERNAL REVIEWER NOTES (PRIVATE):</label>
+                <label className="text-[var(--text-muted)] block mb-1.5 font-bold">INTERNAL REVIEWER NOTES (PRIVATE):</label>
                 <div className="flex gap-2">
                   <textarea
                     rows={2}
@@ -1201,7 +1193,7 @@ export default function AdminPage() {
                   />
                   <button
                     onClick={handleSaveInternalNote}
-                    className="px-3 py-2 rounded-xl bg-[#222222] hover:bg-[#2c2c2c] text-white border border-[#383838] whitespace-nowrap"
+                    className="px-3.5 py-2 rounded-xl bg-[var(--bg-secondary)] hover:bg-[var(--bg-card-hover)] text-[var(--text-primary)] border border-[var(--border-subtle)] whitespace-nowrap font-medium"
                   >
                     Save Note
                   </button>
@@ -1209,24 +1201,24 @@ export default function AdminPage() {
               </div>
 
               {/* Action Buttons */}
-              <div className="pt-4 border-t border-[#2b2b2b] flex flex-wrap gap-2.5 justify-end">
+              <div className="pt-4 border-t border-[var(--border-subtle)] flex flex-wrap gap-2.5 justify-end">
                 <button
                   onClick={() => setRejectModalOpen(true)}
-                  className="px-4 py-2 rounded-xl bg-[#EF4444]/20 hover:bg-[#EF4444]/30 text-[#EF4444] border border-[#EF4444]/40 font-bold"
+                  className="px-4 py-2 rounded-xl bg-[#EF4444]/15 hover:bg-[#EF4444]/25 text-[#DC2626] dark:text-[#EF4444] border border-[#EF4444]/30 font-bold"
                 >
                   Reject with Reason
                 </button>
 
                 <button
                   onClick={() => setScheduleModalOpen(true)}
-                  className="px-4 py-2 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-500/40 font-bold"
+                  className="px-4 py-2 rounded-xl bg-purple-500/15 hover:bg-purple-500/25 text-purple-700 dark:text-purple-300 border border-purple-500/30 font-bold"
                 >
                   Schedule Broadcast
                 </button>
 
                 <button
                   onClick={() => handleApprove(selectedApp)}
-                  className="gradient-btn-primary px-5 py-2 rounded-xl font-bold shadow-lg"
+                  className="gradient-btn-primary px-5 py-2 rounded-xl font-bold shadow-xs"
                 >
                   Approve Application
                 </button>
@@ -1238,12 +1230,12 @@ export default function AdminPage() {
 
       {/* ================= REJECT MODAL ================= */}
       {rejectModalOpen && selectedApp && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90">
-          <div className="w-full max-w-md p-6 rounded-3xl bg-[#191919] border border-[#303030] shadow-2xl">
-            <h3 className="text-lg font-heading font-bold text-white mb-2">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70">
+          <div className="w-full max-w-md p-6 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] shadow-2xl">
+            <h3 className="text-lg font-heading font-bold text-[var(--text-primary)] mb-2">
               Reject Application ({selectedApp.referenceId})
             </h3>
-            <p className="text-xs text-[#A3A3A3] mb-4">
+            <p className="text-xs text-[var(--text-secondary)] mb-4">
               Provide a constructive policy reason. This will be shown to the applicant in the tracking portal.
             </p>
 
@@ -1259,13 +1251,13 @@ export default function AdminPage() {
             <div className="flex justify-end gap-2">
               <button
                 onClick={() => setRejectModalOpen(false)}
-                className="px-4 py-2 rounded-xl bg-[#222222] text-[#A3A3A3] text-xs"
+                className="px-4 py-2 rounded-xl bg-[var(--bg-secondary)] text-[var(--text-secondary)] text-xs font-medium"
               >
                 Cancel
               </button>
               <button
                 onClick={handleRejectConfirm}
-                className="px-4 py-2 rounded-xl bg-[#EF4444] hover:bg-[#dc2626] text-white font-bold text-xs"
+                className="px-4 py-2 rounded-xl bg-[#DC2626] hover:bg-[#b91c1c] text-white font-bold text-xs"
               >
                 Confirm Rejection
               </button>
@@ -1276,12 +1268,12 @@ export default function AdminPage() {
 
       {/* ================= SCHEDULE MODAL ================= */}
       {scheduleModalOpen && selectedApp && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90">
-          <div className="w-full max-w-md p-6 rounded-3xl bg-[#191919] border border-[#303030] shadow-2xl">
-            <h3 className="text-lg font-heading font-bold text-white mb-2">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70">
+          <div className="w-full max-w-md p-6 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] shadow-2xl">
+            <h3 className="text-lg font-heading font-bold text-[var(--text-primary)] mb-2">
               Schedule Broadcast ({selectedApp.referenceId})
             </h3>
-            <p className="text-xs text-[#A3A3A3] mb-4">
+            <p className="text-xs text-[var(--text-secondary)] mb-4">
               Select date and time for channel promotional broadcast.
             </p>
 
@@ -1295,7 +1287,7 @@ export default function AdminPage() {
             <div className="flex justify-end gap-2">
               <button
                 onClick={() => setScheduleModalOpen(false)}
-                className="px-4 py-2 rounded-xl bg-[#222222] text-[#A3A3A3] text-xs"
+                className="px-4 py-2 rounded-xl bg-[var(--bg-secondary)] text-[var(--text-secondary)] text-xs font-medium"
               >
                 Cancel
               </button>
@@ -1312,15 +1304,15 @@ export default function AdminPage() {
 
       {/* ================= EDIT PACKAGE MODAL ================= */}
       {editingPkg && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90">
-          <div className="w-full max-w-lg p-6 rounded-3xl bg-[#191919] border border-[#303030] shadow-2xl">
-            <h3 className="text-lg font-heading font-bold text-white mb-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70">
+          <div className="w-full max-w-lg p-6 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] shadow-2xl">
+            <h3 className="text-lg font-heading font-bold text-[var(--text-primary)] mb-4">
               Edit Package: {editingPkg.name}
             </h3>
 
             <form onSubmit={handleSavePackage} className="space-y-4 text-xs font-mono">
               <div>
-                <label className="text-[#A3A3A3] block mb-1">PRICE (USD, LEAVE EMPTY FOR CONTACT FOR PRICING)</label>
+                <label className="text-[var(--text-secondary)] block mb-1">PRICE (USD, LEAVE EMPTY FOR CONTACT FOR PRICING)</label>
                 <input
                   type="number"
                   value={editingPkg.price ?? ''}
@@ -1337,7 +1329,7 @@ export default function AdminPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-[#A3A3A3] block mb-1">AVAILABLE SLOTS</label>
+                  <label className="text-[var(--text-secondary)] block mb-1">AVAILABLE SLOTS</label>
                   <input
                     type="number"
                     value={editingPkg.availableSlots}
@@ -1348,7 +1340,7 @@ export default function AdminPage() {
                   />
                 </div>
                 <div>
-                  <label className="text-[#A3A3A3] block mb-1">TOTAL SLOTS</label>
+                  <label className="text-[var(--text-secondary)] block mb-1">TOTAL SLOTS</label>
                   <input
                     type="number"
                     value={editingPkg.totalSlots}
@@ -1361,7 +1353,7 @@ export default function AdminPage() {
               </div>
 
               <div>
-                <label className="text-[#A3A3A3] block mb-1">DURATION</label>
+                <label className="text-[var(--text-secondary)] block mb-1">DURATION</label>
                 <input
                   type="text"
                   value={editingPkg.duration}
@@ -1371,7 +1363,7 @@ export default function AdminPage() {
               </div>
 
               <div>
-                <label className="text-[#A3A3A3] block mb-1">PLACEMENT</label>
+                <label className="text-[var(--text-secondary)] block mb-1">PLACEMENT</label>
                 <input
                   type="text"
                   value={editingPkg.placement}
@@ -1384,7 +1376,7 @@ export default function AdminPage() {
                 <button
                   type="button"
                   onClick={() => setEditingPkg(null)}
-                  className="px-4 py-2 rounded-xl bg-[#222222] text-[#A3A3A3]"
+                  className="px-4 py-2 rounded-xl bg-[var(--bg-secondary)] text-[var(--text-secondary)]"
                 >
                   Cancel
                 </button>
@@ -1399,15 +1391,15 @@ export default function AdminPage() {
 
       {/* ================= RECORD PAYMENT MODAL ================= */}
       {paymentModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90">
-          <div className="w-full max-w-md p-6 rounded-3xl bg-[#191919] border border-[#303030] shadow-2xl">
-            <h3 className="text-lg font-heading font-bold text-white mb-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70">
+          <div className="w-full max-w-md p-6 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] shadow-2xl">
+            <h3 className="text-lg font-heading font-bold text-[var(--text-primary)] mb-4">
               Record Verified Payment Receipt
             </h3>
 
             <form onSubmit={handleCreatePayment} className="space-y-4 text-xs font-mono">
               <div>
-                <label className="text-[#A3A3A3] block mb-1">REFERENCE ID *</label>
+                <label className="text-[var(--text-secondary)] block mb-1">REFERENCE ID *</label>
                 <input
                   type="text"
                   required
@@ -1419,7 +1411,7 @@ export default function AdminPage() {
               </div>
 
               <div>
-                <label className="text-[#A3A3A3] block mb-1">CHANNEL NAME</label>
+                <label className="text-[var(--text-secondary)] block mb-1">CHANNEL NAME</label>
                 <input
                   type="text"
                   value={newPayment.channelName}
@@ -1431,7 +1423,7 @@ export default function AdminPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-[#A3A3A3] block mb-1">AMOUNT (USD) *</label>
+                  <label className="text-[var(--text-secondary)] block mb-1">AMOUNT (USD) *</label>
                   <input
                     type="number"
                     required
@@ -1442,13 +1434,13 @@ export default function AdminPage() {
                   />
                 </div>
                 <div>
-                  <label className="text-[#A3A3A3] block mb-1">METHOD</label>
+                  <label className="text-[var(--text-secondary)] block mb-1">METHOD</label>
                   <select
                     value={newPayment.paymentMethod}
                     onChange={(e) =>
                       setNewPayment({ ...newPayment, paymentMethod: e.target.value as any })
                     }
-                    className="w-full px-3 py-2 rounded-xl fintech-input text-xs bg-[#191919]"
+                    className="w-full px-3 py-2 rounded-xl fintech-input text-xs"
                   >
                     <option>Crypto (USDT TRC20/ERC20)</option>
                     <option>Direct Wire</option>
@@ -1459,7 +1451,7 @@ export default function AdminPage() {
               </div>
 
               <div>
-                <label className="text-[#A3A3A3] block mb-1">TRANSACTION HASH / REF *</label>
+                <label className="text-[var(--text-secondary)] block mb-1">TRANSACTION HASH / REF *</label>
                 <input
                   type="text"
                   required
@@ -1474,7 +1466,7 @@ export default function AdminPage() {
                 <button
                   type="button"
                   onClick={() => setPaymentModalOpen(false)}
-                  className="px-4 py-2 rounded-xl bg-[#222222] text-[#A3A3A3]"
+                  className="px-4 py-2 rounded-xl bg-[var(--bg-secondary)] text-[var(--text-secondary)]"
                 >
                   Cancel
                 </button>

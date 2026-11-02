@@ -11,8 +11,6 @@ import { ContactSection } from '@/components/ContactSection';
 import { FinalCTASection } from '@/components/FinalCTASection';
 import { Footer } from '@/components/Footer';
 
-
-
 export default async function HomePage() {
   const [packages, settings] = await Promise.all([
     db.getPackages(),
@@ -20,36 +18,36 @@ export default async function HomePage() {
   ]);
 
   return (
-    <div className="min-h-screen bg-[#111111] text-[#FFFFFF] flex flex-col">
-      {/* Responsive Navbar */}
+    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] flex flex-col transition-colors duration-200">
+      {/* Responsive Navbar with Theme Selector */}
       <Navbar
         announcement={settings.announcementText}
         announcementActive={settings.announcementActive}
       />
 
       <main className="flex-grow">
-        {/* Hero Section */}
+        {/* Refined Hero Section with Authentic Community Topology */}
         <HomeHero
           heading={settings.heroHeading}
           subheading={settings.heroSubheading}
         />
 
-        {/* Trust Section */}
+        {/* Asymmetrical Editorial Trust Section */}
         <TrustSection pillars={settings.trustPillars} />
 
-        {/* About Section */}
+        {/* Editorial About Section */}
         <AboutSection />
 
-        {/* Configurable Promotions Section */}
+        {/* Promotions Tier Cards */}
         <PromotionsSection packages={packages} />
 
-        {/* How It Works Timeline (Horizontal Desktop / Vertical Mobile) */}
+        {/* Clean Process Timeline */}
         <HowItWorksSection />
 
-        {/* Strict Channel Standards & Requirements */}
+        {/* Strict Channel Standards */}
         <ChannelRequirementsSection requirements={settings.channelRequirements} />
 
-        {/* Contact & Inquiry Section */}
+        {/* Direct Contact & Business Inquiry */}
         <ContactSection
           officialTelegram={settings.officialTelegramUrl}
           communityTelegram={settings.communityTelegramUrl}
@@ -61,7 +59,7 @@ export default async function HomePage() {
         <FinalCTASection />
       </main>
 
-      {/* Brand Footer */}
+      {/* Brand Footer with Mandatory Risk Disclaimer */}
       <Footer
         officialTelegram={settings.officialTelegramUrl}
         communityTelegram={settings.communityTelegramUrl}
