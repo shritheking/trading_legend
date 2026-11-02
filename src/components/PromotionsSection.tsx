@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Check, ArrowRight, Clock, MapPin } from 'lucide-react';
+import { Check, ArrowRight, Clock, MapPin, Sparkles, Crown, Zap } from 'lucide-react';
 import { PromotionPackage } from '@/lib/types';
 
 interface PromotionsSectionProps {
@@ -79,94 +79,134 @@ export function PromotionsSection({ packages = [] }: PromotionsSectionProps) {
   ];
 
   return (
-    <section id="promotions" className="py-20 sm:py-28 lg:py-32 bg-[var(--bg-secondary)] border-t border-[var(--border-subtle)]">
+    <section id="promotions" className="py-16 sm:py-24 lg:py-28 bg-[var(--bg-secondary)] border-t border-[var(--border-subtle)] relative">
       <div className="site-container">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-card)] border border-[var(--border-subtle)] text-xs font-mono font-medium text-[#F07800] mb-3">
-            CURATED CAMPAIGN TIERS
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[var(--bg-card)] border border-[var(--border-subtle)] text-xs font-mono font-medium text-[#FF8A00] mb-3 shadow-xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FF8A00]" />
+            <span>CURATED CAMPAIGN TIERS</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-[var(--text-primary)] tracking-tight uppercase">
+          <h2 className="section-headline text-[var(--text-primary)] uppercase">
             PROMOTION OPPORTUNITIES
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-[var(--text-secondary)]">
-            Every promotional placement is scheduled on a strictly capped calendar to maintain maximum community engagement and post retention.
+          <p className="mt-3 text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed">
+            Every promotional placement is scheduled on a strictly capped calendar to maintain maximum community engagement, post retention, and subscriber quality.
           </p>
         </div>
 
-        {/* 3 Configurable Cards Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 xl:gap-10 items-stretch">
-          {displayPackages.map((pkg) => {
-            const isFeatured = pkg.highlighted;
+        {/* 3 Configurable Cards Grid with Distinct Visual Personalities */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 xl:gap-10 items-stretch">
+          {displayPackages.map((pkg, idx) => {
+            const isFeatured = pkg.highlighted || idx === 1;
+            const isPremium = idx === 2 || pkg.name.toLowerCase().includes('premium');
             const priceLabel = pkg.price ? `$${pkg.price}` : 'Contact for Pricing';
+
+            // Distinctive Tier Themes:
+            // 0: Basic (Gold/Amber subtle)
+            // 1: Featured (Vibrant Orange & Gold glow)
+            // 2: Premium (Purple & Gold elite luxury)
+            const themeBorder = isFeatured
+              ? 'border-2 border-[#FF8A00] shadow-[0_0_25px_rgba(255,138,0,0.15)] lg:-translate-y-2'
+              : isPremium
+              ? 'border border-[#8757FF]/40 hover:border-[#8757FF]/80 shadow-xs'
+              : 'border border-[var(--border-subtle)] hover:border-[#FFC247]/50 shadow-xs';
+
+            const tierAccentColor = isFeatured
+              ? '#FF8A00'
+              : isPremium
+              ? '#8757FF'
+              : '#FFC247';
+
+            const tierIcon = isFeatured ? (
+              <Zap className="w-3.5 h-3.5" />
+            ) : isPremium ? (
+              <Crown className="w-3.5 h-3.5" />
+            ) : (
+              <Sparkles className="w-3.5 h-3.5" />
+            );
+
+            const slotPercentage = Math.round((pkg.availableSlots / (pkg.totalSlots || 1)) * 100);
 
             return (
               <div
                 key={pkg.id}
-                className={`relative rounded-3xl p-8 sm:p-9 flex flex-col justify-between transition-all duration-200 ${
-                  isFeatured
-                    ? 'bg-[var(--bg-card)] border-2 border-[#F07800] shadow-xl lg:-translate-y-2'
-                    : 'bg-[var(--bg-card)] border border-[var(--border-subtle)] hover:border-[var(--border-strong)] shadow-xs'
-                }`}
+                className={`relative rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-200 bg-[var(--bg-card)] ${themeBorder}`}
               >
-                {/* Subtle Featured Badge */}
+                {/* Top Badge */}
                 {pkg.badge && (
-                  <div className="absolute -top-3.5 left-8">
+                  <div className="absolute -top-3 left-6 sm:left-8">
                     <span
-                      className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-mono font-bold tracking-wider uppercase ${
+                      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold tracking-wider uppercase shadow-xs ${
                         isFeatured
-                          ? 'bg-[#F07800] text-white shadow-xs'
-                          : 'bg-[var(--bg-secondary)] text-[var(--text-secondary)] border border-[var(--border-subtle)]'
+                          ? 'gradient-btn-primary'
+                          : isPremium
+                          ? 'bg-[#8757FF] text-white'
+                          : 'bg-[var(--bg-secondary)] text-[#FFC247] border border-[var(--border-subtle)]'
                       }`}
                     >
-                      {pkg.badge}
+                      {tierIcon}
+                      <span>{pkg.badge}</span>
                     </span>
                   </div>
                 )}
 
                 <div>
                   {/* Title & Description */}
-                  <div className="mb-6">
-                    <h3 className="text-2xl font-heading font-bold text-[var(--text-primary)] mb-2">
+                  <div className="mb-5 pt-2">
+                    <h3 className="text-xl sm:text-2xl font-heading font-bold text-[var(--text-primary)] mb-2">
                       {pkg.name}
                     </h3>
-                    <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed min-h-[44px]">
+                    <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed min-h-[40px]">
                       {pkg.shortDescription}
                     </p>
                   </div>
 
                   {/* Pricing Display */}
-                  <div className="my-6 p-5 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-subtle)]">
+                  <div className="my-5 p-4 sm:p-5 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-subtle)]">
                     <div className="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)] mb-1">
                       Tier Pricing
                     </div>
                     <div className="flex items-baseline gap-2">
-                      <span className="text-3xl font-heading font-extrabold text-[var(--text-primary)]">
+                      <span className="text-2xl sm:text-3xl font-heading font-extrabold text-[var(--text-primary)]">
                         {priceLabel}
                       </span>
                       {pkg.price && (
                         <span className="text-xs font-mono text-[var(--text-secondary)]">/ campaign</span>
                       )}
                     </div>
-                    <div className="mt-3 flex items-center justify-between text-xs font-mono text-[var(--text-secondary)] pt-3 border-t border-[var(--border-subtle)]">
-                      <span>Schedule Allocation</span>
-                      <span className="text-[#F07800] font-semibold">
-                        {pkg.availableSlots} of {pkg.totalSlots} Slots Open
-                      </span>
+
+                    {/* Slot Availability with visual indicator */}
+                    <div className="mt-3 pt-3 border-t border-[var(--border-subtle)] space-y-1.5">
+                      <div className="flex items-center justify-between text-xs font-mono text-[var(--text-secondary)]">
+                        <span>Schedule Allocation</span>
+                        <span className="font-semibold" style={{ color: tierAccentColor }}>
+                          {pkg.availableSlots} of {pkg.totalSlots} Slots Open
+                        </span>
+                      </div>
+                      <div className="w-full h-1.5 rounded-full bg-[var(--border-subtle)] overflow-hidden">
+                        <div
+                          className="h-full rounded-full transition-all duration-500"
+                          style={{
+                            width: `${slotPercentage}%`,
+                            backgroundColor: tierAccentColor,
+                          }}
+                        />
+                      </div>
                     </div>
                   </div>
 
                   {/* Key Metadata */}
-                  <div className="space-y-3 mb-6 text-xs text-[var(--text-secondary)]">
+                  <div className="space-y-2.5 mb-6 text-xs text-[var(--text-secondary)]">
                     <div className="flex items-start gap-2.5">
-                      <MapPin className="w-4 h-4 text-[#F07800] flex-shrink-0 mt-0.5" />
+                      <MapPin className="w-4 h-4 shrink-0 mt-0.5" style={{ color: tierAccentColor }} />
                       <div>
                         <span className="text-[var(--text-primary)] font-medium">Placement: </span>
                         <span>{pkg.placement}</span>
                       </div>
                     </div>
                     <div className="flex items-start gap-2.5">
-                      <Clock className="w-4 h-4 text-[#F07800] flex-shrink-0 mt-0.5" />
+                      <Clock className="w-4 h-4 shrink-0 mt-0.5" style={{ color: tierAccentColor }} />
                       <div>
                         <span className="text-[var(--text-primary)] font-medium">Duration: </span>
                         <span>{pkg.duration}</span>
@@ -175,15 +215,21 @@ export function PromotionsSection({ packages = [] }: PromotionsSectionProps) {
                   </div>
 
                   {/* Deliverables Checklist */}
-                  <div className="mb-8">
-                    <div className="text-xs font-mono uppercase tracking-wider text-[var(--text-primary)] font-bold mb-3.5">
+                  <div className="mb-6 sm:mb-8">
+                    <div className="text-xs font-mono uppercase tracking-wider text-[var(--text-primary)] font-bold mb-3">
                       Deliverables Included:
                     </div>
-                    <ul className="space-y-2.5 text-xs sm:text-sm text-[var(--text-secondary)]">
-                      {pkg.deliverables.map((item, idx) => (
-                        <li key={idx} className="flex items-start gap-2.5">
-                          <div className="h-4 w-4 rounded-full bg-[#F07800]/15 flex items-center justify-center flex-shrink-0 mt-0.5">
-                            <Check className="w-3 h-3 text-[#F07800]" />
+                    <ul className="space-y-2 text-xs sm:text-sm text-[var(--text-secondary)]">
+                      {pkg.deliverables.map((item, dIdx) => (
+                        <li key={dIdx} className="flex items-start gap-2.5">
+                          <div
+                            className="h-4 w-4 rounded-full flex items-center justify-center shrink-0 mt-0.5"
+                            style={{
+                              backgroundColor: `${tierAccentColor}22`,
+                              color: tierAccentColor,
+                            }}
+                          >
+                            <Check className="w-2.5 h-2.5 stroke-[2.5]" />
                           </div>
                           <span>{item}</span>
                         </li>
@@ -192,14 +238,16 @@ export function PromotionsSection({ packages = [] }: PromotionsSectionProps) {
                   </div>
                 </div>
 
-                {/* Apply CTA Button */}
+                {/* Apply CTA Button - Mobile-first 48px touch target */}
                 <div className="pt-4 border-t border-[var(--border-subtle)]">
                   <Link
                     href={`/apply?package=${encodeURIComponent(pkg.name)}`}
-                    className={`w-full py-3.5 px-6 rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 transition-all ${
+                    className={`btn-touch w-full py-3.5 px-6 rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 transition-all ${
                       isFeatured
                         ? 'gradient-btn-primary shadow-xs'
-                        : 'bg-[var(--bg-secondary)] hover:bg-[var(--bg-primary)] text-[var(--text-primary)] border border-[var(--border-subtle)] hover:border-[#F07800]/50'
+                        : isPremium
+                        ? 'bg-[#8757FF] hover:bg-[#7847ee] text-white shadow-xs'
+                        : 'bg-[var(--bg-secondary)] hover:bg-[var(--bg-card-hover)] text-[var(--text-primary)] border border-[var(--border-subtle)] hover:border-[#FFC247]/60'
                     }`}
                   >
                     <span>Apply for {pkg.name}</span>
@@ -212,7 +260,7 @@ export function PromotionsSection({ packages = [] }: PromotionsSectionProps) {
         </div>
 
         {/* Pricing disclosure note */}
-        <div className="mt-12 text-center text-xs font-mono text-[var(--text-muted)] max-w-xl mx-auto">
+        <div className="mt-10 sm:mt-12 text-center text-xs font-mono text-[var(--text-muted)] max-w-xl mx-auto">
           * Package slots and pricing are dynamically configured through the administration portal. Custom bespoke sponsorships are available upon application review.
         </div>
       </div>

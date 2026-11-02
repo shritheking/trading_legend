@@ -1,6 +1,24 @@
 {
   "applications": [
     {
+      "fullName": "Fintech Verification Tester",
+      "telegramUsername": "fintech_tester_auto",
+      "channelName": "Alpha Global Crypto Desk",
+      "channelLink": "https://t.me/alpha_global_desk",
+      "channelCategory": "Crypto & Web3",
+      "subscriberCount": 35000,
+      "avgPostViews": 12500,
+      "engagementInfo": "High daily active discussions, comments enabled, 35% view rate",
+      "preferredPackage": "Featured Promotion",
+      "additionalInfo": "Automated verification test",
+      "id": "app-1793644723904-tsmg7",
+      "referenceId": "TL-2026-8490",
+      "status": "Submitted",
+      "publicStatusNote": "Your application has been received and queued for manual channel review.",
+      "submittedAt": "2026-11-02T18:38:43.904Z",
+      "updatedAt": "2026-11-02T18:38:43.904Z"
+    },
+    {
       "fullName": "shri dharsan",
       "telegramUsername": "shridharsan",
       "channelName": "my",
@@ -328,6 +346,19 @@
         "publicStatusNote": "Promotion officially scheduled for broadcast on 02/11/2026."
       },
       "timestamp": "2026-11-02T17:34:11.514Z",
+      "delivered": false
+    },
+    {
+      "id": "evt-1793644723904",
+      "type": "application.submitted",
+      "data": {
+        "referenceId": "TL-2026-8490",
+        "channelName": "Alpha Global Crypto Desk",
+        "telegramUsername": "fintech_tester_auto",
+        "preferredPackage": "Featured Promotion",
+        "subscriberCount": 35000
+      },
+      "timestamp": "2026-11-02T18:38:43.904Z",
       "delivered": false
     }
   ]
