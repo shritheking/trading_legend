@@ -1,6 +1,24 @@
 {
   "applications": [
     {
+      "fullName": "Marcus Vance",
+      "telegramUsername": "marcus_vance_fx",
+      "channelName": "Vance Macro & Systematic FX",
+      "channelLink": "https://t.me/vance_macro_fx",
+      "channelCategory": "Forex & Currencies",
+      "subscriberCount": 42000,
+      "avgPostViews": 16800,
+      "engagementInfo": "Active VIP group with 1200 daily active commenters and verified audit",
+      "preferredPackage": "Featured Promotion",
+      "additionalInfo": "Ready for editorial review",
+      "id": "app-1793646417809-dcg7u",
+      "referenceId": "TL-2026-8396",
+      "status": "Submitted",
+      "publicStatusNote": "Your application has been received and queued for manual channel review.",
+      "submittedAt": "2026-11-02T19:06:57.809Z",
+      "updatedAt": "2026-11-02T19:06:57.809Z"
+    },
+    {
       "fullName": "Fintech Verification Tester",
       "telegramUsername": "fintech_tester_auto",
       "channelName": "Alpha Global Crypto Desk",
@@ -359,6 +377,19 @@
         "subscriberCount": 35000
       },
       "timestamp": "2026-11-02T18:38:43.904Z",
+      "delivered": false
+    },
+    {
+      "id": "evt-1793646417809",
+      "type": "application.submitted",
+      "data": {
+        "referenceId": "TL-2026-8396",
+        "channelName": "Vance Macro & Systematic FX",
+        "telegramUsername": "marcus_vance_fx",
+        "preferredPackage": "Featured Promotion",
+        "subscriberCount": 42000
+      },
+      "timestamp": "2026-11-02T19:06:57.809Z",
       "delivered": false
     }
   ]

@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import { ShieldCheck, Award, Eye, Headphones, ArrowRight, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 
 interface TrustSectionProps {
   pillars?: { title: string; description: string }[];
@@ -14,45 +14,29 @@ export function TrustSection({ pillars }: TrustSectionProps) {
       num: '01',
       title: 'Selective Channel Reviews',
       description:
-        'Every trading community is audited individually. We examine post history, analytical rigor, and member interaction to verify real educational substance.',
-      icon: ShieldCheck,
-      color: '#8757FF', // Purple
-      bgTint: 'rgba(135, 87, 255, 0.1)',
-      borderHover: 'hover:border-[#8757FF]/60',
-      badgeText: 'Audit Standard',
+        'Every trading community is audited individually. We examine post history, analytical methodology, and authentic member interaction to verify genuine educational substance.',
+      policy: '100% Manual Audit',
     },
     {
       num: '02',
       title: 'Quality-Focused Promotions',
       description:
-        'We feature trading educators committed to risk management, discipline, and sustainable methodology rather than sensationalized claims.',
-      icon: Award,
-      color: '#FFC247', // Gold
-      bgTint: 'rgba(255, 194, 71, 0.1)',
-      borderHover: 'hover:border-[#FFC247]/60',
-      badgeText: 'Curated Roster',
+        'We feature trading educators committed to risk management, discipline, and sustainable methodology rather than sensationalized profit claims.',
+      policy: 'Curated Roster',
     },
     {
       num: '03',
       title: 'Transparent Application Process',
       description:
         'Applicants receive a unique Reference ID upon submission to track review progress, reviewer notes, and scheduling milestones in real time.',
-      icon: Eye,
-      color: '#24C8E8', // Cyan
-      bgTint: 'rgba(36, 200, 232, 0.1)',
-      borderHover: 'hover:border-[#24C8E8]/60',
-      badgeText: 'Real-Time Tracking',
+      policy: 'Real-Time Tracking',
     },
     {
       num: '04',
       title: 'Dedicated Campaign Support',
       description:
-        'Direct coordination with our review desk via official Telegram channels to ensure accurate scheduling, creative review, and punctual execution.',
-      icon: Headphones,
-      color: '#FF8A00', // Orange
-      bgTint: 'rgba(255, 138, 0, 0.1)',
-      borderHover: 'hover:border-[#FF8A00]/60',
-      badgeText: 'Direct Liaison',
+        'Direct coordination with our review desk via official Telegram channels to ensure accurate scheduling, creative compliance review, and punctual execution.',
+      policy: 'Direct Coordination',
     },
   ];
 
@@ -60,98 +44,73 @@ export function TrustSection({ pillars }: TrustSectionProps) {
     ? pillars.map((p, idx) => ({
         ...p,
         num: defaultPillars[idx].num,
-        icon: defaultPillars[idx].icon,
-        color: defaultPillars[idx].color,
-        bgTint: defaultPillars[idx].bgTint,
-        borderHover: defaultPillars[idx].borderHover,
-        badgeText: defaultPillars[idx].badgeText,
+        policy: defaultPillars[idx].policy,
       }))
     : defaultPillars;
 
   return (
-    <section className="py-16 sm:py-24 lg:py-28 bg-[var(--bg-primary)] relative">
+    <section id="approach" className="py-14 sm:py-20 lg:py-24 bg-[var(--bg-primary)] border-b border-[var(--border-subtle)]">
       <div className="site-container">
-        {/* Asymmetric Header + Principles Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-          {/* Left Column: Editorial Statement (4 cols on lg) */}
-          <div className="lg:col-span-4 lg:sticky lg:top-28 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--badge-bg)] border border-[var(--border-subtle)] text-xs font-mono font-medium text-[var(--badge-text)] shadow-xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FF8A00]" />
-              <span>ETHICS & VERIFICATION</span>
-            </div>
-
-            <h2 className="section-headline text-[var(--text-primary)] uppercase">
-              Our Platform Approach
-            </h2>
-
-            <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed">
-              Trading Legend operates under strict editorial curation to maintain high trustworthiness across every promotional broadcast. We protect member communities from predatory promotion.
-            </p>
-
-            <div className="pt-2">
-              <Link
-                href="/#channel-requirements"
-                className="inline-flex items-center gap-2 text-xs font-mono font-semibold text-[#FF8A00] hover:text-[#FFC247] transition-colors"
-              >
-                <span>Read Channel Requirements</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
+        {/* Section Header */}
+        <div className="max-w-2xl mb-10 sm:mb-14">
+          <div className="text-xs font-mono uppercase text-[#FF8A00] tracking-wider mb-2 font-semibold">
+            STANDARDS & PLATFORM APPROACH
           </div>
+          <h2 className="section-headline text-[var(--text-primary)] uppercase">
+            Our Platform Approach
+          </h2>
+          <p className="mt-2.5 text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed">
+            Trading Legend operates under strict editorial curation to maintain high trustworthiness across every promotional broadcast. We protect member communities from predatory promotion.
+          </p>
+        </div>
 
-          {/* Right Column: 4 Staggered Color-Coded Editorial Principles */}
-          <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
-            {items.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={index}
-                  className={`rounded-2xl sm:rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] p-6 sm:p-7 flex flex-col justify-between transition-all duration-200 ${item.borderHover} shadow-xs relative overflow-hidden group`}
-                >
-                  {/* Subtle top color accent border */}
-                  <div
-                    className="absolute top-0 left-0 right-0 h-1 opacity-80 group-hover:opacity-100 transition-opacity"
-                    style={{ backgroundColor: item.color }}
-                  />
+        {/* Clean Numbered Editorial List with Hairline Dividers (No repetitive cards) */}
+        <div className="border-t border-[var(--border-subtle)] divide-y divide-[var(--border-subtle)]">
+          {items.map((item, index) => (
+            <div
+              key={index}
+              className="py-6 sm:py-8 grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-6 items-start hover:bg-[var(--bg-secondary)]/50 transition-colors px-2 sm:px-4 rounded-lg"
+            >
+              {/* Number (2 cols) */}
+              <div className="md:col-span-2 flex items-center justify-between md:block">
+                <span className="font-heading font-extrabold text-2xl sm:text-3xl text-[#FF8A00] font-mono">
+                  {item.num}
+                </span>
+                <span className="md:hidden inline-block text-[10px] font-mono px-2 py-0.5 rounded bg-[var(--bg-secondary)] text-[var(--text-secondary)] border border-[var(--border-subtle)]">
+                  {item.policy}
+                </span>
+              </div>
 
-                  <div>
-                    <div className="flex items-center justify-between mb-5">
-                      <span
-                        className="font-heading font-extrabold text-2xl tracking-tight"
-                        style={{ color: item.color }}
-                      >
-                        {item.num}
-                      </span>
-                      <div
-                        className="w-10 h-10 rounded-xl border border-[var(--border-subtle)] flex items-center justify-center transition-transform group-hover:scale-105"
-                        style={{ backgroundColor: item.bgTint }}
-                      >
-                        <Icon className="w-5 h-5" style={{ color: item.color }} />
-                      </div>
-                    </div>
+              {/* Title & Policy Badge (4 cols) */}
+              <div className="md:col-span-4 space-y-1">
+                <h3 className="text-base sm:text-lg font-heading font-bold text-[var(--text-primary)]">
+                  {item.title}
+                </h3>
+                <span className="hidden md:inline-block text-[11px] font-mono text-[var(--text-muted)]">
+                  {item.policy}
+                </span>
+              </div>
 
-                    <h3 className="text-lg font-heading font-bold text-[var(--text-primary)] mb-2">
-                      {item.title}
-                    </h3>
+              {/* Description (6 cols) */}
+              <div className="md:col-span-6">
+                <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
 
-                    <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
-
-                  <div className="mt-6 pt-4 border-t border-[var(--border-subtle)] text-[11px] font-mono text-[var(--text-muted)] flex items-center justify-between">
-                    <span className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#22C55E]" />
-                      <span>Enforced Protocol</span>
-                    </span>
-                    <span className="font-semibold" style={{ color: item.color }}>
-                      {item.badgeText}
-                    </span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+        {/* Footnote Link */}
+        <div className="mt-8 pt-4 flex items-center justify-between text-xs font-mono text-[var(--text-muted)]">
+          <span>Enforced across all packages and applicants</span>
+          <Link
+            href="/#standards"
+            className="text-[#FF8A00] hover:underline flex items-center gap-1 font-semibold"
+          >
+            <span>Read Channel Standards</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
         </div>
       </div>
     </section>

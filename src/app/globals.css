@@ -3,53 +3,57 @@
 @layer base {
   :root {
     --bg-primary: #FFFFFF;
-    --bg-secondary: #F7F7F7;
-    --bg-card: #FFFFFF;
-    --bg-card-hover: #F3F4F6;
+    --bg-secondary: #F8F9FA;
+    --bg-surface: #FFFFFF;
+    --bg-surface-hover: #F1F3F5;
     --bg-input: #FFFFFF;
-    --text-primary: #171717;
-    --text-secondary: #666666;
-    --text-muted: #8E8E8E;
+    
+    --text-primary: #121212;
+    --text-secondary: #5A5A5A;
+    --text-muted: #8C8C8C;
+    
     --border-subtle: #E5E7EB;
     --border-strong: #D1D5DB;
 
     /* Exact Brand Accents */
     --brand-orange: #FF8A00;
-    --brand-gold: #FFC247;
-    --accent-purple: #8757FF;
-    --accent-cyan: #24C8E8;
+    --brand-gold: #E7B84B;
+    --accent-purple: #8A5CF6;
+    --accent-cyan: #29C5D9;
     --brand-success: #16A34A;
     --brand-error: #DC2626;
 
-    --nav-bg: rgba(255, 255, 255, 0.92);
-    --badge-bg: #F3F4F6;
-    --badge-text: #4B5563;
+    --nav-bg: rgba(255, 255, 255, 0.94);
+    --badge-bg: #F1F3F5;
+    --badge-text: #495057;
     color-scheme: light;
   }
 
   html.dark {
     --bg-primary: #101010;
-    --bg-secondary: #181818;
-    --bg-card: #1C1C1C;
-    --bg-card-hover: #242424;
-    --bg-input: #161616;
-    --text-primary: #FFFFFF;
-    --text-secondary: #A3A3A3;
-    --text-muted: #737373;
-    --border-subtle: #2A2A2A;
-    --border-strong: #383838;
+    --bg-secondary: #161616;
+    --bg-surface: #191919;
+    --bg-surface-hover: #222222;
+    --bg-input: #151515;
+    
+    --text-primary: #F5F3EF;
+    --text-secondary: #A5A5A5;
+    --text-muted: #6E6E6E;
+    
+    --border-subtle: #262626;
+    --border-strong: #333333;
 
     /* Exact Brand Accents */
     --brand-orange: #FF8A00;
-    --brand-gold: #FFC247;
-    --accent-purple: #8757FF;
-    --accent-cyan: #24C8E8;
+    --brand-gold: #E7B84B;
+    --accent-purple: #8A5CF6;
+    --accent-cyan: #29C5D9;
     --brand-success: #22C55E;
     --brand-error: #EF4444;
 
-    --nav-bg: rgba(16, 16, 16, 0.92);
-    --badge-bg: #222222;
-    --badge-text: #A3A3A3;
+    --nav-bg: rgba(16, 16, 16, 0.94);
+    --badge-bg: #1F1F1F;
+    --badge-text: #A5A5A5;
     color-scheme: dark;
   }
 }
@@ -74,10 +78,10 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Custom modern scrollbar */
+/* Custom editorial scrollbar */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -86,96 +90,76 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: var(--border-subtle);
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--brand-orange);
 }
 
-/* Primary Fintech Brand Button */
-.gradient-btn-primary {
-  background: linear-gradient(135deg, #FF8A00 0%, #FFA825 100%);
+/* Primary Brand Action Button */
+.btn-primary {
+  background: #FF8A00;
   color: #FFFFFF !important;
   font-weight: 600;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.15s ease-out;
   min-height: 48px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  border-radius: 10px;
 }
 
-.gradient-btn-primary:hover {
-  background: linear-gradient(135deg, #FF951A 0%, #FFB63D 100%);
-  box-shadow: 0 4px 20px rgba(255, 138, 0, 0.35);
+.btn-primary:hover {
+  background: #E67A00;
   transform: translateY(-1px);
 }
 
-.gradient-btn-primary:active {
+.btn-primary:active {
   transform: translateY(0);
 }
 
-/* Secondary Button */
+/* Secondary Editorial Button */
 .btn-secondary {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  background-color: transparent;
+  border: 1px solid var(--border-strong);
   color: var(--text-primary);
   min-height: 48px;
+  font-weight: 600;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
+  border-radius: 10px;
+  transition: all 0.15s ease-out;
 }
 
 .btn-secondary:hover {
-  background-color: var(--bg-card-hover);
-  border-color: var(--border-strong);
+  background-color: var(--bg-surface-hover);
+  border-color: var(--brand-orange);
 }
 
-/* Luxury Purple Button */
-.btn-purple-glow {
-  background: linear-gradient(135deg, #8757FF 0%, #A27BFF 100%);
-  color: #FFFFFF !important;
-  font-weight: 600;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+/* Mobile-First Touch Action Helper */
+.btn-touch {
   min-height: 48px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
+  touch-action: manipulation;
 }
 
-.btn-purple-glow:hover {
-  box-shadow: 0 4px 20px rgba(135, 87, 255, 0.35);
-  transform: translateY(-1px);
-}
-
-/* Editorial subtle card */
-.editorial-card {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
-}
-
-.editorial-card:hover {
-  border-color: rgba(255, 138, 0, 0.45);
-}
-
-/* Mobile Friendly Form Inputs */
+/* Form Inputs */
 .fintech-input {
   background-color: var(--bg-input);
   border: 1px solid var(--border-subtle);
   color: var(--text-primary);
   min-height: 48px;
   font-size: 15px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  border-radius: 10px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .fintech-input:focus {
   outline: none;
   border-color: var(--brand-orange);
-  box-shadow: 0 0 0 2px rgba(255, 138, 0, 0.2);
+  box-shadow: 0 0 0 1px var(--brand-orange);
 }
 
 .fintech-input::placeholder {
@@ -185,18 +169,11 @@ body {
 /* Standard wide layout container */
 .site-container {
   width: 100%;
-  max-width: 1600px;
+  max-width: 1560px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-@media (min-width: 480px) {
-  .site-container {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-  }
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 
 @media (min-width: 640px) {
@@ -215,35 +192,31 @@ body {
 
 @media (min-width: 1440px) {
   .site-container {
-    padding-left: 4.5rem;
-    padding-right: 4.5rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
   }
 }
 
-/* Responsive clamp typography */
+/* Controlled Editorial Typography */
 .hero-headline {
-  font-size: clamp(2rem, 5.5vw, 4.25rem);
-  line-height: 1.08;
-  letter-spacing: -0.03em;
+  font-family: var(--font-sora), sans-serif;
+  font-size: clamp(1.875rem, 4.5vw, 3.75rem);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  font-weight: 800;
 }
 
 .section-headline {
-  font-size: clamp(1.75rem, 3.5vw, 3rem);
-  line-height: 1.15;
+  font-family: var(--font-sora), sans-serif;
+  font-size: clamp(1.5rem, 2.75vw, 2.5rem);
+  line-height: 1.18;
   letter-spacing: -0.02em;
+  font-weight: 700;
 }
 
-/* Glow highlights */
-.glow-cyan {
-  box-shadow: 0 0 25px rgba(36, 200, 232, 0.25);
-}
-
-.glow-purple {
-  box-shadow: 0 0 25px rgba(135, 87, 255, 0.25);
-}
-
-.glow-orange {
-  box-shadow: 0 0 25px rgba(255, 138, 0, 0.25);
+/* Hairline Editorial Divider */
+.hairline-divider {
+  border-color: var(--border-subtle);
 }
 
 /* Respect reduced motion */

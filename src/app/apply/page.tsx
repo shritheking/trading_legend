@@ -11,12 +11,9 @@ import {
   AlertCircle,
   Copy,
   ArrowRight,
-  Sparkles,
-  BarChart2,
+  ShieldCheck,
   Lock,
-  Layers,
-  Crown,
-  Zap,
+  BarChart2,
 } from 'lucide-react';
 import { ChannelCategory } from '@/lib/types';
 
@@ -31,9 +28,9 @@ const CATEGORIES: ChannelCategory[] = [
 ];
 
 const PACKAGES = [
-  { name: 'Basic Promotion', tag: '24h Spotlight', accent: '#FFC247' },
-  { name: 'Featured Promotion', tag: '48h Pinned', accent: '#FF8A00' },
-  { name: 'Premium Promotion', tag: '7-Day Campaign', accent: '#8757FF' },
+  { name: 'Basic Promotion', tag: '24h Spotlight' },
+  { name: 'Featured Promotion', tag: '48h Pinned' },
+  { name: 'Premium Promotion', tag: '7-Day Campaign' },
 ];
 
 function ApplicationForm() {
@@ -148,51 +145,51 @@ function ApplicationForm() {
 
   if (successData) {
     return (
-      <div className="max-w-2xl mx-auto my-8 sm:my-12 p-6 sm:p-10 rounded-2xl sm:rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] shadow-xl text-center animate-in zoom-in-95 duration-200">
-        <div className="w-16 h-16 rounded-2xl bg-[#22C55E]/15 text-[#22C55E] flex items-center justify-center mx-auto mb-5">
-          <CheckCircle className="w-8 h-8" />
+      <div className="max-w-xl mx-auto my-8 p-6 sm:p-8 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-center animate-in zoom-in-95 duration-200">
+        <div className="w-12 h-12 rounded-full bg-[#16A34A]/10 text-[#16A34A] flex items-center justify-center mx-auto mb-4">
+          <CheckCircle className="w-6 h-6" />
         </div>
 
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-secondary)] border border-[var(--border-subtle)] text-xs font-mono text-[#22C55E] mb-3">
+        <div className="text-[11px] font-mono uppercase text-[#16A34A] font-bold mb-2">
           APPLICATION REGISTERED
         </div>
 
-        <h2 className="text-2xl sm:text-3xl font-heading font-extrabold text-[var(--text-primary)] mb-3">
+        <h2 className="text-xl sm:text-2xl font-heading font-extrabold text-[var(--text-primary)] mb-2">
           Submission Successful
         </h2>
 
         {/* Required Notification Text */}
-        <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed max-w-lg mx-auto mb-6">
+        <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed max-w-md mx-auto mb-6">
           &ldquo;Your application has been submitted successfully. Our team will review your channel and notify you about the decision.&rdquo;
         </p>
 
         {/* Reference ID Card */}
-        <div className="p-5 sm:p-6 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-subtle)] max-w-md mx-auto mb-6 text-left">
-          <div className="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)] mb-1">
-            Unique Application Reference ID
+        <div className="p-4 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-subtle)] max-w-sm mx-auto mb-6 text-left">
+          <div className="text-[10px] font-mono uppercase text-[var(--text-muted)] mb-1">
+            Application Reference ID
           </div>
-          <div className="flex items-center justify-between gap-3">
-            <span className="font-mono text-xl sm:text-2xl font-bold text-[#FF8A00] tracking-wider">
+          <div className="flex items-center justify-between gap-2">
+            <span className="font-mono text-xl font-bold text-[#FF8A00] tracking-wider">
               {successData.referenceId}
             </span>
             <button
               onClick={copyRefId}
               type="button"
-              className="btn-touch px-3.5 py-1.5 rounded-xl bg-[var(--bg-card)] hover:bg-[var(--bg-card-hover)] border border-[var(--border-subtle)] text-xs font-medium text-[var(--text-primary)] flex items-center gap-1.5 transition-colors shadow-xs"
+              className="btn-touch px-3 py-1 rounded bg-[var(--bg-primary)] border border-[var(--border-subtle)] text-xs font-medium text-[var(--text-primary)] flex items-center gap-1 transition-colors"
             >
               <Copy className="w-3.5 h-3.5 text-[#FF8A00]" />
-              <span>{copied ? 'Copied!' : 'Copy'}</span>
+              <span>{copied ? 'Copied' : 'Copy'}</span>
             </button>
           </div>
-          <div className="mt-3 text-[11px] text-[var(--text-muted)] pt-3 border-t border-[var(--border-subtle)]">
-            Save this Reference ID. You will need it alongside your Telegram username to track review status.
+          <div className="mt-2 text-[10px] text-[var(--text-muted)] pt-2 border-t border-[var(--border-subtle)]">
+            Save this ID. You will use it to track your review status.
           </div>
         </div>
 
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
           <Link
             href={`/track?ref=${encodeURIComponent(successData.referenceId)}`}
-            className="btn-touch gradient-btn-primary px-7 py-3.5 rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-xs"
+            className="btn-primary btn-touch px-6 py-3 text-sm font-bold flex items-center justify-center gap-2"
           >
             <span>Track Application Status</span>
             <ArrowRight className="w-4 h-4" />
@@ -200,7 +197,7 @@ function ApplicationForm() {
 
           <Link
             href="/"
-            className="btn-touch px-6 py-3.5 rounded-xl bg-[var(--bg-secondary)] hover:bg-[var(--bg-card-hover)] text-[var(--text-primary)] font-medium text-sm border border-[var(--border-subtle)] transition-colors text-center"
+            className="btn-secondary btn-touch px-5 py-3 text-sm font-semibold text-center"
           >
             Return to Homepage
           </Link>
@@ -210,135 +207,130 @@ function ApplicationForm() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-2xl mx-auto">
       {/* Header */}
-      <div className="text-center mb-10 sm:mb-12">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[var(--badge-bg)] border border-[var(--border-subtle)] text-xs font-mono font-medium text-[#FF8A00] mb-3 shadow-xs">
-          <Sparkles className="w-3.5 h-3.5 text-[#FF8A00]" />
-          <span>TRADING COMMUNITY PROMOTION PORTAL</span>
+      <div className="text-left mb-8">
+        <div className="text-xs font-mono uppercase text-[#FF8A00] tracking-wider mb-2 font-semibold">
+          APPLICATION PORTAL
         </div>
         <h1 className="section-headline text-[var(--text-primary)] uppercase">
           Apply for Promotional Placement
         </h1>
-        <p className="mt-3 text-sm sm:text-base text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
+        <p className="mt-2 text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
           Submit your trading channel for our editorial compliance review. Applications are audited manually within 24 to 48 business hours.
         </p>
       </div>
 
       {/* Error alert */}
       {errorMessage && (
-        <div className="mb-6 p-4 rounded-2xl bg-[#EF4444]/10 border border-[#EF4444]/40 text-[#DC2626] dark:text-[#EF4444] text-sm flex items-start gap-3">
-          <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
-          <div className="flex-1">
+        <div className="mb-6 p-4 rounded-lg bg-[#EF4444]/10 border border-[#EF4444]/40 text-[#DC2626] dark:text-[#EF4444] text-xs sm:text-sm flex items-start gap-2.5">
+          <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+          <div>
             <span className="font-semibold">Submission Incomplete: </span>
             {errorMessage}
           </div>
         </div>
       )}
 
-      {/* Main Form */}
-      <form onSubmit={handleSubmit} className="rounded-2xl sm:rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] p-5 sm:p-8 lg:p-10 shadow-lg space-y-6 sm:space-y-8">
+      {/* Main Form: Single column per row on mobile */}
+      <form onSubmit={handleSubmit} className="rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] p-5 sm:p-8 space-y-6">
         {/* Section 1: Contact Identity */}
-        <div>
-          <h2 className="text-base sm:text-lg font-heading font-bold text-[var(--text-primary)] flex items-center gap-2 mb-4 pb-2 border-b border-[var(--border-subtle)]">
-            <Lock className="w-4 h-4 text-[#8757FF]" />
-            <span>1. Channel Owner Contact</span>
-          </h2>
+        <div className="space-y-4">
+          <div className="pb-2 border-b border-[var(--border-subtle)] flex items-center gap-2 text-sm font-heading font-bold text-[var(--text-primary)]">
+            <Lock className="w-4 h-4 text-[#FF8A00]" />
+            <span>1. Contact Details</span>
+          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-            <div>
-              <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-1.5 font-medium">
-                Full Name <span className="text-[#FF8A00]">*</span>
-              </label>
-              <input
-                type="text"
-                required
-                inputMode="text"
-                value={formData.fullName}
-                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                placeholder="e.g. Alexander Vance"
-                className="w-full px-4 py-3.5 rounded-xl fintech-input text-sm"
-              />
-            </div>
+          <div>
+            <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-1.5 font-medium">
+              Full Name <span className="text-[#FF8A00]">*</span>
+            </label>
+            <input
+              type="text"
+              required
+              inputMode="text"
+              value={formData.fullName}
+              onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+              placeholder="e.g. Alexander Vance"
+              className="w-full px-3.5 py-3 rounded-lg fintech-input text-sm"
+            />
+          </div>
 
-            <div>
-              <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-1.5 font-medium">
-                Telegram Username <span className="text-[#FF8A00]">*</span>
-              </label>
-              <input
-                type="text"
-                required
-                inputMode="text"
-                value={formData.telegramUsername}
-                onChange={(e) => setFormData({ ...formData, telegramUsername: e.target.value })}
-                placeholder="@vance_trading"
-                className="w-full px-4 py-3.5 rounded-xl fintech-input text-sm"
-              />
-              <span className="text-[11px] text-[var(--text-muted)] mt-1.5 block">Used for review status communications.</span>
-            </div>
+          <div>
+            <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-1.5 font-medium">
+              Telegram Username <span className="text-[#FF8A00]">*</span>
+            </label>
+            <input
+              type="text"
+              required
+              inputMode="text"
+              value={formData.telegramUsername}
+              onChange={(e) => setFormData({ ...formData, telegramUsername: e.target.value })}
+              placeholder="@vance_trading"
+              className="w-full px-3.5 py-3 rounded-lg fintech-input text-sm"
+            />
+            <span className="text-[11px] text-[var(--text-muted)] mt-1 block">Used for direct review communications.</span>
           </div>
         </div>
 
         {/* Section 2: Channel Identification & Metrics */}
-        <div>
-          <h2 className="text-base sm:text-lg font-heading font-bold text-[var(--text-primary)] flex items-center gap-2 mb-4 pb-2 border-b border-[var(--border-subtle)]">
-            <BarChart2 className="w-4 h-4 text-[#24C8E8]" />
-            <span>2. Channel Metrics & Classification</span>
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 mb-4 sm:mb-5">
-            <div>
-              <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-1.5 font-medium">
-                Telegram Channel Name <span className="text-[#FF8A00]">*</span>
-              </label>
-              <input
-                type="text"
-                required
-                inputMode="text"
-                value={formData.channelName}
-                onChange={(e) => setFormData({ ...formData, channelName: e.target.value })}
-                placeholder="e.g. Vance Macro FX & Analysis"
-                className="w-full px-4 py-3.5 rounded-xl fintech-input text-sm"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-1.5 font-medium">
-                Telegram Channel Link <span className="text-[#FF8A00]">*</span>
-              </label>
-              <input
-                type="url"
-                required
-                inputMode="url"
-                value={formData.channelLink}
-                onChange={(e) => setFormData({ ...formData, channelLink: e.target.value })}
-                placeholder="https://t.me/vance_macro_fx"
-                className="w-full px-4 py-3.5 rounded-xl fintech-input text-sm"
-              />
-            </div>
+        <div className="space-y-4 pt-2">
+          <div className="pb-2 border-b border-[var(--border-subtle)] flex items-center gap-2 text-sm font-heading font-bold text-[var(--text-primary)]">
+            <BarChart2 className="w-4 h-4 text-[#FF8A00]" />
+            <span>2. Channel Details & Metrics</span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
-            <div>
-              <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-1.5 font-medium">
-                Channel Category <span className="text-[#FF8A00]">*</span>
-              </label>
-              <select
-                value={formData.channelCategory}
-                onChange={(e) => setFormData({ ...formData, channelCategory: e.target.value as ChannelCategory })}
-                className="w-full px-4 py-3.5 rounded-xl fintech-input text-sm"
-              >
-                {CATEGORIES.map((c) => (
-                  <option key={c} value={c}>
-                    {c}
-                  </option>
-                ))}
-              </select>
-            </div>
+          <div>
+            <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-1.5 font-medium">
+              Telegram Channel Name <span className="text-[#FF8A00]">*</span>
+            </label>
+            <input
+              type="text"
+              required
+              inputMode="text"
+              value={formData.channelName}
+              onChange={(e) => setFormData({ ...formData, channelName: e.target.value })}
+              placeholder="e.g. Vance Macro FX & Analysis"
+              className="w-full px-3.5 py-3 rounded-lg fintech-input text-sm"
+            />
+          </div>
 
+          <div>
+            <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-1.5 font-medium">
+              Telegram Channel URL <span className="text-[#FF8A00]">*</span>
+            </label>
+            <input
+              type="url"
+              required
+              inputMode="url"
+              value={formData.channelLink}
+              onChange={(e) => setFormData({ ...formData, channelLink: e.target.value })}
+              placeholder="https://t.me/vance_macro_fx"
+              className="w-full px-3.5 py-3 rounded-lg fintech-input text-sm"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-1.5 font-medium">
+              Channel Primary Category <span className="text-[#FF8A00]">*</span>
+            </label>
+            <select
+              value={formData.channelCategory}
+              onChange={(e) => setFormData({ ...formData, channelCategory: e.target.value as ChannelCategory })}
+              className="w-full px-3.5 py-3 rounded-lg fintech-input text-sm"
+            >
+              {CATEGORIES.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-1.5 font-medium">
-                Total Subscribers <span className="text-[#FF8A00]">*</span>
+                Subscribers <span className="text-[#FF8A00]">*</span>
               </label>
               <input
                 type="number"
@@ -348,14 +340,14 @@ function ApplicationForm() {
                 value={formData.subscriberCount}
                 onChange={(e) => setFormData({ ...formData, subscriberCount: e.target.value })}
                 placeholder="e.g. 24000"
-                className="w-full px-4 py-3.5 rounded-xl fintech-input text-sm font-mono"
+                className="w-full px-3.5 py-3 rounded-lg fintech-input text-sm font-mono"
               />
-              <span className="text-[11px] text-[var(--text-muted)] mt-1.5 block">Min. 100 subscribers</span>
+              <span className="text-[10px] text-[var(--text-muted)] mt-1 block">Min. 100 subscribers</span>
             </div>
 
             <div>
               <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-1.5 font-medium">
-                Average Post Views <span className="text-[#FF8A00]">*</span>
+                Avg. Post Views <span className="text-[#FF8A00]">*</span>
               </label>
               <input
                 type="number"
@@ -365,85 +357,81 @@ function ApplicationForm() {
                 value={formData.avgPostViews}
                 onChange={(e) => setFormData({ ...formData, avgPostViews: e.target.value })}
                 placeholder="e.g. 8500"
-                className="w-full px-4 py-3.5 rounded-xl fintech-input text-sm font-mono"
+                className="w-full px-3.5 py-3 rounded-lg fintech-input text-sm font-mono"
               />
-              <span className="text-[11px] text-[var(--text-muted)] mt-1.5 block">Past 30-day average</span>
+              <span className="text-[10px] text-[var(--text-muted)] mt-1 block">Past 30-day average</span>
             </div>
+          </div>
+
+          <div>
+            <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-1.5 font-medium">
+              Engagement & Group Discussions <span className="text-[#FF8A00]">*</span>
+            </label>
+            <textarea
+              required
+              rows={3}
+              value={formData.engagementInfo}
+              onChange={(e) => setFormData({ ...formData, engagementInfo: e.target.value })}
+              placeholder="Describe your engagement: discussion group activity, reactions, comments..."
+              className="w-full px-3.5 py-3 rounded-lg fintech-input text-sm resize-none"
+            />
           </div>
         </div>
 
-        {/* Section 3: Engagement Information */}
-        <div>
-          <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-1.5 font-medium">
-            Engagement Information & Discussion Group Activity <span className="text-[#FF8A00]">*</span>
-          </label>
-          <textarea
-            required
-            rows={3}
-            value={formData.engagementInfo}
-            onChange={(e) => setFormData({ ...formData, engagementInfo: e.target.value })}
-            placeholder="Describe your typical engagement: view-rate percentage, active discussion group activity, reactions, comments..."
-            className="w-full px-4 py-3.5 rounded-xl fintech-input text-sm resize-none"
-          />
-        </div>
-
-        {/* Section 4: Preferred Package */}
-        <div>
+        {/* Section 3: Preferred Package Selection */}
+        <div className="pt-2">
           <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-2 font-medium">
             Preferred Promotion Package <span className="text-[#FF8A00]">*</span>
           </label>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="space-y-2">
             {PACKAGES.map((pkg) => {
               const selected = formData.preferredPackage === pkg.name;
               return (
                 <div
                   key={pkg.name}
                   onClick={() => setFormData({ ...formData, preferredPackage: pkg.name })}
-                  className={`p-4 rounded-xl cursor-pointer border transition-all text-left ${
+                  className={`p-3.5 rounded-lg cursor-pointer border transition-colors flex items-center justify-between ${
                     selected
-                      ? 'bg-[var(--bg-secondary)] shadow-xs'
-                      : 'bg-[var(--bg-card)] border-[var(--border-subtle)] hover:border-[var(--border-strong)]'
+                      ? 'bg-[var(--bg-secondary)] border-[#FF8A00]'
+                      : 'bg-[var(--bg-primary)] border-[var(--border-subtle)] hover:border-[var(--border-strong)]'
                   }`}
-                  style={{
-                    borderColor: selected ? pkg.accent : undefined,
-                  }}
                 >
-                  <div className="flex items-center justify-between mb-1.5">
-                    <span className="font-heading font-bold text-[var(--text-primary)] text-sm">{pkg.name}</span>
-                    <div
-                      className="w-4 h-4 rounded-full border flex items-center justify-center"
-                      style={{
-                        borderColor: selected ? pkg.accent : 'var(--border-strong)',
-                        backgroundColor: selected ? pkg.accent : 'transparent',
-                      }}
-                    >
-                      {selected && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
-                    </div>
+                  <div>
+                    <span className="font-heading font-bold text-sm text-[var(--text-primary)] block">
+                      {pkg.name}
+                    </span>
+                    <span className="text-[11px] font-mono text-[var(--text-muted)]">
+                      {pkg.tag}
+                    </span>
                   </div>
-                  <span className="text-[11px] font-mono text-[var(--text-muted)]">
-                    {pkg.tag}
-                  </span>
+                  <div
+                    className={`w-4 h-4 rounded-full border flex items-center justify-center ${
+                      selected ? 'border-[#FF8A00] bg-[#FF8A00]' : 'border-[var(--border-strong)]'
+                    }`}
+                  >
+                    {selected && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
+                  </div>
                 </div>
               );
             })}
           </div>
         </div>
 
-        {/* Section 5: Supporting Screenshots / Links & Additional Info */}
-        <div className="space-y-4">
+        {/* Section 4: Supporting Links & Notes */}
+        <div className="space-y-4 pt-2">
           <div>
             <label className="block text-xs font-mono uppercase text-[var(--text-secondary)] mb-1.5 font-medium">
-              Supporting Statistics Link or Screenshot URL (Optional)
+              Supporting Statistics Link (Optional)
             </label>
             <input
               type="url"
               inputMode="url"
               value={formData.screenshotUrl}
               onChange={(e) => setFormData({ ...formData, screenshotUrl: e.target.value })}
-              placeholder="https://t.me/tgstat_or_analytics_screenshot_url"
-              className="w-full px-4 py-3.5 rounded-xl fintech-input text-sm"
+              placeholder="https://t.me/tgstat_or_analytics_url"
+              className="w-full px-3.5 py-3 rounded-lg fintech-input text-sm"
             />
-            <span className="text-[11px] text-[var(--text-muted)] mt-1.5 block">TGStat link, Telemetr report, or image link showing analytics.</span>
+            <span className="text-[10px] text-[var(--text-muted)] mt-1 block">TGStat report, Telemetr, or analytics screenshot link.</span>
           </div>
 
           <div>
@@ -454,21 +442,21 @@ function ApplicationForm() {
               rows={2}
               value={formData.additionalInfo}
               onChange={(e) => setFormData({ ...formData, additionalInfo: e.target.value })}
-              placeholder="Any target scheduling dates, special collaboration requests, or focus topics..."
-              className="w-full px-4 py-3.5 rounded-xl fintech-input text-sm resize-none"
+              placeholder="Target schedule dates, special focus topics, or notes..."
+              className="w-full px-3.5 py-3 rounded-lg fintech-input text-sm resize-none"
             />
           </div>
         </div>
 
-        {/* Section 6: Compliance Acknowledgement */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-subtle)]">
-          <label className="flex items-start gap-3 cursor-pointer">
+        {/* Compliance Acknowledgement */}
+        <div className="p-4 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-subtle)]">
+          <label className="flex items-start gap-2.5 cursor-pointer">
             <input
               type="checkbox"
               required
               checked={formData.acceptedTerms}
               onChange={(e) => setFormData({ ...formData, acceptedTerms: e.target.checked })}
-              className="mt-1 h-4 w-4 rounded border-[var(--border-strong)] text-[#FF8A00] focus:ring-[#FF8A00]"
+              className="mt-0.5 h-4 w-4 rounded border-[var(--border-strong)] text-[#FF8A00] focus:ring-[#FF8A00]"
             />
             <span className="text-xs text-[var(--text-secondary)] leading-relaxed">
               I certify that this channel does not publish deceptive profit claims or fraudulent content. I acknowledge that application submission does not guarantee promotion approval and that all campaigns are manually reviewed and scheduled per slot availability.
@@ -476,17 +464,17 @@ function ApplicationForm() {
           </label>
         </div>
 
-        {/* Submit Button */}
+        {/* Full-width Submit Button */}
         <div>
           <button
             type="submit"
             disabled={submitting}
-            className="btn-touch w-full gradient-btn-primary py-4 rounded-xl font-bold text-base tracking-wide flex items-center justify-center gap-2 shadow-xs disabled:opacity-50"
+            className="btn-primary btn-touch w-full py-4 rounded-lg font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-xs disabled:opacity-50"
           >
             {submitting ? (
-              <span className="flex items-center gap-2">
+              <span className="flex items-center gap-2 font-mono text-xs">
                 <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                <span>Verifying and Submitting Channel...</span>
+                <span>Auditing and Submitting Channel...</span>
               </span>
             ) : (
               <>
@@ -505,11 +493,11 @@ export default function ApplyPage() {
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] flex flex-col transition-colors duration-200">
       <Navbar />
-      <main className="flex-grow py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+      <main className="flex-grow py-10 sm:py-16">
         <div className="site-container">
           <Suspense
             fallback={
-              <div className="text-center py-24 text-sm text-[var(--text-muted)] font-mono">
+              <div className="text-center py-20 text-xs text-[var(--text-muted)] font-mono">
                 Loading application portal...
               </div>
             }

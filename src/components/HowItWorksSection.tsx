@@ -1,117 +1,90 @@
 'use client';
 
 import React from 'react';
-import { Send, FileSearch, CheckCircle2, CalendarCheck, ArrowRight, Shield } from 'lucide-react';
 import Link from 'next/link';
+import { ArrowRight, Send, FileSearch, CheckCircle2, CalendarCheck } from 'lucide-react';
 
 export function HowItWorksSection() {
   const steps = [
     {
       number: '01',
       title: 'Submit Application',
+      timeframe: '5 minutes',
       description:
-        'Submit your channel details, audience metrics, and preferred promotional placement through our secure portal.',
+        'Submit your channel link, audience metrics, and preferred promotional placement through our structured application form.',
       icon: Send,
-      color: '#8757FF', // Purple
-      bgTint: 'rgba(135, 87, 255, 0.12)',
     },
     {
       number: '02',
-      title: 'Editorial Review',
+      title: 'Editorial Compliance Review',
+      timeframe: '24–48 hours',
       description:
-        'Our compliance desk audits channel history, educational substance, and authentic member engagement.',
+        'Our compliance desk manually audits your channel history, analytical substance, and genuine member interaction.',
       icon: FileSearch,
-      color: '#24C8E8', // Cyan
-      bgTint: 'rgba(36, 200, 232, 0.12)',
     },
     {
       number: '03',
-      title: 'Confirmation & Token',
+      title: 'Confirmation & Reference Token',
+      timeframe: 'Immediate upon decision',
       description:
-        'Receive your unique Reference ID and reservation details upon successful editorial verification.',
+        'Receive your unique Reference ID to track review progress, reviewer notes, and scheduling confirmation in real time.',
       icon: CheckCircle2,
-      color: '#FFC247', // Gold
-      bgTint: 'rgba(255, 194, 71, 0.12)',
     },
     {
       number: '04',
-      title: 'Broadcast Scheduling',
+      title: 'Broadcast Scheduling & Delivery',
+      timeframe: 'Per calendar slot',
       description:
-        'Your promotional campaign is slotted into our primetime broadcast calendar with verified delivery.',
+        'Your promotional broadcast is slotted into our primetime broadcast calendar with verified delivery and post retention.',
       icon: CalendarCheck,
-      color: '#FF8A00', // Orange
-      bgTint: 'rgba(255, 138, 0, 0.12)',
     },
   ];
 
   return (
-    <section id="how-it-works" className="py-16 sm:py-24 lg:py-28 bg-[var(--bg-primary)] relative">
+    <section id="how-it-works" className="py-14 sm:py-20 lg:py-24 bg-[var(--bg-secondary)] border-b border-[var(--border-subtle)]">
       <div className="site-container">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[var(--badge-bg)] border border-[var(--border-subtle)] text-xs font-mono font-medium text-[#FF8A00] mb-3 shadow-xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#24C8E8]" />
-            <span>VERIFIED WORKFLOW</span>
+        <div className="max-w-2xl mb-10 sm:mb-14">
+          <div className="text-xs font-mono uppercase text-[#FF8A00] tracking-wider mb-2 font-semibold">
+            APPLICATION WORKFLOW
           </div>
           <h2 className="section-headline text-[var(--text-primary)] uppercase">
-            HOW IT WORKS
+            How It Works
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed">
-            A transparent, curated four-step pathway from initial application to network publication.
+          <p className="mt-2.5 text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed">
+            A transparent, curated four-step pathway from initial channel submission to primetime network publication.
           </p>
         </div>
 
-        {/* Workflow steps: Mobile vertical timeline, Desktop horizontal sequence */}
-        <div className="relative">
-          {/* Subtle multi-gradient line for desktop */}
-          <div className="hidden lg:block absolute top-7 left-[10%] right-[10%] h-[2px] bg-gradient-to-r from-[#8757FF] via-[#24C8E8] to-[#FF8A00] opacity-40 z-0" />
+        {/* Vertical Step-by-Step Timeline (Clean, compact, no oversized cards) */}
+        <div className="max-w-3xl relative">
+          {/* Subtle Vertical Spine */}
+          <div className="absolute top-4 bottom-4 left-4 sm:left-5 w-[1px] bg-[var(--border-strong)] z-0" />
 
-          {/* Mobile vertical line */}
-          <div className="lg:hidden absolute top-4 bottom-8 left-6 w-[2px] bg-gradient-to-b from-[#8757FF] via-[#24C8E8] to-[#FF8A00] opacity-30 z-0" />
-
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 sm:gap-8 xl:gap-10 relative z-10">
+          <div className="space-y-6 sm:space-y-8 relative z-10">
             {steps.map((step, index) => {
               const Icon = step.icon;
               return (
-                <div
-                  key={index}
-                  className="flex flex-row lg:flex-col items-start gap-4 lg:gap-0 group rounded-2xl bg-[var(--bg-card)] lg:bg-transparent p-5 sm:p-6 lg:p-0 border border-[var(--border-subtle)] lg:border-none shadow-xs lg:shadow-none"
-                >
-                  {/* Step Marker & Icon */}
-                  <div className="flex lg:items-center lg:justify-between w-full mb-0 lg:mb-5 shrink-0">
-                    <div
-                      className="w-12 h-12 rounded-2xl border border-[var(--border-subtle)] flex items-center justify-center transition-all group-hover:scale-105 shadow-xs"
-                      style={{ backgroundColor: step.bgTint }}
-                    >
-                      <Icon className="w-5 h-5" style={{ color: step.color }} />
-                    </div>
-                    <span
-                      className="hidden lg:block font-heading font-extrabold text-2xl font-mono"
-                      style={{ color: step.color }}
-                    >
-                      {step.number}
-                    </span>
+                <div key={index} className="flex items-start gap-4 sm:gap-6">
+                  {/* Step Marker Circle */}
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[var(--bg-primary)] border-2 border-[#FF8A00] flex items-center justify-center shrink-0 text-xs sm:text-sm font-mono font-bold text-[#FF8A00] shadow-xs">
+                    {step.number}
                   </div>
 
                   {/* Step Content */}
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between lg:hidden mb-1">
-                      <span className="text-[11px] font-mono uppercase tracking-wider font-semibold" style={{ color: step.color }}>
-                        Step {step.number}
+                  <div className="flex-1 pt-0.5">
+                    <div className="flex flex-wrap items-baseline gap-2 mb-1">
+                      <h3 className="text-base sm:text-lg font-heading font-bold text-[var(--text-primary)]">
+                        {step.title}
+                      </h3>
+                      <span className="text-[11px] font-mono text-[var(--text-muted)]">
+                        • {step.timeframe}
                       </span>
                     </div>
 
-                    <h3 className="text-base sm:text-lg font-heading font-bold text-[var(--text-primary)] mb-1.5">
-                      {step.title}
-                    </h3>
-
-                    <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed max-w-xl">
                       {step.description}
                     </p>
-
-                    <div className="hidden lg:block mt-5 pt-3 border-t border-[var(--border-subtle)] text-[11px] font-mono text-[var(--text-muted)]">
-                      Phase {index + 1} of 4
-                    </div>
                   </div>
                 </div>
               );
@@ -119,14 +92,17 @@ export function HowItWorksSection() {
           </div>
         </div>
 
-        {/* Quick link to start */}
-        <div className="mt-12 sm:mt-16 text-center">
+        {/* Action Link */}
+        <div className="mt-10 sm:mt-12 pt-6 border-t border-[var(--border-subtle)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <span className="text-xs font-mono text-[var(--text-muted)]">
+            Ready to submit your channel? Applications take under 5 minutes.
+          </span>
           <Link
             href="/apply"
-            className="btn-touch inline-flex items-center justify-center gap-2 text-sm font-semibold text-[var(--text-primary)] bg-[var(--bg-card)] hover:bg-[var(--bg-card-hover)] border border-[var(--border-subtle)] hover:border-[#FF8A00]/50 px-6 py-3.5 rounded-xl transition-all shadow-xs"
+            className="btn-primary btn-touch px-6 py-3 text-sm font-bold flex items-center gap-2"
           >
-            <span>Begin Step 01: Application Form</span>
-            <ArrowRight className="w-4 h-4 text-[#FF8A00]" />
+            <span>Begin Step 01: Apply Now</span>
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </div>
