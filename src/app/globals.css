@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-bg: #111111;
+  --color-brand-surface: #191919;
+  --color-brand-card: #202020;
+  --color-brand-card-hover: #262626;
+  --color-brand-orange: #F07800;
+  --color-brand-gold: #FFB000;
+  --color-brand-text: #FFFFFF;
+  --color-brand-muted: #A3A3A3;
+  --color-brand-border: #303030;
+  --color-brand-border-focus: #F07800;
+  --color-brand-success: #22C55E;
+  --color-brand-error: #EF4444;
+
+  --font-heading: var(--font-sora), system-ui, -apple-system, sans-serif;
+  --font-body: var(--font-inter), system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  --background: #111111;
+  --foreground: #FFFFFF;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #111111;
+  color: #FFFFFF;
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+body {
+  background-color: #111111;
+  color: #FFFFFF;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111111;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2b2b2b;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #F07800;
+}
+
+/* Fintech Glow & Gradients */
+.gradient-btn-primary {
+  background: linear-gradient(135deg, #F07800 0%, #FF9E00 100%);
+  color: #FFFFFF;
+  font-weight: 600;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gradient-btn-primary:hover {
+  background: linear-gradient(135deg, #FF8A00 0%, #FFB000 100%);
+  box-shadow: 0 4px 20px rgba(240, 120, 0, 0.35);
+  transform: translateY(-1px);
+}
+
+.gradient-btn-primary:active {
+  transform: translateY(0);
+}
+
+.gradient-badge {
+  background: linear-gradient(135deg, rgba(240, 120, 0, 0.15) 0%, rgba(255, 176, 0, 0.08) 100%);
+  border: 1px solid rgba(240, 120, 0, 0.3);
+  color: #FFB000;
+}
+
+.fintech-card {
+  background-color: #202020;
+  border: 1px solid #303030;
+  transition: all 0.3s ease;
+}
+
+.fintech-card:hover {
+  border-color: rgba(240, 120, 0, 0.4);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+.fintech-input {
+  background-color: #191919;
+  border: 1px solid #303030;
+  color: #FFFFFF;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fintech-input:focus {
+  outline: none;
+  border-color: #F07800;
+  box-shadow: 0 0 0 2px rgba(240, 120, 0, 0.2);
+}
+
+.fintech-input::placeholder {
+  color: #666666;
+}

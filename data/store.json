@@ -1,0 +1,334 @@
+{
+  "applications": [
+    {
+      "fullName": "shri dharsan",
+      "telegramUsername": "shridharsan",
+      "channelName": "my",
+      "channelLink": "https://t.me/shri",
+      "channelCategory": "Forex & Currencies",
+      "subscriberCount": 2000,
+      "avgPostViews": 2000,
+      "engagementInfo": "we need to create a add so create it after say to me",
+      "preferredPackage": "Featured Promotion",
+      "id": "app-1793640696030-y1u7u",
+      "referenceId": "TL-2026-3928",
+      "status": "Scheduled",
+      "publicStatusNote": "Promotion officially scheduled for broadcast on 02/11/2026.",
+      "submittedAt": "2026-11-02T17:31:36.030Z",
+      "updatedAt": "2026-11-02T17:34:11.514Z",
+      "scheduledDate": "2026-11-02T17:34:00.000Z"
+    },
+    {
+      "fullName": "Jordan Bell",
+      "telegramUsername": "jordan_quant_desk",
+      "channelName": "Quantum Alpha Quant Desk",
+      "channelLink": "https://t.me/quantum_alpha_desk",
+      "channelCategory": "Options & Derivatives",
+      "subscriberCount": 32000,
+      "avgPostViews": 11400,
+      "engagementInfo": "High view velocity with gamma exposure breakdowns.",
+      "preferredPackage": "Featured Promotion",
+      "additionalInfo": "Targeting December options expiry cycle.",
+      "id": "app-1793640440166-njcco",
+      "referenceId": "TL-2026-2008",
+      "status": "Submitted",
+      "publicStatusNote": "Your application has been received and queued for manual channel review.",
+      "submittedAt": "2026-11-02T17:27:20.166Z",
+      "updatedAt": "2026-11-02T17:27:20.166Z"
+    },
+    {
+      "id": "app-demo-1",
+      "referenceId": "TL-2026-4812",
+      "fullName": "Alexander Vance",
+      "telegramUsername": "vance_fx",
+      "channelName": "Vance Macro FX & Commodities",
+      "channelLink": "https://t.me/vance_macro_fx",
+      "channelCategory": "Forex & Currencies",
+      "subscriberCount": 24500,
+      "avgPostViews": 8200,
+      "engagementInfo": "Consistent 33% view rate with active discussion group of 1,800 verified traders.",
+      "preferredPackage": "Featured Promotion",
+      "additionalInfo": "Focus on institutional order flow, COT reports, and central bank monetary policy breakdowns.",
+      "status": "Scheduled",
+      "publicStatusNote": "Application approved! Promotion campaign scheduled for broadcast.",
+      "internalNotes": "Audited post history. Educational content is top-tier. Clean track record.",
+      "submittedAt": "2026-10-28T10:15:00Z",
+      "updatedAt": "2026-10-29T14:20:00Z",
+      "scheduledDate": "2026-11-05T18:00:00Z",
+      "paymentStatus": "Paid",
+      "paymentAmount": 499,
+      "paymentRef": "TXN-USDT-99410382",
+      "isDemo": true
+    },
+    {
+      "id": "app-demo-2",
+      "referenceId": "TL-2026-7209",
+      "fullName": "Elena Rostova",
+      "telegramUsername": "elena_crypto_charts",
+      "channelName": "Alpha Deriv Insights",
+      "channelLink": "https://t.me/alpha_deriv_insights",
+      "channelCategory": "Crypto & Web3",
+      "subscriberCount": 41200,
+      "avgPostViews": 14500,
+      "engagementInfo": "Daily on-chain analytics, volume profiles, and spot delta analysis.",
+      "preferredPackage": "Premium Promotion",
+      "additionalInfo": "Requesting custom Q&A session alongside the promotional broadcast.",
+      "status": "Approved",
+      "publicStatusNote": "Channel successfully approved by review committee. Payment confirmation pending.",
+      "internalNotes": "Strong community engagement and zero scam promotions in past 12 months.",
+      "submittedAt": "2026-10-30T08:45:00Z",
+      "updatedAt": "2026-11-01T11:00:00Z",
+      "paymentStatus": "Pending",
+      "paymentAmount": 1199,
+      "isDemo": true
+    },
+    {
+      "id": "app-demo-3",
+      "referenceId": "TL-2026-9051",
+      "fullName": "Marcus Sterling",
+      "telegramUsername": "marcus_indices",
+      "channelName": "Apex Index Trading Desk",
+      "channelLink": "https://t.me/apex_index_desk",
+      "channelCategory": "Stock Markets & Indices",
+      "subscriberCount": 16800,
+      "avgPostViews": 5400,
+      "engagementInfo": "Live morning pre-market briefs covering ES, NQ, and DAX futures.",
+      "preferredPackage": "Basic Promotion",
+      "additionalInfo": "Applying for November slot to coincide with quarterly earnings week.",
+      "status": "Under Review",
+      "publicStatusNote": "Your channel is currently under analytical inspection by our review desk.",
+      "internalNotes": "Currently verifying follower retention and average view-to-sub ratio.",
+      "submittedAt": "2026-11-01T16:30:00Z",
+      "updatedAt": "2026-11-02T09:15:00Z",
+      "isDemo": true
+    },
+    {
+      "id": "app-demo-4",
+      "referenceId": "TL-2026-3184",
+      "fullName": "David K.",
+      "telegramUsername": "easy_pip_millionaire",
+      "channelName": "1000x Signals VIP",
+      "channelLink": "https://t.me/easy_pip_signals",
+      "channelCategory": "Forex & Currencies",
+      "subscriberCount": 89000,
+      "avgPostViews": 1200,
+      "engagementInfo": "Automated signal bot.",
+      "preferredPackage": "Featured Promotion",
+      "status": "Rejected",
+      "rejectionReason": "Violates quality policy: channel claims guaranteed 99% win-rates and uses unverified bot activity.",
+      "publicStatusNote": "Application declined: Content violates our transparent risk & quality requirements.",
+      "internalNotes": "Heavy bot inflation. Suspicious subscriber spike, unrealistic profit guarantees.",
+      "submittedAt": "2026-10-25T14:10:00Z",
+      "updatedAt": "2026-10-26T09:00:00Z",
+      "isDemo": true
+    }
+  ],
+  "packages": [
+    {
+      "id": "pkg-basic",
+      "name": "Basic Promotion",
+      "badge": "Standard Reach",
+      "shortDescription": "Ideal for established niche trading channels looking for steady, targeted organic reach.",
+      "placement": "Official Telegram Channel & Community Feed",
+      "duration": "24-Hour Pinned Spotlight",
+      "deliverables": [
+        "1x Dedicated custom promotional post",
+        "24-Hour pinned post placement",
+        "Direct channel referral link with tracked metrics",
+        "Pre-publish content compliance review",
+        "Basic engagement report summary"
+      ],
+      "price": null,
+      "currency": "USD",
+      "availableSlots": 4,
+      "totalSlots": 10,
+      "isActive": true,
+      "highlighted": false
+    },
+    {
+      "id": "pkg-featured",
+      "name": "Featured Promotion",
+      "badge": "Most Popular",
+      "shortDescription": "High-visibility placement across our primary network channels with prioritized scheduling.",
+      "placement": "Main Broadcast Channel + Community Spotlight",
+      "duration": "48-Hour Pinned + 2x Highlights",
+      "deliverables": [
+        "2x Dedicated prime-time promotional posts",
+        "48-Hour pinned placement at top of feed",
+        "Exclusive weekend community feature bulletin",
+        "Custom graphic/creative review & optimization",
+        "Detailed post-campaign performance metrics",
+        "Priority channel review queue"
+      ],
+      "price": 499,
+      "currency": "USD",
+      "availableSlots": 2,
+      "totalSlots": 6,
+      "isActive": true,
+      "highlighted": true
+    },
+    {
+      "id": "pkg-premium",
+      "name": "Premium Promotion",
+      "badge": "Elite Partner Tier",
+      "shortDescription": "Comprehensive multi-day campaign with prominent cross-channel exposure for leading communities.",
+      "placement": "Full Network Broadcast, Discord & Telegram Network",
+      "duration": "7-Day Strategic Campaign",
+      "deliverables": [
+        "4x Primetime bespoke promotional posts over 7 days",
+        "Permanent post retention (no deletion after pin expiry)",
+        "Featured partner badge on Trading Legend directory",
+        "Custom interactive poll / AMA introduction format",
+        "Dedicated campaign manager & real-time monitoring",
+        "Comprehensive analytics & subscriber conversion analysis"
+      ],
+      "price": 1199,
+      "currency": "USD",
+      "availableSlots": 1,
+      "totalSlots": 3,
+      "isActive": true,
+      "highlighted": false
+    }
+  ],
+  "payments": [
+    {
+      "id": "pay-demo-1",
+      "applicationId": "app-demo-1",
+      "referenceId": "TL-2026-4812",
+      "channelName": "Vance Macro FX & Commodities",
+      "telegramUsername": "vance_fx",
+      "amount": 499,
+      "currency": "USD",
+      "paymentMethod": "Crypto (USDT TRC20/ERC20)",
+      "paymentReference": "0x8f3c71a8e8b9347d4e5f1a2b3c4d5e6f7a8b9c0d",
+      "status": "Verified",
+      "createdAt": "2026-10-29T15:30:00Z",
+      "verifiedAt": "2026-10-29T16:00:00Z",
+      "notes": "USDT on TRON verified on explorer. Match verified.",
+      "isDemo": true
+    }
+  ],
+  "settings": {
+    "heroHeading": "YOUR TRADING COMMUNITY.\nYOUR NEXT GROWTH OPPORTUNITY.",
+    "heroSubheading": "Connect your trading community with promotional opportunities designed to help quality trading channels reach a wider audience.",
+    "announcementText": "🔥 Q4 Promotion Slots Now Open – Manual channel quality reviews underway.",
+    "announcementActive": true,
+    "officialTelegramUsername": "TradingLegend_Official",
+    "officialTelegramUrl": "https://t.me/TradingLegend_Official",
+    "communityTelegramUrl": "https://t.me/TradingLegend_Community",
+    "supportEmail": "desk@tradinglegend.io",
+    "businessInquiryEmail": "partnerships@tradinglegend.io",
+    "channelRequirements": [
+      "Channels must be directly relevant to trading, market analysis, or financial education.",
+      "Every application undergoes rigorous manual verification by our compliance team.",
+      "Channels displaying unrealistic profit claims (e.g. 1000% daily returns) are strictly rejected.",
+      "Scam-related schemes, pump-and-dump groups, or unverified copy-trading schemes are prohibited.",
+      "Application submission does not guarantee approval or placement acceptance.",
+      "Promotion scheduling strictly depends on weekly network slot availability to prevent feed fatigue."
+    ],
+    "trustPillars": [
+      {
+        "title": "Selective Channel Reviews",
+        "description": "We manually examine each channel’s post history, analytical rigor, and community feedback before approval."
+      },
+      {
+        "title": "Quality-Focused Promotions",
+        "description": "We prioritize genuine educational substance and long-term value over spam and sensationalized claims."
+      },
+      {
+        "title": "Transparent Application Process",
+        "description": "Clear evaluation criteria, real-time status tracking with unique reference IDs, and direct feedback."
+      },
+      {
+        "title": "Dedicated Support",
+        "description": "Personal campaign coordination via verified Telegram channels to guarantee punctual execution."
+      }
+    ],
+    "razorpayEnabled": false,
+    "razorpayKeyId": "rzp_test_placeholder_key"
+  },
+  "botEvents": [
+    {
+      "id": "evt-1793640440166",
+      "type": "application.submitted",
+      "data": {
+        "referenceId": "TL-2026-2008",
+        "channelName": "Quantum Alpha Quant Desk",
+        "telegramUsername": "jordan_quant_desk",
+        "preferredPackage": "Featured Promotion",
+        "subscriberCount": 32000
+      },
+      "timestamp": "2026-11-02T17:27:20.166Z",
+      "delivered": false
+    },
+    {
+      "id": "evt-1793640696030",
+      "type": "application.submitted",
+      "data": {
+        "referenceId": "TL-2026-3928",
+        "channelName": "my",
+        "telegramUsername": "shridharsan",
+        "preferredPackage": "Featured Promotion",
+        "subscriberCount": 2000
+      },
+      "timestamp": "2026-11-02T17:31:36.030Z",
+      "delivered": false
+    },
+    {
+      "id": "evt-1793640792799",
+      "type": "application.approved",
+      "data": {
+        "referenceId": "TL-2026-3928",
+        "channelName": "my",
+        "telegramUsername": "shridharsan",
+        "previousStatus": "Submitted",
+        "newStatus": "Approved",
+        "publicStatusNote": "Application approved by review committee. Promotion reservation slot confirmed."
+      },
+      "timestamp": "2026-11-02T17:33:12.799Z",
+      "delivered": false
+    },
+    {
+      "id": "evt-1793640821443",
+      "type": "status.updated",
+      "data": {
+        "referenceId": "TL-2026-3928",
+        "channelName": "my",
+        "telegramUsername": "shridharsan",
+        "previousStatus": "Approved",
+        "newStatus": "Scheduled",
+        "publicStatusNote": "Promotion officially scheduled for broadcast on 02/11/2026."
+      },
+      "timestamp": "2026-11-02T17:33:41.443Z",
+      "delivered": false
+    },
+    {
+      "id": "evt-1793640847015",
+      "type": "application.approved",
+      "data": {
+        "referenceId": "TL-2026-3928",
+        "channelName": "my",
+        "telegramUsername": "shridharsan",
+        "previousStatus": "Scheduled",
+        "newStatus": "Approved",
+        "publicStatusNote": "Application approved by review committee. Promotion reservation slot confirmed."
+      },
+      "timestamp": "2026-11-02T17:34:07.015Z",
+      "delivered": false
+    },
+    {
+      "id": "evt-1793640851514",
+      "type": "status.updated",
+      "data": {
+        "referenceId": "TL-2026-3928",
+        "channelName": "my",
+        "telegramUsername": "shridharsan",
+        "previousStatus": "Approved",
+        "newStatus": "Scheduled",
+        "publicStatusNote": "Promotion officially scheduled for broadcast on 02/11/2026."
+      },
+      "timestamp": "2026-11-02T17:34:11.514Z",
+      "delivered": false
+    }
+  ]
+}
