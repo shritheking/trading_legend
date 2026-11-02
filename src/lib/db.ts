@@ -16,7 +16,10 @@ interface DatabaseSchema {
   botEvents: BotWebhookEvent[];
 }
 
-const DB_FILE_PATH = path.join(process.cwd(), 'data', 'store.json');
+const SEED_FILE_PATH = path.join(process.cwd(), 'data', 'store.json');
+const DB_FILE_PATH = process.env.VERCEL
+  ? path.join('/tmp', 'trading_legend_store.json')
+  : SEED_FILE_PATH;
 
 const INITIAL_PACKAGES: PromotionPackage[] = [
   {
@@ -238,6 +241,19 @@ const INITIAL_DEMO_PAYMENTS: PaymentRecord[] = [
 function readDb(): DatabaseSchema {
   try {
     if (!fs.existsSync(DB_FILE_PATH)) {
+      // If deployed on Vercel, clone the committed seed store to /tmp
+      if (fs.existsSync(SEED_FILE_PATH) && DB_FILE_PATH !== SEED_FILE_PATH) {
+        try {
+          const rawSeed = fs.readFileSync(SEED_FILE_PATH, 'utf-8');
+          const seedData = JSON.parse(rawSeed);
+          fs.mkdirSync(path.dirname(DB_FILE_PATH), { recursive: true });
+          fs.writeFileSync(DB_FILE_PATH, JSON.stringify(seedData, null, 2), 'utf-8');
+          return seedData;
+        } catch (copyErr) {
+          console.warn('Could not copy seed store, using fallback:', copyErr);
+        }
+      }
+
       const initialData: DatabaseSchema = {
         applications: INITIAL_DEMO_APPLICATIONS,
         packages: INITIAL_PACKAGES,
