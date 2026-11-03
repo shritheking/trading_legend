@@ -20,12 +20,6 @@ export function HomeHero({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center">
           {/* Left Column: Heading, Subheading & CTAs (7 cols on lg) */}
           <div className="lg:col-span-7 space-y-5 sm:space-y-6 text-left">
-            {/* Minimalist Editorial Tag */}
-            <div className="inline-flex items-center gap-2 text-xs font-mono font-medium text-[var(--text-secondary)]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FF8A00]" />
-              <span className="tracking-wide uppercase">Vetted Trading Promotion Network</span>
-            </div>
-
             {/* Controlled Editorial Headline */}
             <h1 className="hero-headline text-[var(--text-primary)] uppercase whitespace-pre-line">
               {heading}

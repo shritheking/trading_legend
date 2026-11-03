@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Sora, Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { InitialLoader } from "@/components/InitialLoader";
 import "./globals.css";
 
 const sora = Sora({
@@ -84,7 +85,10 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] font-sans antialiased selection:bg-[#F07800]/25 selection:text-[#F07800]">
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <InitialLoader />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

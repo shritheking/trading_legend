@@ -21,8 +21,8 @@ export function Footer({
     <>
       <footer className="bg-[var(--bg-secondary)] border-t border-[var(--border-subtle)] text-[var(--text-secondary)] pt-14 pb-12 transition-colors duration-200">
         <div className="site-container">
-          {/* Main Footer Layout: Multi-column on desktop, stacked on mobile */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 pb-10 border-b border-[var(--border-subtle)]">
+          {/* Main Footer Layout: Brand on top or left, double-sided link columns on mobile */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 pb-10 border-b border-[var(--border-subtle)]">
             {/* Brand Area (Spans 4 on lg) */}
             <div className="lg:col-span-4 space-y-4">
               <BrandLogo variant="footer" href="/" />
@@ -56,116 +56,119 @@ export function Footer({
               </div>
             </div>
 
-            {/* Column 2: Platform Navigation (Spans 3 on lg) */}
-            <div className="lg:col-span-3 space-y-3">
-              <h4 className="text-xs font-mono font-bold tracking-wider text-[var(--text-primary)] uppercase">
-                Platform Navigation
-              </h4>
-              <ul className="space-y-2 text-xs sm:text-sm">
-                <li>
-                  <Link href="/" className="hover:text-[var(--text-primary)] transition-colors py-1 inline-block">
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#about" className="hover:text-[var(--text-primary)] transition-colors py-1 inline-block">
-                    About Trading Legend
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#approach" className="hover:text-[var(--text-primary)] transition-colors py-1 inline-block">
-                    Platform Approach
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#how-it-works" className="hover:text-[var(--text-primary)] transition-colors py-1 inline-block">
-                    How It Works
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#standards" className="hover:text-[var(--text-primary)] transition-colors py-1 inline-block">
-                    Channel Eligibility & Standards
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#contact" className="hover:text-[var(--text-primary)] transition-colors py-1 inline-block">
-                    Direct Contact & Inquiries
-                  </Link>
-                </li>
-              </ul>
-            </div>
+            {/* Double-sided Columns on Mobile: 2 columns on mobile, 3 columns on sm/lg */}
+            <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-8">
+              {/* Column 1: Platform Navigation */}
+              <div className="space-y-3">
+                <h4 className="text-xs font-mono font-bold tracking-wider text-[var(--text-primary)] uppercase">
+                  Platform Navigation
+                </h4>
+                <ul className="space-y-2 text-xs sm:text-sm">
+                  <li>
+                    <Link href="/" className="hover:text-[var(--text-primary)] transition-colors py-0.5 inline-block">
+                      Home
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/#about" className="hover:text-[var(--text-primary)] transition-colors py-0.5 inline-block">
+                      About Trading Legend
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/#approach" className="hover:text-[var(--text-primary)] transition-colors py-0.5 inline-block">
+                      Platform Approach
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/#how-it-works" className="hover:text-[var(--text-primary)] transition-colors py-0.5 inline-block">
+                      How It Works
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/#standards" className="hover:text-[var(--text-primary)] transition-colors py-0.5 inline-block">
+                      Eligibility & Standards
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/#contact" className="hover:text-[var(--text-primary)] transition-colors py-0.5 inline-block">
+                      Direct Contact
+                    </Link>
+                  </li>
+                </ul>
+              </div>
 
-            {/* Column 3: Promotions & Tracking (Spans 3 on lg) */}
-            <div className="lg:col-span-3 space-y-3">
-              <h4 className="text-xs font-mono font-bold tracking-wider text-[var(--text-primary)] uppercase">
-                Campaigns & Tracking
-              </h4>
-              <ul className="space-y-2 text-xs sm:text-sm">
-                <li>
-                  <Link href="/apply" className="hover:underline font-semibold text-[#FF8A00] py-1 inline-block">
-                    Apply for Promotion
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/track" className="hover:text-[var(--text-primary)] transition-colors py-1 inline-block">
-                    Track Application Status
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#promotions" className="hover:text-[var(--text-primary)] transition-colors py-1 inline-block">
-                    Basic Promotion Tier
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#promotions" className="hover:text-[var(--text-primary)] transition-colors py-1 inline-block">
-                    Featured Promotion Tier
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#promotions" className="hover:text-[var(--text-primary)] transition-colors py-1 inline-block">
-                    Premium Promotion Tier
-                  </Link>
-                </li>
-              </ul>
-            </div>
+              {/* Column 2: Campaigns & Tracking */}
+              <div className="space-y-3">
+                <h4 className="text-xs font-mono font-bold tracking-wider text-[var(--text-primary)] uppercase">
+                  Campaigns & Tracking
+                </h4>
+                <ul className="space-y-2 text-xs sm:text-sm">
+                  <li>
+                    <Link href="/apply" className="hover:underline font-semibold text-[#FF8A00] py-0.5 inline-block">
+                      Apply for Promotion
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/track" className="hover:text-[var(--text-primary)] transition-colors py-0.5 inline-block">
+                      Track Application
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/#promotions" className="hover:text-[var(--text-primary)] transition-colors py-0.5 inline-block">
+                      Basic Promotion Tier
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/#promotions" className="hover:text-[var(--text-primary)] transition-colors py-0.5 inline-block">
+                      Featured Promotion
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/#promotions" className="hover:text-[var(--text-primary)] transition-colors py-0.5 inline-block">
+                      Premium Promotion
+                    </Link>
+                  </li>
+                </ul>
+              </div>
 
-            {/* Column 4: Compliance & Legal (Spans 2 on lg) */}
-            <div className="lg:col-span-2 space-y-3">
-              <h4 className="text-xs font-mono font-bold tracking-wider text-[var(--text-primary)] uppercase">
-                Compliance & Admin
-              </h4>
-              <ul className="space-y-2 text-xs sm:text-sm">
-                <li>
-                  <button
-                    onClick={() => setModalType('disclaimer')}
-                    className="hover:text-[var(--text-primary)] transition-colors text-left text-amber-600 dark:text-amber-500 font-medium py-1"
-                  >
-                    Risk Disclaimer
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => setModalType('terms')}
-                    className="hover:text-[var(--text-primary)] transition-colors text-left py-1"
-                  >
-                    Terms & Conditions
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => setModalType('privacy')}
-                    className="hover:text-[var(--text-primary)] transition-colors text-left py-1"
-                  >
-                    Privacy Policy
-                  </button>
-                </li>
-                <li>
-                  <Link href="/admin" className="hover:text-[var(--text-primary)] transition-colors font-mono text-xs text-[var(--text-muted)] flex items-center gap-1.5 py-1">
-                    <Lock className="w-3 h-3" />
-                    <span>Admin Terminal</span>
-                  </Link>
-                </li>
-              </ul>
+              {/* Column 3: Compliance & Legal (Double-sided on mobile as well) */}
+              <div className="col-span-2 sm:col-span-1 space-y-3 pt-4 sm:pt-0 border-t border-[var(--border-subtle)] sm:border-t-0">
+                <h4 className="text-xs font-mono font-bold tracking-wider text-[var(--text-primary)] uppercase">
+                  Compliance & Admin
+                </h4>
+                <ul className="grid grid-cols-2 sm:grid-cols-1 gap-2 text-xs sm:text-sm">
+                  <li>
+                    <button
+                      onClick={() => setModalType('disclaimer')}
+                      className="hover:text-[var(--text-primary)] transition-colors text-left text-amber-600 dark:text-amber-500 font-medium py-0.5"
+                    >
+                      Risk Disclaimer
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => setModalType('terms')}
+                      className="hover:text-[var(--text-primary)] transition-colors text-left py-0.5"
+                    >
+                      Terms & Conditions
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => setModalType('privacy')}
+                      className="hover:text-[var(--text-primary)] transition-colors text-left py-0.5"
+                    >
+                      Privacy Policy
+                    </button>
+                  </li>
+                  <li>
+                    <Link href="/admin" className="hover:text-[var(--text-primary)] transition-colors font-mono text-xs text-[var(--text-muted)] flex items-center gap-1.5 py-0.5">
+                      <Lock className="w-3 h-3" />
+                      <span>Admin Terminal</span>
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
 

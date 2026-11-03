@@ -1,6 +1,24 @@
 {
   "applications": [
     {
+      "fullName": "Mobile Verification Auditor",
+      "telegramUsername": "mobile_auditor_tl",
+      "channelName": "Mobile Alpha Signals & Desk",
+      "channelLink": "https://t.me/mobile_alpha_signals",
+      "channelCategory": "Multi-Asset Trading",
+      "subscriberCount": 18500,
+      "avgPostViews": 6400,
+      "engagementInfo": "Verified active discussions with daily educational breakdowns",
+      "preferredPackage": "Featured Promotion",
+      "additionalInfo": "Responsive layout verification test",
+      "id": "app-1793647829036-jq9c5",
+      "referenceId": "TL-2026-4551",
+      "status": "Submitted",
+      "publicStatusNote": "Your application has been received and queued for manual channel review.",
+      "submittedAt": "2026-11-02T19:30:29.036Z",
+      "updatedAt": "2026-11-02T19:30:29.036Z"
+    },
+    {
       "fullName": "Marcus Vance",
       "telegramUsername": "marcus_vance_fx",
       "channelName": "Vance Macro & Systematic FX",
@@ -390,6 +408,19 @@
         "subscriberCount": 42000
       },
       "timestamp": "2026-11-02T19:06:57.809Z",
+      "delivered": false
+    },
+    {
+      "id": "evt-1793647829036",
+      "type": "application.submitted",
+      "data": {
+        "referenceId": "TL-2026-4551",
+        "channelName": "Mobile Alpha Signals & Desk",
+        "telegramUsername": "mobile_auditor_tl",
+        "preferredPackage": "Featured Promotion",
+        "subscriberCount": 18500
+      },
+      "timestamp": "2026-11-02T19:30:29.036Z",
       "delivered": false
     }
   ]

@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import Link from 'next/link';
-import { Check, ArrowRight, Clock, MapPin, Sparkles, Crown, Zap, Shield } from 'lucide-react';
+import { Check, ArrowRight, Clock, MapPin, Sparkles, Crown, Shield } from 'lucide-react';
 import { PromotionPackage } from '@/lib/types';
 
 interface PromotionsSectionProps {
@@ -10,6 +10,9 @@ interface PromotionsSectionProps {
 }
 
 export function PromotionsSection({ packages = [] }: PromotionsSectionProps) {
+  const [activeTab, setActiveTab] = useState<number>(1); // Default to Featured (index 1)
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const displayPackages = packages.length > 0 ? packages : [
     {
       id: 'pkg-basic',
@@ -78,11 +81,33 @@ export function PromotionsSection({ packages = [] }: PromotionsSectionProps) {
     },
   ];
 
+  const handleSelectTab = (index: number) => {
+    setActiveTab(index);
+    if (containerRef.current) {
+      const cardWidth = containerRef.current.clientWidth * 0.85;
+      containerRef.current.scrollTo({
+        left: index * (cardWidth + 16),
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  const handleScroll = () => {
+    if (containerRef.current) {
+      const scrollLeft = containerRef.current.scrollLeft;
+      const cardWidth = containerRef.current.clientWidth * 0.85;
+      const newIndex = Math.round(scrollLeft / (cardWidth + 16));
+      if (newIndex >= 0 && newIndex < displayPackages.length && newIndex !== activeTab) {
+        setActiveTab(newIndex);
+      }
+    }
+  };
+
   return (
     <section id="promotions" className="py-14 sm:py-20 lg:py-24 bg-[var(--bg-primary)] border-b border-[var(--border-subtle)] scroll-mt-20 sm:scroll-mt-24">
       <div className="site-container">
         {/* Section Header */}
-        <div className="max-w-3xl mb-10 sm:mb-14">
+        <div className="max-w-3xl mb-8 sm:mb-14">
           <div className="text-xs font-mono uppercase text-[#FF8A00] tracking-wider mb-2 font-semibold">
             CAMPAIGN PACKAGES
           </div>
@@ -94,8 +119,38 @@ export function PromotionsSection({ packages = [] }: PromotionsSectionProps) {
           </p>
         </div>
 
-        {/* 3 Configurable Cards with Distinct Visual Personalities */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+        {/* Mobile Quick Tier Switcher Tab Bar (< lg screens) */}
+        <div className="lg:hidden mb-6">
+          <div className="p-1 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] grid grid-cols-3 gap-1 shadow-2xs">
+            {displayPackages.map((pkg, idx) => {
+              const isSelected = activeTab === idx;
+              const isFeatured = idx === 1;
+              return (
+                <button
+                  key={pkg.id}
+                  onClick={() => handleSelectTab(idx)}
+                  className={`py-2 px-2 rounded-lg text-xs font-mono font-medium transition-all text-center truncate ${
+                    isSelected
+                      ? isFeatured
+                        ? 'bg-[#FF8A00] text-white font-bold shadow-xs'
+                        : 'bg-[var(--bg-secondary)] text-[var(--text-primary)] font-bold border border-[var(--border-subtle)] shadow-xs'
+                      : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                  }`}
+                >
+                  {isFeatured ? '★ ' : ''}
+                  {pkg.name.replace(' Promotion', '')}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Single-row snap scroll on mobile, 3-column grid on desktop */}
+        <div
+          ref={containerRef}
+          onScroll={handleScroll}
+          className="flex lg:grid lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 overflow-x-auto lg:overflow-x-visible snap-x snap-mandatory pb-4 pt-2 -mx-4 px-4 sm:mx-0 sm:px-0 no-scrollbar items-stretch"
+        >
           {displayPackages.map((pkg, idx) => {
             const isFeatured = pkg.highlighted || idx === 1;
             const isPremium = idx === 2 || pkg.name.toLowerCase().includes('premium');
@@ -113,9 +168,9 @@ export function PromotionsSection({ packages = [] }: PromotionsSectionProps) {
             return (
               <div
                 key={pkg.id}
-                className={`rounded-2xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-200 relative bg-[var(--bg-surface)] ${
+                className={`w-[85vw] max-w-[340px] sm:w-[360px] lg:w-auto shrink-0 snap-center rounded-2xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-200 relative bg-[var(--bg-surface)] ${
                   isFeatured
-                    ? 'border-2 border-[#FF8A00] shadow-md lg:-translate-y-2'
+                    ? 'border-2 border-[#FF8A00] shadow-md lg:-translate-y-2 ring-2 ring-[#FF8A00]/20'
                     : isPremium
                     ? 'border border-[var(--border-subtle)] hover:border-[#8757FF]/60 shadow-xs'
                     : 'border border-[var(--border-subtle)] hover:border-[#E7B84B]/60 shadow-xs'
@@ -247,6 +302,20 @@ export function PromotionsSection({ packages = [] }: PromotionsSectionProps) {
               </div>
             );
           })}
+        </div>
+
+        {/* Mobile dots indicator */}
+        <div className="lg:hidden flex items-center justify-center gap-2 mt-4">
+          {displayPackages.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => handleSelectTab(idx)}
+              className={`h-2 rounded-full transition-all ${
+                activeTab === idx ? 'w-6 bg-[#FF8A00]' : 'w-2 bg-[var(--border-subtle)]'
+              }`}
+              aria-label={`Go to tier ${idx + 1}`}
+            />
+          ))}
         </div>
 
         {/* Pricing disclosure note */}

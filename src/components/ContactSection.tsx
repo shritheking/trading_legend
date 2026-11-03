@@ -53,28 +53,18 @@ export function ContactSection({
               </p>
             </div>
 
-            {/* Subtle Communication SVG Network Diagram */}
-            <div className="w-full rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] p-4 shadow-2xs">
-              <svg viewBox="0 0 400 90" fill="none" className="w-full h-auto">
-                <circle cx="50" cy="45" r="20" className="fill-[#24C8E8]/15 stroke-[#24C8E8]" strokeWidth="1.5" />
-                <text x="50" y="49" textAnchor="middle" fill="#24C8E8" fontSize="11" fontWeight="700" fontFamily="sans-serif">TG</text>
-                
-                <line x1="75" y1="45" x2="165" y2="45" stroke="#FF8A00" strokeWidth="1.5" strokeDasharray="4 3" />
-                <polygon points="163,42 170,45 163,48" fill="#FF8A00" />
-                
-                <rect x="175" y="25" width="110" height="40" rx="8" className="fill-[var(--bg-secondary)] stroke-[#FF8A00]" strokeWidth="1.5" />
-                <text x="230" y="44" textAnchor="middle" className="fill-[var(--text-primary)]" fontSize="10" fontWeight="700" fontFamily="monospace">REVIEW DESK</text>
-                <text x="230" y="56" textAnchor="middle" fill="#16A34A" fontSize="8" fontFamily="monospace">Active Liaison</text>
-
-                <line x1="290" y1="45" x2="345" y2="45" stroke="#FF8A00" strokeWidth="1.5" strokeDasharray="4 3" />
-                <polygon points="343,42 350,45 343,48" fill="#FF8A00" />
-
-                <circle cx="365" cy="45" r="16" className="fill-[#8757FF]/15 stroke-[#8757FF]" strokeWidth="1.5" />
-                <text x="365" y="49" textAnchor="middle" fill="#8757FF" fontSize="10" fontWeight="700" fontFamily="sans-serif">COMM</text>
-              </svg>
-              <div className="text-center text-[10px] font-mono text-[var(--text-muted)] pt-1">
-                Encrypted & Direct Telegram Verification Bridge
+            {/* Direct Verification Liaison Badge (Clean & professional, no crude flow) */}
+            <div className="w-full rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] p-4 shadow-2xs space-y-2">
+              <div className="flex items-center justify-between text-xs font-mono">
+                <span className="flex items-center gap-1.5 text-[#16A34A] font-semibold">
+                  <span className="w-2 h-2 rounded-full bg-[#16A34A] animate-pulse" />
+                  <span>REVIEW DESK ACTIVE</span>
+                </span>
+                <span className="text-[var(--text-muted)] text-[11px]">24H RESPONSE TIME</span>
               </div>
+              <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                All communications and campaign submissions are handled directly by our compliance coordinators. Choose your preferred endpoint below:
+              </p>
             </div>
 
             {/* Direct Channel Cards (Stack vertically on mobile, clear icons, visible arrows) */}
