@@ -7,6 +7,7 @@
     --bg-surface: #FFFFFF;
     --bg-surface-hover: #F1F3F5;
     --bg-input: #FFFFFF;
+    --bg-card: #FFFFFF;
     
     --text-primary: #121212;
     --text-secondary: #5A5A5A;
@@ -35,6 +36,7 @@
     --bg-surface: #191919;
     --bg-surface-hover: #222222;
     --bg-input: #151515;
+    --bg-card: #191919;
     
     --text-primary: #F5F3EF;
     --text-secondary: #A5A5A5;
