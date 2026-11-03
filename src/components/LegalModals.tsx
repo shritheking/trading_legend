@@ -13,19 +13,19 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 dark:bg-black/80 backdrop-blur-xs transition-opacity duration-200"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs transition-opacity duration-200"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#191919] border border-gray-200 dark:border-[#262626] p-6 sm:p-8 shadow-2xl text-left transition-colors duration-200"
+        className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-3xl bg-[var(--bg-card)] border border-[var(--border-subtle)] p-6 sm:p-8 shadow-2xl text-left transition-colors duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-xl bg-gray-100 hover:bg-gray-200 dark:bg-[#222222] dark:hover:bg-[#2a2a2a] text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white border border-gray-200 dark:border-[#333333] transition-colors"
+          className="absolute top-5 right-5 p-2 rounded-xl bg-[var(--bg-secondary)] hover:bg-[var(--bg-surface-hover)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-subtle)] transition-colors"
           aria-label="Close dialog"
         >
           <X className="w-5 h-5" />
@@ -37,12 +37,12 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
               <div className="p-2.5 rounded-xl bg-[#F07800]/10 text-[#F07800]">
                 <ShieldAlert className="w-6 h-6" />
               </div>
-              <h3 id="modal-title" className="text-xl font-heading font-bold text-gray-900 dark:text-[#F5F3EF]">
+              <h3 id="modal-title" className="text-xl font-heading font-bold text-[var(--text-primary)]">
                 Risk Disclaimer & Regulatory Notice
               </h3>
             </div>
-            <div className="space-y-4 text-sm text-gray-600 dark:text-[#A5A5A5] leading-relaxed">
-              <p className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-gray-900 dark:text-white font-medium">
+            <div className="space-y-4 text-sm text-[var(--text-secondary)] leading-relaxed">
+              <p className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-[var(--text-primary)] font-medium">
                 &ldquo;Trading involves significant financial risk. Trading Legend does not guarantee profits or financial returns. Promotional placements do not constitute investment advice or endorsement of trading performance.&rdquo;
               </p>
               <p>
@@ -64,20 +64,20 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
               <div className="p-2.5 rounded-xl bg-[#F07800]/10 text-[#F07800]">
                 <FileText className="w-6 h-6" />
               </div>
-              <h3 id="modal-title" className="text-xl font-heading font-bold text-gray-900 dark:text-[#F5F3EF]">
+              <h3 id="modal-title" className="text-xl font-heading font-bold text-[var(--text-primary)]">
                 Terms of Promotion & Placement
               </h3>
             </div>
-            <div className="space-y-3.5 text-sm text-gray-600 dark:text-[#A5A5A5] leading-relaxed">
-              <h4 className="text-gray-900 dark:text-[#F5F3EF] font-semibold">1. Editorial Compliance Audit</h4>
+            <div className="space-y-3.5 text-sm text-[var(--text-secondary)] leading-relaxed">
+              <h4 className="text-[var(--text-primary)] font-semibold">1. Editorial Compliance Audit</h4>
               <p>
                 All applying trading communities undergo editorial verification. Trading Legend reserves the unilateral right to accept or decline any applicant channel that fails our quality, ethics, or authenticity metrics.
               </p>
-              <h4 className="text-gray-900 dark:text-[#F5F3EF] font-semibold">2. Prohibition of Deceptive Marketing</h4>
+              <h4 className="text-[var(--text-primary)] font-semibold">2. Prohibition of Deceptive Marketing</h4>
               <p>
                 Channels utilizing deceptive promises, guaranteed ROI claims, or unverified automated bots will be rejected with forfeiture of scheduled queue slots.
               </p>
-              <h4 className="text-gray-900 dark:text-[#F5F3EF] font-semibold">3. Scheduling and Fulfillment</h4>
+              <h4 className="text-[var(--text-primary)] font-semibold">3. Scheduling and Fulfillment</h4>
               <p>
                 Broadcast slots are subject to weekly schedule caps. Confirmed slots will be executed per the agreed deliverables timetable. Trading Legend does not guarantee arbitrary subscriber acquisition volumes.
               </p>
@@ -91,11 +91,11 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
               <div className="p-2.5 rounded-xl bg-[#22C55E]/10 text-[#22C55E]">
                 <Lock className="w-6 h-6" />
               </div>
-              <h3 id="modal-title" className="text-xl font-heading font-bold text-gray-900 dark:text-[#F5F3EF]">
+              <h3 id="modal-title" className="text-xl font-heading font-bold text-[var(--text-primary)]">
                 Privacy & Confidentiality Policy
               </h3>
             </div>
-            <div className="space-y-3 text-sm text-gray-600 dark:text-[#A5A5A5] leading-relaxed">
+            <div className="space-y-3 text-sm text-[var(--text-secondary)] leading-relaxed">
               <p>
                 Trading Legend treats applicant data with strict commercial confidentiality. Contact details, Telegram handles, and channel statistics submitted via the application portal are solely utilized for placement evaluation and campaign fulfillment.
               </p>
@@ -109,10 +109,10 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
           </div>
         )}
 
-        <div className="mt-8 pt-4 border-t border-gray-200 dark:border-[#262626] flex justify-end">
+        <div className="mt-8 pt-4 border-t border-[var(--border-subtle)] flex justify-end">
           <button
             onClick={onClose}
-            className="px-5 py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 dark:bg-[#222222] dark:hover:bg-[#2a2a2a] text-gray-800 dark:text-white text-sm font-semibold border border-gray-200 dark:border-[#333333] transition-colors"
+            className="px-5 py-2.5 rounded-xl bg-[var(--bg-secondary)] hover:bg-[var(--bg-surface-hover)] text-[var(--text-primary)] text-sm font-semibold border border-[var(--border-subtle)] transition-colors"
           >
             Close
           </button>

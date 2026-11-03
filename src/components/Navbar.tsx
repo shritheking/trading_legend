@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { BrandLogo } from './BrandLogo';
 import { ThemeToggle } from './ThemeToggle';
-import { Menu, X, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 
 interface NavbarProps {
   announcement?: string;
@@ -105,23 +105,26 @@ export function Navbar({ announcement, announcementActive = false }: NavbarProps
         </div>
       </header>
 
-      {/* Mobile Drawer Navigation with backdrop overlay */}
+      {/* Mobile Drawer Navigation with double-sided grid layout */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 top-16 sm:top-18 z-40 bg-[var(--bg-primary)] lg:hidden flex flex-col justify-between overflow-y-auto animate-in fade-in duration-150">
-          <div className="site-container py-5 space-y-1">
-            <div className="text-[11px] font-mono uppercase tracking-wider text-[var(--text-muted)] px-3 mb-2">
+          <div className="site-container py-5 space-y-4">
+            <div className="text-[11px] font-mono uppercase tracking-wider text-[var(--text-muted)] px-1">
               Menu Navigation
             </div>
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="min-h-[48px] flex items-center px-3 text-base font-semibold text-[var(--text-primary)] hover:text-[#FF8A00] border-b border-[var(--border-subtle)] transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {/* Double-sided 2-column grid on mobile for compact viewing */}
+            <div className="grid grid-cols-2 gap-2">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="min-h-[46px] flex items-center px-3.5 py-2.5 text-sm font-semibold text-[var(--text-primary)] hover:text-[#FF8A00] bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl hover:border-[#FF8A00]/50 transition-colors shadow-2xs"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </div>
 
           {/* Drawer Bottom CTA */}
@@ -134,10 +137,6 @@ export function Navbar({ announcement, announcementActive = false }: NavbarProps
               <span>Apply for Promotion</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
-            <div className="text-center text-[11px] font-mono text-[var(--text-muted)] flex items-center justify-center gap-1.5">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#FF8A00]" />
-              <span>Vetted Trading Partner Network</span>
-            </div>
           </div>
         </div>
       )}
